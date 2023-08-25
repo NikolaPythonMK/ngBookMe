@@ -1,0 +1,26 @@
+<mat-card class="horizontal-card">
+  <img mat-card-image src='../../../assets/apartamnt.jpg' alt="Photo of a Shiba Inu" class="card-avatar">
+  <div class="card-content">
+    <mat-card-header>
+      <mat-card-title>{{ property.propertyName }}</mat-card-title>
+      <mat-card-subtitle> {{ property.propertyType }} </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ property.propertyCity }},{{ property.propertyLocation }} </p>
+      <div>
+        <span class="to-bold"> 8.8 - Excellent </span>
+        <span>(342 reviews)</span>
+      </div>
+      <div>
+        <span class="price">{{ property.propertyPrice }} МКД</span>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions class="card-actions">
+      <button mat-raised-button color="primary">View Details</button>
+      <button mat-icon-button>
+        <mat-icon>bookmark</mat-icon>
+      </button>
+    </mat-card-actions>
+  </div>
+</mat-card>

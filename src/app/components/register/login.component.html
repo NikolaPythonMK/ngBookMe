@@ -1,0 +1,30 @@
+<h1>Log In</h1>
+
+<form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div class="field">
+    <label class="label">First Name</label>
+    <input type="text" class="input" formControlName="firstName"
+           [class.invalid]="registerForm.get('firstName')?.invalid &&
+           (registerForm.get('firstName')?.dirty || registerForm.get('username')?.touched)">
+  </div>
+  <div class="field">
+    <label class="label">Last Name</label>
+    <input type="text" class="input" formControlName="lastName">
+  </div>
+  <div class="field">
+    <label class="label">Email</label>
+    <input type="text" class="input" formControlName="email">
+  </div>
+  <div class="field">
+    <label class="label">Phone</label>
+    <input type="text" class="input" formControlName="mobilePhone">
+  </div>
+  <div class="field">
+    <label class="label">Password</label>
+    <input type="text" class="input" formControlName="password">
+  </div>
+
+  <div>
+    <button type="submit" class="button">Register</button>
+  </div>
+</form>

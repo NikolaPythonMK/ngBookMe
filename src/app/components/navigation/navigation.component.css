@@ -1,0 +1,38 @@
+.navbar-container{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin-bottom: 5%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.navbar-icons{
+ display: flex;
+}
+
+.navbar-icons div{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px 10px 20px;
+  cursor: pointer;
+}
+
+.navbar-icons div:hover{
+  background-color: lightgray;
+}
+
+.navbar-text{
+  font-size: 15px;
+  margin-left: 5px;
+}
+
+.navbar-title{
+  cursor: pointer;
+  color: blueviolet;
+}
+
+@media (max-width: 768px) {
+  .navbar-text{
+    display: none;
+  }
+}
