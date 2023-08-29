@@ -16,8 +16,6 @@ export class DisplayPropertiesComponent implements OnInit{
   ngOnInit() {
     this.propertyService.getAll().subscribe(properties => {
       this.properties = properties;
-      console.log(this.properties)
-      console.log('WTF')
     });
   }
 }

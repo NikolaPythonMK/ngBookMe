@@ -1,13 +1,16 @@
 .horizontal-card{
   display: flex;
   flex-direction: row;
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
 .card-avatar{
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   background-color: #ccc;
   margin-right: 16px;
+  transition: transform 0.3s ease;
 }
 
 .to-bold{
@@ -25,9 +28,15 @@
   flex: 1;
 }
 
-.card-actions {
+.footer{
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  padding: 16px;
+  align-items: center;
+}
+
+.horizontal-card:hover{
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+.horizontal-card:hover .card-avatar {
+  transform: scale(1.05); /* Enlarge avatar on hover */
 }

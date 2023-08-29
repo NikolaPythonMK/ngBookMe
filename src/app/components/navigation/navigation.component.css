@@ -31,6 +31,20 @@
   color: blueviolet;
 }
 
+.menu{
+  margin-top: -10px;
+  padding-top: -10px;
+}
+
+.menu button{
+  width: 100%; /* Expand the menu items to full width */
+  text-align: left; /* Align the text to the left */
+}
+
+.menu-container{
+
+}
+
 @media (max-width: 768px) {
   .navbar-text{
     display: none;

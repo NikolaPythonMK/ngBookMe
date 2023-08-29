@@ -1,0 +1,7 @@
+<ng-container *ngIf="shouldShowNavbar()">
+  <navigation-app [loggedInUser]="user"></navigation-app>
+</ng-container>
+
+<div>
+  <router-outlet></router-outlet>
+</div>

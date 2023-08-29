@@ -1,0 +1,14 @@
+.remove-underline{
+  text-decoration: none;
+}
+
+.bad-credentials{
+  border: 1px dotted orangered;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 1rem;
+  color: red;
+  background-color: #fed;
+}
+

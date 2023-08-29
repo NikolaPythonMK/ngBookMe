@@ -1,29 +1,42 @@
-<mat-toolbar color="basic" class="navbar-container">
-  <span class="navbar-title">BookingSite</span>
-  <div class="navbar-icons">
-    <div>
-      <mat-icon class="navbar-icon"><span>home</span></mat-icon>
-      <span class="navbar-text">Home</span>
+<ng-container>
+  <mat-toolbar color="basic" class="navbar-container">
+    <span class="navbar-title" routerLink="">BookingSite</span>
+    <div class="navbar-icons">
+      <div routerLink="">
+        <mat-icon class="navbar-icon"><span>home</span></mat-icon>
+        <span class="navbar-text">Home</span>
+      </div>
+
+      <div routerLink="/saved">
+        <mat-icon class="navbar-icon" color="warn"><span>favorite</span></mat-icon>
+        <span class="navbar-text">Favorites</span>
+      </div>
+
+      <div routerLink="/post">
+        <mat-icon class="navbar-icon"><span>post_add</span></mat-icon>
+        <span class="navbar-text">Post property</span>
+      </div>
+
+      <ng-container *ngIf="loggedInUser; else notLoggedIn">
+        <div mat-button [matMenuTriggerFor]="menu" class="menu-container">
+          <mat-icon class="navbar-icon"><span>account_circle</span></mat-icon>
+          <span class="navbar-text">Welcome, {{loggedInUser.firstName}}</span>
+          <mat-icon class="navbar-icon" [ngStyle]="{'margin-left': '10px'}"><span>expand_more</span></mat-icon>
+          <mat-menu #menu="matMenu" class="menu" xPosition="before">
+            <button mat-menu-item><mat-icon>person</mat-icon>Profile</button>
+            <button mat-menu-item><mat-icon>settings</mat-icon>Settings and privacy</button>
+            <button mat-menu-item><mat-icon>display_settings</mat-icon>display and accessibility</button>
+            <button mat-menu-item><mat-icon>help</mat-icon>Help and support</button>
+            <button mat-menu-item (click)="logout()"><mat-icon>logout</mat-icon>Log out</button>
+          </mat-menu>
+        </div>
+      </ng-container>
+      <ng-template #notLoggedIn>
+        <div routerLink="/login">
+          <mat-icon class="navbar-icon"><span>account_circle</span></mat-icon>
+          <span class="navbar-text">Log in</span>
+        </div>
+      </ng-template>
     </div>
-
-    <div>
-      <mat-icon class="navbar-icon" color="warn"><span>favorite</span></mat-icon>
-      <span class="navbar-text">Favorites</span>
-    </div>
-
-    <div>
-      <mat-icon class="navbar-icon"><span>post_add</span></mat-icon>
-      <span class="navbar-text">Post property</span>
-    </div>
-
-    <div>
-      <mat-icon class="navbar-icon"><span>account_circle</span></mat-icon>
-      <span class="navbar-text">Log in</span>
-    </div>
-  </div>
-<!--  <button mat-button routerLink="/">Home</button>-->
-<!--  <button mat-button routerLink="/about">About</button>-->
-<!--  <button mat-button routerLink="/contact">Contact</button>-->
-</mat-toolbar>
-
-
+  </mat-toolbar>
+</ng-container>

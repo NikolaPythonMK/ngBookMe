@@ -1,0 +1,52 @@
+.body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.title{
+  color: blueviolet;
+}
+
+.sub-text{
+  width: 50%;
+  font-size: 1.1rem;
+}
+
+.wizard{
+  width: 50%;
+}
+
+.m-right{
+  margin-right: 1rem;
+}
+
+.radio-el{
+  width: 50%;
+}
+.rad{
+  width: 50%;
+}
+
+.err-msg{
+  color: red;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .wizard{
+    width: 90%;
+  }
+  .sub-text{
+    width: 90%;
+    font-size: 1.1rem;
+  }
+}
+
+/*@media (min-width: 768px) and (max-width: 1023px) {*/
+/*  .wizard{*/
+
+/*  }*/
+/*}*/
+

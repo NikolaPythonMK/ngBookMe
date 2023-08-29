@@ -1,12 +1,3 @@
-<div class="content row">
-  <div class="properties-container col-7">
-    <div *ngFor="let property of properties" class="mb-3">
-      <property-app [property]="property"></property-app>
-    </div>
-  </div>
-
-  <div class="map-container col-5">
-
-  </div>
-
+<div *ngFor="let property of properties" class="mb-3">
+  <property-app [property]="property"></property-app>
 </div>

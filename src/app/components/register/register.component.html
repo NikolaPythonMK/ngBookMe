@@ -1,0 +1,95 @@
+<div class="body">
+  <div class="auth-container">
+    <div class="app-name mb-2" routerLink="">
+      <span class="first-part">Book</span><span class="second-part">Me</span>
+    </div>
+    <div class="form-wrapper">
+      <h2 class="mb-5">Create Account</h2>
+
+      <p *ngIf="errorMessage" class="text-warning">{{errorMessage}}</p>
+
+      <form class="form-el" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="field col-6">
+            <mat-form-field class="custom-form-field">
+              <mat-label>First name</mat-label>
+              <input type="text" matInput formControlName="firstName">
+<!--              <mat-error *ngIf="hasRequiredError('firstName')" class="error">This field is required.</mat-error>-->
+            </mat-form-field>
+          </div>
+
+          <div class="field col-6">
+            <mat-form-field class="custom-form-field">
+              <mat-label>Last name</mat-label>
+              <input type="text" matInput formControlName="lastName">
+<!--              <mat-error *ngIf="hasRequiredError('lastName')" class="error">This field is required.</mat-error>-->
+            </mat-form-field>
+          </div>
+        </div>
+
+
+        <div class="field">
+          <mat-form-field class="custom-form-field">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput formControlName="email">
+<!--            <mat-error *ngIf="hasRequiredError('email')" class="error">This field is required.</mat-error>-->
+            <mat-error *ngIf="hasInvalidEmail()" class="error">Invalid email.</mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <div class="field">
+          <mat-form-field class="custom-form-field">
+            <mat-label>Phone</mat-label>
+            <input type="text" matInput formControlName="mobilePhone">
+            <mat-icon matSuffix><span>call</span></mat-icon>
+<!--            <mat-error *ngIf="hasRequiredError('mobilePhone')" class="error">This field is required.</mat-error>-->
+            <mat-error *ngIf="hasInvalidPhoneNumber()" class="error">Invalid phone number.</mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <div class="row">
+          <div class="field col-6">
+            <mat-form-field class="custom-form-field">
+              <mat-label>Password</mat-label>
+              <input [type]="hidePassword? 'password' : 'text'" matInput formControlName="password">
+              <button mat-icon-button matSuffix  type="button" (click)="hidePassword = !hidePassword"
+                      [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+<!--              <mat-error *ngIf="hasRequiredError('password')" class="error">The field is required.</mat-error>-->
+            </mat-form-field>
+          </div>
+
+
+          <div class="field col-6">
+            <mat-form-field class="custom-form-field">
+              <mat-label>Confirm Password</mat-label>
+              <input [type]="hideConfirmPassword? 'password' : 'text'" matInput [formControl]="confirmPassword">
+              <button type="button" mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword"
+                      [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPassword">
+                <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="hasPasswordMismatch()" class="error">Mismatched password.</mat-error>
+            </mat-form-field>
+          </div>
+          <p *ngIf="hasPasswordMismatch()" class="error d-flex justify-content-center"
+          [ngStyle]="{'font-size': '1.2rem'}">
+            Passwords do not match.
+          </p>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit" class="submit-btn mt-2">Sign Up</button>
+      </form>
+    </div>
+
+    <div class="additional mt-3">
+      <div>Already have an account? <a routerLink="/login" class="remove-underline">Log in</a>.</div>
+
+      <p class="mt-5">
+        By creating an account, you agree to our <a href="#">Privacy policy</a>  and <a href="#">Terms of use</a>.
+      </p>
+    </div>
+  </div>
+</div>

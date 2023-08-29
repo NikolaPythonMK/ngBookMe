@@ -1,0 +1,126 @@
+<div class="body">
+  <h3 class="title mb-3">Get Your Property Noticed.</h3>
+  <p class="sub-text mb-5">Your property is more than just a place to stay – it's an experience waiting to be shared. Tell your property's unique story and let travelers imagine themselves being a part of it!</p>
+<mat-vertical-stepper [linear]="false" #stepper [animationDuration]="'2000'" class="wizard">
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup" class="step-form">
+      <ng-template matStepLabel>Fill out information about your property</ng-template>
+      <div class="mat-form-group d-flex flex-column mt-3">
+        <mat-form-field>
+          <input matInput placeholder="Property name" formControlName="propertyName" required>
+        </mat-form-field>
+        <mat-form-field>
+          <textarea  matInput placeholder="Describe your property"  formControlName="propertyDescription" required></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Number of rooms" formControlName="propertySize" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input  matInput placeholder="Amount (Денари)"  formControlName="propertyPrice" required>
+          <mat-icon matSuffix=""><span>payments</span></mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="mt-4">
+        <button mat-raised-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" class="step">
+    <form [formGroup]="secondFormGroup" class="step-form">
+      <ng-template matStepLabel>Fill out your address and location</ng-template>
+      <div class="mat-form-group d-flex flex-column mt-3">
+        <mat-form-field>
+          <input matInput placeholder="City" formControlName="propertyCity" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Address" formControlName="propertyAddress" required>
+        </mat-form-field>
+        <div class="inner-form-group d-flex">
+          <mat-form-field class="m-1">
+            <input matInput placeholder="Longitude" formControlName="lon" required>
+          </mat-form-field>
+          <mat-form-field class="m-1">
+            <input matInput placeholder="Latitude" formControlName="lat" required>
+          </mat-form-field>
+        </div>
+        <div class="map">
+          <create-property-map-app></create-property-map-app>
+        </div>
+      </div>
+      <div class="mt-4">
+        <button mat-raised-button matStepperPrevious class="m-right">Back</button>
+        <button mat-raised-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="thirdFormGroup" class="step">
+    <form [formGroup]="thirdFormGroup" class="step-form">
+      <ng-template matStepLabel>What type of property?</ng-template>
+
+<!--      <label id="example-radio-group-label">Pick your favorite season</label>-->
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group d-flex flex-column" formControlName="propertyType">
+        <mat-radio-button class="example-radio-button" *ngFor="let type of propertyTypes" [value]="type">
+          {{type}}
+        </mat-radio-button>
+      </mat-radio-group>
+
+<!--      <div>You selected: {{ thirdFormGroup!.get('propertyType')!.value }}</div>-->
+
+      <div class="mt-4">
+        <button mat-raised-button matStepperPrevious class="m-right">Back</button>
+        <button mat-raised-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <mat-step [stepControl]="fourthFormGroup" class="step">
+    <form [formGroup]="fourthFormGroup" class="step-form" enctype="multipart/form-data">
+      <ng-template matStepLabel>Insert images of your property</ng-template>
+      <p class="mt-3">
+        Upload an image of your property that will be shown as the main card image. This image will give users a quick
+        glimpse of your property.
+      </p>
+      <input type="file" class="mb-5" formControlName="propertyImage">
+    </form>
+
+    <form [formGroup]="imageForm">
+            <p>
+              You can upload more images to showcase different aspects of your property.
+              This helps guests get a comprehensive view of what your property has to offer.
+            </p>
+            <button  mat-raised-button type="button" class="mb-5" (click)="addImageInput()">Add Another Image</button>
+            <div formArrayName="images" class="mb-5">
+              <div *ngFor="let imageControl of imageArray.controls; let i = index">
+                <input type="file" [formControlName]="i">
+              </div>
+            </div>
+
+    </form>
+          <div class="mt-4">
+            <button mat-raised-button matStepperPrevious class="m-right">Back</button>
+            <button mat-raised-button matStepperNext>Next</button>
+          </div>
+  </mat-step>
+
+
+  <mat-step class="step">
+    <ng-template matStepLabel>Done</ng-template>
+    <p class="mt-3">You are now done.</p>
+    <p>click 'Continue' to review your entries and complete the process.</p>
+    <p *ngIf="displayInvalidMessage" class="err-msg">All inputs are required</p>
+    <button mat-raised-button color="primary" (click)="submit()">Continue</button>
+    <div class="mt-5">
+      <button mat-raised-button matStepperPrevious class="m-right">Back</button>
+      <button mat-raised-button color="warn" (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
+</div>
+
+<!--<div class="map">-->
+<!--  <create-property-map-app></create-property-map-app>-->
+<!--</div>-->

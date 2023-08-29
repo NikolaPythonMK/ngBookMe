@@ -9,7 +9,7 @@
 
   <mat-form-field subscriptSizing="dynamic">
     <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="startDatepicker" placeholder="Start date">
+    <input matInput [matDatepicker]="startDatepicker" placeholder="Start date" [(ngModel)]="startDate">
     <mat-datepicker-toggle matIconSuffix [for]="startDatepicker"></mat-datepicker-toggle>
     <mat-datepicker #startDatepicker>
       <mat-datepicker-actions>
@@ -60,9 +60,17 @@
 
 
   <!--  <button mat-raised-button color="primary" class="search-btn" subscriptSizing="dynamic">Search</button>-->
-  <button class="btn btn-primary search-btn"><span>Search</span></button>
+  <button class="btn btn-primary search-btn" (click)="submit()"><span>Search</span></button>
   </div>
 </div>
 
+<div class="content-wrapper">
+<div class="content row">
+  <div class="properties-container col-7">
+    <display-properties-app></display-properties-app>
+  </div>
+    <div class="map-container col-5" id="map">
+  </div>
+</div>
+</div>
 
-<display-properties-app></display-properties-app>

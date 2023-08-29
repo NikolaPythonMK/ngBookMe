@@ -14,14 +14,27 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatExpansionModule} from "@angular/material/expansion";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import {MatCardModule} from '@angular/material/card';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatStepperModule} from '@angular/material/stepper'
+import {MatRadioModule} from '@angular/material/radio';
 
 import { SearchBarComponent } from "./components/search-bar/search-bar.component";
 import { NavigationComponent } from "./components/navigation/navigation.component";
-import { LoginComponent} from "./components/register/login.component";
+import { RegisterComponent} from "./components/register/register.component";
 import { DisplayPropertiesComponent } from "./components/display-properties/display-properties.component";
 import { PropertyComponent } from "./components/property/property.component";
+import { LoginComponent} from "./components/login/login.component";
 
 import {ReactiveFormsModule} from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
+import { FormsModule } from "@angular/forms";
+import {LayoutComponent} from "./components/layout/layout.component";
+import {CreatePropertyComponent} from "./components/create-property/create-property.component";
+import {SavedPropertiesComponent} from "./components/saved-properties/saved-properties.component";
+import {MatDialog, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
+import {CreatePropertyDialogComponent} from "./components/create-property-dialog/create-property-dialog.component";
+import {CreatePropertyMapComponent} from "./components/create-property-map/create-property-map.component";
+
 
 
 @NgModule({
@@ -29,9 +42,16 @@ import {ReactiveFormsModule} from "@angular/forms";
     AppComponent,
     SearchBarComponent,
     NavigationComponent,
-    LoginComponent,
+    RegisterComponent,
     DisplayPropertiesComponent,
-    PropertyComponent
+    PropertyComponent,
+    LoginComponent,
+    LayoutComponent,
+    CreatePropertyComponent,
+    SavedPropertiesComponent,
+    CreatePropertyDialogComponent,
+    CreatePropertyMapComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -46,7 +66,13 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatExpansionModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatCardModule
+    MatCardModule,
+    HttpClientModule,
+    MatMenuModule,
+    FormsModule,
+    MatStepperModule,
+    MatRadioModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

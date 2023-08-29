@@ -2,14 +2,23 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { SearchBarComponent } from "./components/search-bar/search-bar.component";
-import {LoginComponent} from "./components/register/login.component";
+import {RegisterComponent} from "./components/register/register.component";
 import {PropertyComponent} from "./components/property/property.component";
 import {DisplayPropertiesComponent} from "./components/display-properties/display-properties.component";
+import {LoginComponent} from "./components/login/login.component";
+import {LayoutComponent} from "./components/layout/layout.component";
+import {CreatePropertyComponent} from "./components/create-property/create-property.component";
+import {AuthGuard} from "./guards/AuthGuard";
+import {SavedPropertiesComponent} from "./components/saved-properties/saved-properties.component";
+import {CreatePropertyMapComponent} from "./components/create-property-map/create-property-map.component";
 
 const routes: Routes = [
   {path: '', component: SearchBarComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'test', component: DisplayPropertiesComponent}
+  {path: 'post', component: CreatePropertyComponent, canActivate: [AuthGuard]},
+  {path: 'saved', component: SavedPropertiesComponent, canActivate: [AuthGuard]},
+  {path: 'test', component: CreatePropertyMapComponent}
 ];
 
 @NgModule({

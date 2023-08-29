@@ -11,16 +11,17 @@
         <span class="to-bold"> 8.8 - Excellent </span>
         <span>(342 reviews)</span>
       </div>
-      <div>
-        <span class="price">{{ property.propertyPrice }} МКД</span>
+
+      <div class="footer">
+        <div>
+          <span class="price">{{ property.propertyPrice }} МКД</span>
+        </div>
+        <div class="card-actions">
+          <button mat-icon-button>
+            <mat-icon>bookmark</mat-icon>
+          </button>
+        </div>
       </div>
     </mat-card-content>
-
-    <mat-card-actions class="card-actions">
-      <button mat-raised-button color="primary">View Details</button>
-      <button mat-icon-button>
-        <mat-icon>bookmark</mat-icon>
-      </button>
-    </mat-card-actions>
   </div>
 </mat-card>

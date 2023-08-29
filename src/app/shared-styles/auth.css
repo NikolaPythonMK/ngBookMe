@@ -1,0 +1,77 @@
+.body{
+  display: flex;
+  justify-content: center;
+}
+
+.app-name{
+  cursor: pointer;
+  font-family: 'Abril Fatface', cursive;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.first-part{
+  color: cornflowerblue;
+}
+
+.second-part{
+  color: yellowgreen;
+}
+
+.auth-container{
+  width: 35%;
+  padding: 1rem 2.5rem 1rem 2.5rem;
+  /*box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;*/
+}
+
+.form-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+}
+
+.submit-btn{
+  width: 100%;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.form-el{
+  width: 100%;
+}
+
+.successful-reg{
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: forestgreen;
+}
+
+.error{
+  color: red;
+  font-size: 0.9rem;
+
+}
+
+.remove-underline{
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .auth-container{
+    width: 90%;
+    padding: 1rem 2.5rem 1rem 2.5rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .auth-container{
+    width: 70%;
+    padding: 1rem 2.5rem 1rem 2.5rem;
+  }
+}

@@ -1,4 +1,6 @@
-import {Component} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
+import {AuthService} from "../../services/AuthService";
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'navigation-app',
@@ -6,5 +8,12 @@ import {Component} from "@angular/core";
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent{
+  @Input() loggedInUser!: any;
 
+  constructor(private authService: AuthService) {}
+
+  logout(): void{
+    this.authService.logout();
+    this.loggedInUser = null;
+  }
 }
