@@ -12,7 +12,7 @@ export class SearchBarComponent {
   startDate?: Date;
   ednDate?: string;
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.map = L.map('map').setView([51.505, -0.09], 30);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {

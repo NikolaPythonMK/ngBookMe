@@ -11,15 +11,10 @@ export class MessengerService{
   }
 
   isRegistered(): boolean{
-    console.log('method call')
-    console.log('1: ', this.registration)
     if(this.registration){
-      console.log('2: ', this.registration)
       this.registration = false;
-      console.log('3: ', this.registration)
       return true;
     }
-    console.log('4: ', this.registration)
     return false;
   }
 }

@@ -8,25 +8,11 @@ import {Router} from "@angular/router";
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css']
 })
-export class LayoutComponent implements OnInit{
-  user?: any = null;
+export class LayoutComponent{
 
-  constructor(private authService: AuthService, private router: Router) {
-  }
-
-  ngOnInit(): void {
-    if(this.isLoggedIn()){
-      const token = this.authService.getToken()!;
-      const decodedToken: any  = jwt_decode(token);
-      this.user = JSON.parse(decodedToken.sub);
-    }
-  }
+  constructor(private authService: AuthService, private router: Router) {}
 
   shouldShowNavbar(): boolean{
     return !['/login', '/register'].includes(this.router.url);
-  }
-
-  isLoggedIn(): boolean{
-    return this.authService.isAuthenticated();
   }
 }

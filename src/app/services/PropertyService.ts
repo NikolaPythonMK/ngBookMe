@@ -9,7 +9,7 @@ import {SavePropertyRequest} from "../models/SavePropertyRequest";
 })
 export class PropertyService {
 
-  private readonly authUrl = 'http://localhost:9090/api/v1/properties';
+  private readonly url = 'http://localhost:9090/api/properties';
 
   readonly httpOptions = {
     headers: new HttpHeaders({
@@ -20,8 +20,8 @@ export class PropertyService {
   constructor(private http: HttpClient) {}
 
 
-  // saveProperty(obj: SavePropertyRequest): Observable<Property>{
-  //   return this.http.post<SavePropertyRequest>()
-  // }
+  saveProperty(obj: SavePropertyRequest, files: any[]): Observable<Property>{
+    return this.http.post<Property>(this.url, {data: obj, images: []})
+  }
 
 }

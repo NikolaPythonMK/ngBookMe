@@ -35,6 +35,9 @@
         <mat-form-field>
           <input matInput placeholder="Address" formControlName="propertyAddress" required>
         </mat-form-field>
+        <div class="map">
+          <map-app (propertyLocationEmit)="onPropertyLocationChange($event)"></map-app>
+        </div>
         <div class="inner-form-group d-flex">
           <mat-form-field class="m-1">
             <input matInput placeholder="Longitude" formControlName="lon" required>
@@ -42,9 +45,6 @@
           <mat-form-field class="m-1">
             <input matInput placeholder="Latitude" formControlName="lat" required>
           </mat-form-field>
-        </div>
-        <div class="map">
-          <create-property-map-app></create-property-map-app>
         </div>
       </div>
       <div class="mt-4">
@@ -87,17 +87,13 @@
       <input type="file" class="mb-5" formControlName="propertyImage">
     </form>
 
-    <form [formGroup]="imageForm">
+    <form [formGroup]="imageForm" enctype="multipart/form-data">
             <p>
               You can upload more images to showcase different aspects of your property.
               This helps guests get a comprehensive view of what your property has to offer.
             </p>
-            <button  mat-raised-button type="button" class="mb-5" (click)="addImageInput()">Add Another Image</button>
-            <div formArrayName="images" class="mb-5">
-              <div *ngFor="let imageControl of imageArray.controls; let i = index">
-                <input type="file" [formControlName]="i">
-              </div>
-            </div>
+<!--            <input type="file" multiple class="mb-4" formControlName="images">-->
+      <input type="file" multiple class="mb-4" (change)="onImageChange($event)">
 
     </form>
           <div class="mt-4">
@@ -121,6 +117,3 @@
 </mat-vertical-stepper>
 </div>
 
-<!--<div class="map">-->
-<!--  <create-property-map-app></create-property-map-app>-->
-<!--</div>-->

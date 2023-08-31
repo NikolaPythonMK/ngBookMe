@@ -12,6 +12,7 @@ import { LatLngExpression } from 'leaflet';
 export class CreatePropertyMapComponent {
   private map!: L.Map;
 
+
   ngAfterViewInit(): void {
     this.initializeMap();
     this.getUserLocation();
@@ -19,7 +20,6 @@ export class CreatePropertyMapComponent {
 
   private initializeMap(): void {
     this.map = L.map('map').setView([51.505, -0.09], 30);
-
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '© OpenStreetMap contributors'

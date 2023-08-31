@@ -21,11 +21,11 @@
   background-color: #eee;
   display: flex;
   justify-content: center;
-
 }
 
 .content{
-  width: 98%;
+  width: 100%;
+  padding-left: 5px;
 }
 
 .properties-container{
@@ -35,13 +35,21 @@
 .map-container{
   /*background-color: green;*/
   /*height: 60vh;*/
+  position: -webkit-sticky;
+  position: sticky;
+  height: 100vh;
+  top: 10px;
+  padding: 0;
+
 }
 
 #map{
-  height: 100vh;
-  position: fixed;
-  right: -10%;
-  width: 52%;
+  /*height: calc(100vh - 83px);*/
+  /*position: -webkit-sticky;*/
+  /*position: sticky;*/
+  /*right: -10%;*/
+  /*width: 52%;*/
+  height: calc(100vh - 15px);
 }
 
 @media (max-width: 768px) {

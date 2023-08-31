@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Observable, tap} from "rxjs";
+import {BehaviorSubject, Observable, of, tap} from "rxjs";
 import {UserDetails} from "../models/UserDetails";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {RegisterRequest} from "../models/RegisterRequest";
@@ -11,6 +11,7 @@ import jwt_decode from 'jwt-decode';
 export class AuthService {
   private readonly authUrl = 'http://localhost:9090/api/auth';
   private token: string | null = null;
+  user: any | null;
 
   readonly httpOptions = {
     headers: new HttpHeaders({
@@ -24,6 +25,8 @@ export class AuthService {
   setToken(token: string){
     this.token = token;
     localStorage.setItem('token', token);
+    this.user = this.getUserFromToken(token);
+    console.log('logged in')
   }
 
   getToken(): string | null {
@@ -31,6 +34,11 @@ export class AuthService {
       this.token = localStorage.getItem('token');
     }
     return this.token;
+  }
+
+  getUserFromToken(token: string): any{
+    const decodedToken: any  = jwt_decode(token);
+    return JSON.parse(decodedToken.sub);
   }
 
   isAuthenticated(): boolean{
@@ -43,6 +51,7 @@ export class AuthService {
     }
     return false;
   }
+
 
   register(user: RegisterRequest): Observable<UserDetails>{
     return this.http.post<UserDetails>(this.authUrl + '/register', user)
@@ -59,6 +68,8 @@ export class AuthService {
   logout(): void{
     localStorage.removeItem('token');
     this.token = null;
+    this.user = null;
+    console.log('Logged out')
   }
 
 }

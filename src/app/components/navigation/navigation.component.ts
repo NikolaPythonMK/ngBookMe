@@ -7,13 +7,17 @@ import jwt_decode from "jwt-decode";
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
-export class NavigationComponent{
-  @Input() loggedInUser!: any;
+export class NavigationComponent implements OnInit{
+  loggedInUser!: any;
 
   constructor(private authService: AuthService) {}
 
   logout(): void{
     this.authService.logout();
     this.loggedInUser = null;
+  }
+
+  ngOnInit(): void {
+    this.loggedInUser = this.authService.user;
   }
 }
