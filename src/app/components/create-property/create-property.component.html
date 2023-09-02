@@ -40,9 +40,11 @@
         </div>
         <div class="inner-form-group d-flex">
           <mat-form-field class="m-1">
+            <mat-label>Longitude</mat-label>
             <input matInput placeholder="Longitude" formControlName="lon" required>
           </mat-form-field>
           <mat-form-field class="m-1">
+            <mat-label>Latitude</mat-label>
             <input matInput placeholder="Latitude" formControlName="lat" required>
           </mat-form-field>
         </div>
@@ -62,8 +64,8 @@
       <mat-radio-group
         aria-labelledby="example-radio-group-label"
         class="example-radio-group d-flex flex-column" formControlName="propertyType">
-        <mat-radio-button class="example-radio-button" *ngFor="let type of propertyTypes" [value]="type">
-          {{type}}
+        <mat-radio-button class="example-radio-button" *ngFor="let type of propertyTypes" [value]="type.value">
+          {{type.name}}
         </mat-radio-button>
       </mat-radio-group>
 
@@ -84,7 +86,10 @@
         Upload an image of your property that will be shown as the main card image. This image will give users a quick
         glimpse of your property.
       </p>
-      <input type="file" class="mb-5" formControlName="propertyImage">
+      <input type="file" class="mb-5" formControlName="propertyImage" (change)="onThumbnailSubmit($event)">
+      <div class="thumbnail-container mb-5">
+        <img *ngIf="dataUrl" [src]="dataUrl" class="thumbnail">
+      </div>
     </form>
 
     <form [formGroup]="imageForm" enctype="multipart/form-data">
@@ -94,6 +99,10 @@
             </p>
 <!--            <input type="file" multiple class="mb-4" formControlName="images">-->
       <input type="file" multiple class="mb-4" (change)="onImageChange($event)">
+
+      <div class="img-container">
+        <img *ngFor="let url of dataUrls" [src]="url">
+      </div>
 
     </form>
           <div class="mt-4">
@@ -116,4 +125,3 @@
   </mat-step>
 </mat-vertical-stepper>
 </div>
-

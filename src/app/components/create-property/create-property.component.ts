@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
+import {Component} from "@angular/core";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 import {AuthService} from "../../services/AuthService";
 import {SavePropertyRequest} from "../../models/SavePropertyRequest";
 import {CreatePropertyDialogComponent} from "../create-property-dialog/create-property-dialog.component";
@@ -45,14 +45,93 @@ export class CreatePropertyComponent {
   displayInvalidMessage: boolean = false;
   isSubmitted: boolean = false;
   property?: SavePropertyRequest;
+  dataUrl: string | ArrayBuffer | null = null;
+  dataUrls: any[] = [];
 
-  propertyTypes = ['Apartment', 'Bed and Breakfast (B&B)', 'Boat/Ship', 'Condo', 'Guesthouse', 'Lodge', 'Hostel',
-    'Motel', 'Hotel', 'Ranch/Farm Stay', 'Resort', 'Villa']
+  propertyTypes = [
+    {
+      name: 'Apartment',
+      value: 'APARTMENT',
+    },
+    {
+      name: 'Bed and Breakfast (B&B)',
+      value: 'BED_AND_BREAKFAST',
+    },
+    {
+      name: 'Boat/Ship',
+      value: 'BOAT_SHIP',
+    },
+    {
+      name: 'Condo',
+      value: 'CONDO',
+    },
+    {
+      name: 'Guesthouse',
+      value: 'GUESTHOUSE',
+    },
+    {
+      name: 'Lodge',
+      value: 'LODGE',
+    },
+    {
+      name: 'Hostel',
+      value: 'HOSTEL',
+    },
+    {
+      name: 'Motel',
+      value: 'MOTEL',
+    },
+    {
+      name: 'Hotel',
+      value: 'HOTEL',
+    },
+    {
+      name: 'Ranch/Farm stay',
+      value: 'RANCH_FARM_STAY',
+    },
+    {
+      name: 'Resort',
+      value: 'RESORT',
+    },
+    {
+      name: 'Villa',
+      value: 'VILLA',
+    },
+  ];
 
+  renderImages(files: File[]) {
+    this.dataUrls = [];
+    for (const file of files) {
+      const reader = new FileReader(); // dokolku nema poseben reader za sekoja slika, ke se preoptovari
+
+      reader.onload = (event) => {
+        const dataUrl = event.target?.result ?? null;
+        this.dataUrls.push(dataUrl);
+
+        // Check if all files have been processed
+        if (this.dataUrls.length === files.length) {
+          // All files have been read, you can do something here if needed
+        }
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
+
+  onThumbnailSubmit(event: any): void{
+    const file = event.target.files[0];  // .file - ERROR
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      this.dataUrl = event.target?.result ?? null;
+    }
+    reader.readAsDataURL(file);
+  }
 
   onImageChange(event: any) {
     const files = event.target.files;
     const imagesControl = this.imageForm.get('images') as FormArray;
+
+    this.renderImages(files);
 
     for (const file of files) {
       imagesControl.push(this._formBuilder.control(file));
@@ -63,7 +142,7 @@ export class CreatePropertyComponent {
     return this.imageForm.get('images') as FormArray;
   }
 
-  openDialog() {
+  openDialog(formData: FormData) {
     this.dialog.open(CreatePropertyDialogComponent, {
       data: {
         property: this.property
@@ -72,15 +151,16 @@ export class CreatePropertyComponent {
       if(result.confirmed){
         console.log(this.property)
         console.log(this.images.value)
-        this.propertyService.saveProperty(this.property!, this.images.value).subscribe({
+        this.propertyService.saveProperty(formData).subscribe({
           next: value => {
-            console.log(value)
+            console.log('value: ', value)
           },
           error: err => {
-            console.log(err)
+            console.log('error: ', err)
+            console.log('complete: ', formData);
           },
           complete: () => {
-
+            console.log('complete: ', formData);
           }
         })
       }
@@ -105,7 +185,26 @@ export class CreatePropertyComponent {
         propertyImages: null,
         propertyUser: this.authService.getToken()
       } as SavePropertyRequest;
-      this.openDialog();
+
+      const fd = new FormData();
+      fd.append('propertyName', this.firstFormGroup.get('propertyName')!.value);
+      fd.append('propertyDescription', this.firstFormGroup.get('propertyDescription')!.value);
+      fd.append('propertyCity', this.secondFormGroup.get('propertyCity')!.value);
+      fd.append('propertyAddress', this.secondFormGroup.get('propertyAddress')!.value);
+      fd.append('propertyLocation', this.secondFormGroup.get('lon')!.value + ';' + this.secondFormGroup.get('lat')!.value);
+      fd.append('propertyType', this.thirdFormGroup.get('propertyType')!.value);
+      fd.append('propertySize', this.firstFormGroup.get('propertySize')!.value);
+      fd.append('propertyPrice', this.firstFormGroup.get('propertyPrice')!.value);
+      fd.append('propertyImage', this.fourthFormGroup.get('propertyImage')!.value);
+      fd.append('propertyUser', this.authService.getToken()!);
+
+      const imagesControl = this.imageForm.get('images') as FormArray;
+      for(const image of imagesControl.value){
+        fd.append('propertyImages', image);
+        console.log(image);
+      }
+
+      this.openDialog(fd);
     }
     else{
       this.displayInvalidMessage = true;

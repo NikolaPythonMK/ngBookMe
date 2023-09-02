@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {Injectable, OnInit} from "@angular/core";
 import {BehaviorSubject, Observable, of, tap} from "rxjs";
 import {UserDetails} from "../models/UserDetails";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
@@ -8,25 +8,22 @@ import jwt_decode from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService{
   private readonly authUrl = 'http://localhost:9090/api/auth';
   private token: string | null = null;
-  user: any | null;
 
-  readonly httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    }),
-    responseType: 'text'
-  };
+  user$ = new BehaviorSubject<any>(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    if(this.isAuthenticated()){
+      this.user$.next(this.getUserFromToken(this.getToken()!))
+    }
+  }
 
   setToken(token: string){
     this.token = token;
     localStorage.setItem('token', token);
-    this.user = this.getUserFromToken(token);
-    console.log('logged in')
+    this.user$.next(this.getUserFromToken(token));
   }
 
   getToken(): string | null {
@@ -45,7 +42,6 @@ export class AuthService {
     const token = this.getToken();
     if (token){
       const decodedToken: any = jwt_decode(token);
-      console.log("user: ", decodedToken);
       const expirationDate = new Date(decodedToken.exp * 1000);
       return expirationDate > new Date();
     }
@@ -68,8 +64,6 @@ export class AuthService {
   logout(): void{
     localStorage.removeItem('token');
     this.token = null;
-    this.user = null;
-    console.log('Logged out')
+    this.user$.next(null);
   }
-
 }

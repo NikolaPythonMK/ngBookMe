@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, of} from "rxjs";
 import {Property} from "../models/Property";
 import {SavePropertyRequest} from "../models/SavePropertyRequest";
+import {AuthService} from "./AuthService";
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,14 @@ export class PropertyService {
     }),
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
 
-  saveProperty(obj: SavePropertyRequest, files: any[]): Observable<Property>{
-    return this.http.post<Property>(this.url, {data: obj, images: []})
+  saveProperty(formData: FormData): Observable<Property>{
+    // Why won't it work with .append()?
+    const headers = new HttpHeaders({
+      'Authorization': this.authService.getToken()!,
+    });
+    return this.http.post<Property>(this.url, formData, {headers: headers})
   }
-
 }

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {AuthService} from "../../services/AuthService";
-import jwt_decode from "jwt-decode";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'navigation-app',
@@ -8,16 +8,24 @@ import jwt_decode from "jwt-decode";
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit{
-  loggedInUser!: any;
+  loggedInUser: any | null = null;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   logout(): void{
     this.authService.logout();
     this.loggedInUser = null;
+    this.router.navigate(['']);
   }
 
   ngOnInit(): void {
-    this.loggedInUser = this.authService.user;
+    this.authService.user$.subscribe(user => {
+      if(user){
+        this.loggedInUser = user;
+      }
+      else{
+        this.loggedInUser = null;
+      }
+    })
   }
 }

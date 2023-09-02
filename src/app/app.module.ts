@@ -76,7 +76,12 @@ import {MapComponent} from "./components/map/map.component";
     MatRadioModule,
     MatDialogModule,
   ],
-  providers: [],
+  providers: [
+    // {
+    //   provide: MAP_SERVICE_TOKEN,
+    //   useClass: MapService,
+    // }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

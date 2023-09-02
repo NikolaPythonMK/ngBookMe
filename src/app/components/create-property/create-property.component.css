@@ -34,6 +34,29 @@
   font-weight: bold;
 }
 
+
+.img-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.img-container img{
+  width: 200px;
+  height: 200px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.thumbnail-container{
+  display: flex;
+  justify-content: center;
+}
+
+.thumbnail{
+  height: 20em;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
 @media (max-width: 768px) {
   .wizard{
     width: 90%;

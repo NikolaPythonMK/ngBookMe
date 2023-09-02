@@ -1,3 +1,6 @@
 .modal-container{
   padding: 5rem 10rem 1rem 5rem;
 }
+.buttons-container{
+  border-top: 1px solid gray;
+}
