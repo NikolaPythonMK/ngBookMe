@@ -31,35 +31,7 @@
     </mat-datepicker>
   </mat-form-field>
 
-  <!--  <mat-accordion class="example-headers-align accordion-el" multi subscriptSizing="dynamic">-->
-<!--    <mat-expansion-panel>-->
-<!--      <mat-expansion-panel-header>-->
-<!--        <mat-panel-title>-->
-<!--          Personal data-->
-<!--        </mat-panel-title>-->
-<!--        <mat-panel-description>-->
-<!--          Type your name and age-->
-<!--          <mat-icon>account_circle</mat-icon>-->
-<!--        </mat-panel-description>-->
-<!--      </mat-expansion-panel-header>-->
 
-<!--      <mat-form-field subscriptSizing="dynamic">-->
-<!--        <mat-label>First name</mat-label>-->
-<!--        <input matInput>-->
-<!--      </mat-form-field>-->
-
-<!--      <mat-form-field subscriptSizing="dynamic">-->
-<!--        <mat-label>Age</mat-label>-->
-<!--        <input matInput type="number" min="1">-->
-<!--      </mat-form-field>-->
-
-<!--    </mat-expansion-panel>-->
-<!--  </mat-accordion>-->
-
-
-
-
-  <!--  <button mat-raised-button color="primary" class="search-btn" subscriptSizing="dynamic">Search</button>-->
   <button class="btn btn-primary search-btn" (click)="submit()"><span>Search</span></button>
   </div>
 </div>
@@ -67,14 +39,12 @@
 <div class="content-wrapper">
 <div class="content row">
   <div class="properties-container col-7">
-    <display-properties-app></display-properties-app>
+    <display-properties-app [page]="page" (pageEvent)="appendPageNumberParam($event)"></display-properties-app>
   </div>
 
     <div class="map-container col-5">
-      <div id="map" #map></div>
-<!--      <map-app></map-app>-->
-
-  </div>
+      <properties-map-app></properties-map-app>
+    </div>
 </div>
 </div>
 

@@ -1,55 +1,37 @@
-import {Component, ViewChild} from "@angular/core";
-import * as L from 'leaflet';
-import 'leaflet.locatecontrol';
-import { LatLngExpression } from 'leaflet';
+import {Component, ElementRef, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild} from "@angular/core";
+import * as L from "leaflet";
+import {Icon, IconOptions, LatLng, LatLngExpression} from "leaflet";
+import {MapService} from "../../services/MapService";
 
+// import {MAP_SERVICE_TOKEN, MapService} from "../../services/MapService";
+//  constructor(@Inject(MAP_SERVICE_TOKEN) private mapService: MapService)
 
 @Component({
   selector: 'create-property-map-app',
   templateUrl: './create-property-map.component.html',
   styleUrls: ['./create-property-map.component.css']
 })
-export class CreatePropertyMapComponent {
-  private map!: L.Map;
+export class CreatePropertyMapComponent implements OnDestroy{
+  @Output() propertyLocationEmit = new EventEmitter<number[]>();
+  @ViewChild('map') myDiv!: ElementRef;
 
+  constructor(private mapService: MapService) {}
 
-  ngAfterViewInit(): void {
-    this.initializeMap();
-    this.getUserLocation();
+  ngAfterViewInit() {
+    this.mapService.initMap();
+    this.mapService.showUserLocationMarker().subscribe({
+      next: userLocation => {
+        this.propertyLocationEmit.emit(userLocation);
+      }
+    })
+    this.mapService.addMarkerPositionChangeOnClick().subscribe(location => {
+      this.propertyLocationEmit.emit(location);
+    })
   }
 
-  private initializeMap(): void {
-    this.map = L.map('map').setView([51.505, -0.09], 30);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(this.map);
+  ngOnDestroy() {
+    this.mapService.removeMapInstance();
+    const divElement = this.myDiv.nativeElement;
+    divElement.parentNode.removeChild(divElement);
   }
-
-  private getUserLocation(): void {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const lat = position.coords.latitude;
-        const lng = position.coords.longitude;
-
-        const userMarker = L.marker([lat, lng]).addTo(this.map);
-        userMarker.bindPopup('Your Location').openPopup();
-
-        // Add another marker at a specific location
-        const markerCoords: LatLngExpression = [(lat + 0.01) as number, (lng - 0.02) as number];
-        const customMarker = L.marker(markerCoords).addTo(this.map);
-        customMarker.bindPopup('Custom Marker').openPopup();
-
-        this.map.setView([lat, lng], 15);
-      }, error => {
-        console.error('Error getting user location:', error);
-      });
-    } else {
-      console.error('Geolocation is not available.');
-    }
-  }
-
-
-
-
 }

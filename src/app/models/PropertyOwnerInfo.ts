@@ -4,4 +4,5 @@ export interface PropertyOwnerInfo{
   lastName: string,
   mobilePhone: string,
   email: string,
+  role?: string
 }
