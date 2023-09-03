@@ -43,15 +43,6 @@
 
 }
 
-#map{
-  /*height: calc(100vh - 83px);*/
-  /*position: -webkit-sticky;*/
-  /*position: sticky;*/
-  /*right: -10%;*/
-  /*width: 52%;*/
-  height: calc(100vh - 15px);
-}
-
 @media (max-width: 768px) {
   .search-bar-container{
     display: flex;

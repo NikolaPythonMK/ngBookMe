@@ -64,13 +64,16 @@ export class InMemoryProperties{
     return {
       id: id,
       propertyName: name,
+      propertyDescription: 'Some description goes here...',
       propertyCity: city,
+      propertyAddress: 'Street x, number y',
       propertyLocation: location,
       propertyType: type,
       propertySize: size,
       propertyPrice: price,
       propertyImage: image,
-      propertyOwnerInfo: user
+      propertyUser: user,
+      propertyImages: [],
     } as Property;
   }
 }

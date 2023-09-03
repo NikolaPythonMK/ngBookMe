@@ -36,7 +36,7 @@
           <input matInput placeholder="Address" formControlName="propertyAddress" required>
         </mat-form-field>
         <div class="map">
-          <map-app (propertyLocationEmit)="onPropertyLocationChange($event)"></map-app>
+          <create-property-map-app (propertyLocationEmit)="onPropertyLocationChange($event)"></create-property-map-app>
         </div>
         <div class="inner-form-group d-flex">
           <mat-form-field class="m-1">

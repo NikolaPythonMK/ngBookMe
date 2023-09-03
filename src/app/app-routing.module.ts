@@ -10,8 +10,6 @@ import {LayoutComponent} from "./components/layout/layout.component";
 import {CreatePropertyComponent} from "./components/create-property/create-property.component";
 import {AuthGuard} from "./guards/AuthGuard";
 import {SavedPropertiesComponent} from "./components/saved-properties/saved-properties.component";
-import {CreatePropertyMapComponent} from "./components/create-property-map/create-property-map.component";
-import {MapComponent} from "./components/map/map.component";
 
 const routes: Routes = [
   {path: '', component: SearchBarComponent},
@@ -19,7 +17,6 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'post', component: CreatePropertyComponent, canActivate: [AuthGuard]},
   {path: 'saved', component: SavedPropertiesComponent, canActivate: [AuthGuard]},
-  {path: 'test', component: MapComponent}
 ];
 
 @NgModule({

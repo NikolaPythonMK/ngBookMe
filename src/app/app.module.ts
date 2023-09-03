@@ -34,7 +34,8 @@ import {SavedPropertiesComponent} from "./components/saved-properties/saved-prop
 import {MatDialog, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import {CreatePropertyDialogComponent} from "./components/create-property-dialog/create-property-dialog.component";
 import {CreatePropertyMapComponent} from "./components/create-property-map/create-property-map.component";
-import {MapComponent} from "./components/map/map.component";
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {PropertiesMapComponent} from "./components/properties-map/properties-map.component";
 
 
 
@@ -52,8 +53,7 @@ import {MapComponent} from "./components/map/map.component";
     SavedPropertiesComponent,
     CreatePropertyDialogComponent,
     CreatePropertyMapComponent,
-    MapComponent
-
+    PropertiesMapComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +75,7 @@ import {MapComponent} from "./components/map/map.component";
     MatStepperModule,
     MatRadioModule,
     MatDialogModule,
+    MatPaginatorModule,
   ],
   providers: [
     // {

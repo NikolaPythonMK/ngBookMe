@@ -1,9 +1,10 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable, of} from "rxjs";
+import {map, Observable, of, tap} from "rxjs";
 import {Property} from "../models/Property";
 import {SavePropertyRequest} from "../models/SavePropertyRequest";
 import {AuthService} from "./AuthService";
+import {Page} from "../models/Page";
 
 @Injectable({
   providedIn: 'root'
@@ -28,4 +29,27 @@ export class PropertyService {
     });
     return this.http.post<Property>(this.url, formData, {headers: headers})
   }
+
+  getProperties(urlParams: string | null): Observable<Page>{
+    let url;
+    if(urlParams){
+      url = `${this.url}?page=${urlParams}`;
+    }
+    else{
+      url = this.url;
+    }
+    return this.http.get<any>(url)
+      .pipe(
+        map((page) => {
+          return {
+            content: page.content,
+            pageNumber: page['pageable']['pageNumber'],
+            pageSize: page['pageable']['pageSize'],
+            totalElements: page['totalElements']
+          } as Page;
+        }
+        )
+      )
+  }
+
 }

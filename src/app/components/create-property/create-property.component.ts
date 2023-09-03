@@ -7,6 +7,7 @@ import {CreatePropertyDialogComponent} from "../create-property-dialog/create-pr
 
 import 'leaflet.locatecontrol';
 import {PropertyService} from "../../services/PropertyService";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -18,7 +19,8 @@ export class CreatePropertyComponent {
   constructor(private _formBuilder: FormBuilder,
               public dialog: MatDialog,
               private authService: AuthService,
-              private propertyService: PropertyService) {}
+              private propertyService: PropertyService,
+              private router: Router) {}
 
   firstFormGroup: FormGroup = this._formBuilder.group({
     propertyName: ['', Validators.required],
@@ -149,19 +151,14 @@ export class CreatePropertyComponent {
       },
     }).afterClosed().subscribe(result => {
       if(result.confirmed){
-        console.log(this.property)
-        console.log(this.images.value)
         this.propertyService.saveProperty(formData).subscribe({
           next: value => {
-            console.log('value: ', value)
+            //TODO: redirect to value.id details
+            this.router.navigate(['']);
           },
           error: err => {
-            console.log('error: ', err)
-            console.log('complete: ', formData);
+            console.log(err);
           },
-          complete: () => {
-            console.log('complete: ', formData);
-          }
         })
       }
     })
@@ -200,8 +197,7 @@ export class CreatePropertyComponent {
 
       const imagesControl = this.imageForm.get('images') as FormArray;
       for(const image of imagesControl.value){
-        fd.append('propertyImages', image);
-        console.log(image);
+        fd.append('images', image);
       }
 
       this.openDialog(fd);
