@@ -8,6 +8,7 @@ import {CreatePropertyDialogComponent} from "../create-property-dialog/create-pr
 import 'leaflet.locatecontrol';
 import {PropertyService} from "../../services/PropertyService";
 import {Router} from "@angular/router";
+import {UploadedImage} from "../../models/UploadedImage";
 
 
 @Component({
@@ -37,9 +38,9 @@ export class CreatePropertyComponent {
   thirdFormGroup: FormGroup = this._formBuilder.group({
     propertyType: ['', Validators.required]
   });
-  fourthFormGroup: FormGroup = this._formBuilder.group({
-    propertyImage: ['', Validators.required],
-  })
+  // fourthFormGroup: FormGroup = this._formBuilder.group({
+  //   propertyImage: ['', Validators.required],
+  // })
   imageForm: FormGroup = this._formBuilder.group({
     images: this._formBuilder.array([])
   })
@@ -50,6 +51,8 @@ export class CreatePropertyComponent {
   dataUrl: string | ArrayBuffer | null = null;
   dataUrls: any[] = [];
   selectedImage: any | null = null;
+
+  uploadedImages: UploadedImage[] = [];
 
   propertyTypes = [
     {
@@ -105,17 +108,23 @@ export class CreatePropertyComponent {
   renderImages(files: File[]) {
     this.dataUrls = [];
     for (const file of files) {
-      console.log(file);
       const reader = new FileReader(); // dokolku nema poseben reader za sekoja slika, ke se preoptovari
 
       reader.onload = (event) => {
         const dataUrl = event.target?.result ?? null;
         this.dataUrls.push(dataUrl);
 
+        this.uploadedImages.push({
+          file: file,
+          url: dataUrl
+        } as UploadedImage)
+
         // Check if all files have been processed
         if (this.dataUrls.length === files.length) {
           // All files have been read, you can do something here if needed
         }
+
+
       };
 
       reader.readAsDataURL(file);
@@ -167,7 +176,7 @@ export class CreatePropertyComponent {
   }
 
   submit(): void{
-    if(this.allFormsValid()){
+    if(this.allFormsValid() && this.selectedImage){
       this.displayInvalidMessage = false;
       this.isSubmitted = true;
       this.property = {
@@ -179,7 +188,7 @@ export class CreatePropertyComponent {
         propertyType: this.thirdFormGroup.get('propertyType')!.value,
         propertySize: this.firstFormGroup.get('propertySize')!.value,
         propertyPrice: this.firstFormGroup.get('propertyPrice')!.value,
-        propertyImage: this.fourthFormGroup.get('propertyImage')!.value,
+        propertyImage: this.selectedImage,
         propertyImages: null,
         propertyUser: this.authService.getToken()
       } as SavePropertyRequest;
@@ -193,7 +202,7 @@ export class CreatePropertyComponent {
       fd.append('propertyType', this.thirdFormGroup.get('propertyType')!.value);
       fd.append('propertySize', this.firstFormGroup.get('propertySize')!.value);
       fd.append('propertyPrice', this.firstFormGroup.get('propertyPrice')!.value);
-      fd.append('propertyImage', this.fourthFormGroup.get('propertyImage')!.value);
+      fd.append('propertyImage', this.selectedImage);
       fd.append('propertyUser', this.authService.getToken()!);
 
       const imagesControl = this.imageForm.get('images') as FormArray;
@@ -211,7 +220,7 @@ export class CreatePropertyComponent {
   }
 
   allFormsValid(): boolean{
-    return this.firstFormGroup.valid && this.secondFormGroup.valid && this.thirdFormGroup.valid && this.fourthFormGroup.valid;
+    return this.firstFormGroup.valid && this.secondFormGroup.valid && this.thirdFormGroup.valid;
   }
 
   onPropertyLocationChange(event: number[]): void{
@@ -221,8 +230,8 @@ export class CreatePropertyComponent {
     });
   }
 
-  onSelectedImage(url: string):void{
-    console.log(typeof url);
+  onSelectedImage(file: File):void{
+    this.selectedImage = file.name;
   }
 
 }
