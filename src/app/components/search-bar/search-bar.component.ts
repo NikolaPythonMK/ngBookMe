@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {PropertyService} from "../../services/PropertyService";
 import {Page} from "../../models/Page";
 import {ActivatedRoute, Route, Router} from "@angular/router";
+import {Property} from "../../models/Property";
 
 @Component({
   selector: 'search-bar-app',

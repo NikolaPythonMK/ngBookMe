@@ -2,6 +2,7 @@ import {Injectable, InjectionToken} from "@angular/core";
 import * as L from "leaflet";
 import {Icon, IconOptions, LatLng, LatLngExpression} from "leaflet";
 import {Observable} from "rxjs";
+import {PropertyPopup} from "../models/PropertyPopup";
 
 // export const MAP_SERVICE_TOKEN = new InjectionToken<MapService>('MAP_SERVICE_TOKEN');
 
@@ -26,25 +27,34 @@ export class MapService{
   initMap(): void{
     if(!this.map){
       this.map = L.map('map').setView([51.505, -0.09], 13);
-      console.log('3: ', this.map)
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '© OpenStreetMap contributors'
       }).addTo(this.map)
     }
+
+    L.marker([43.00, 42.00], {icon: this.customIcon}).addTo(this.map!);
+    L.marker([44.99, 41.99], {icon: this.customIcon}).addTo(this.map!);
+    L.marker([45.99, 21.43], {icon: this.customIcon}).addTo(this.map!);
   }
 
   getMapInstance(): L.Map{
     return this.map!;
   }
 
-  removeMapInstance(): void{
-    // console.log('before: ', this.map)
-    // this.map!.off().remove();
-    // this.map = null;
-    // console.log('after: ', this.map)
+  getPropertyMarkers(): L.Marker[]{
+    return this.propertyMarkers;
+  }
 
+  appendMarker(latLng: LatLngExpression, property: PropertyPopup): void{
+    const marker = L.marker(latLng, {icon: this.customIcon}).addTo(this.map!);
+    marker.bindPopup(`<p>${property.name}</p><p>${property.price} MKD</p><p>${property.rating}</p><img src="http://localhost:9090/uploads/${property.id}/${property.image}" width="100" height="100">`);
+
+    marker.openPopup();
+  }
+
+  removeMapInstance(): void{
     this.userMarker = null;
     this.propertyMarkers = [];
     this.map?.remove();
@@ -78,7 +88,7 @@ export class MapService{
       this.map!.on('click', (event: L.LeafletMouseEvent) => {
         const clickedLocation = event.latlng;
         this.setUserLocationMarker(clickedLocation);
-        observer.next([clickedLocation.lat, clickedLocation.lat] as number[]);
+        observer.next([clickedLocation.lat, clickedLocation.lng] as number[]);
       })
     })
     // this.map.on('click', (event: L.LeafletMouseEvent) => {

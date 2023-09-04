@@ -31,8 +31,8 @@ export class CreatePropertyComponent {
   secondFormGroup: FormGroup = this._formBuilder.group({
     propertyCity: ['', Validators.required],
     propertyAddress: ['', Validators.required],
-    lon: ['', Validators.required],
-    lat: ['', Validators.required]
+    lat: ['', Validators.required],
+    lng: ['', Validators.required]
   });
   thirdFormGroup: FormGroup = this._formBuilder.group({
     propertyType: ['', Validators.required]
@@ -174,7 +174,7 @@ export class CreatePropertyComponent {
         propertyDescription: this.firstFormGroup.get('propertyDescription')!.value,
         propertyCity: this.secondFormGroup.get('propertyCity')!.value,
         propertyAddress: this.secondFormGroup.get('propertyAddress')!.value,
-        propertyLocation: this.secondFormGroup.get('lon')!.value + ';' + this.secondFormGroup.get('lat')!.value,
+        propertyLocation: this.secondFormGroup.get('lat')!.value + ';' + this.secondFormGroup.get('lng')!.value,
         propertyType: this.thirdFormGroup.get('propertyType')!.value,
         propertySize: this.firstFormGroup.get('propertySize')!.value,
         propertyPrice: this.firstFormGroup.get('propertyPrice')!.value,
@@ -188,7 +188,7 @@ export class CreatePropertyComponent {
       fd.append('propertyDescription', this.firstFormGroup.get('propertyDescription')!.value);
       fd.append('propertyCity', this.secondFormGroup.get('propertyCity')!.value);
       fd.append('propertyAddress', this.secondFormGroup.get('propertyAddress')!.value);
-      fd.append('propertyLocation', this.secondFormGroup.get('lon')!.value + ';' + this.secondFormGroup.get('lat')!.value);
+      fd.append('propertyLocation', this.secondFormGroup.get('lat')!.value + ';' + this.secondFormGroup.get('lng')!.value);
       fd.append('propertyType', this.thirdFormGroup.get('propertyType')!.value);
       fd.append('propertySize', this.firstFormGroup.get('propertySize')!.value);
       fd.append('propertyPrice', this.firstFormGroup.get('propertyPrice')!.value);
@@ -214,8 +214,8 @@ export class CreatePropertyComponent {
 
   onPropertyLocationChange(event: number[]): void{
     this.secondFormGroup.patchValue({
-      lon: event[0],
-      lat: event[1]
+      lat: event[0],
+      lng: event[1]
     });
   }
 }
