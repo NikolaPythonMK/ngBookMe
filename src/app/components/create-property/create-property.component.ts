@@ -193,7 +193,7 @@ export class CreatePropertyComponent {
       fd.append('propertyType', this.thirdFormGroup.get('propertyType')!.value);
       fd.append('propertySize', this.firstFormGroup.get('propertySize')!.value);
       fd.append('propertyPrice', this.firstFormGroup.get('propertyPrice')!.value);
-      fd.append('propertyImage', this.fourthFormGroup.get('propertyImage')!.value);
+      fd.append('propertyImage', this.fourthFormGroup.get('propertyImage')!.value.split("\\")[2]);
       fd.append('propertyUser', this.authService.getToken()!);
 
       const imagesControl = this.imageForm.get('images') as FormArray;

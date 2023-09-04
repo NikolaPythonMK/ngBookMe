@@ -34,7 +34,7 @@ export class PropertiesMapComponent {
         id: property.id,
         name: property.propertyName,
         price: property.propertyPrice,
-        image: property.propertyImage.split("\\")[2],
+        image: property.propertyImage,
         rating: "8-8 excellent"
       } as PropertyPopup;
       console.log(propertyInfo.image)
