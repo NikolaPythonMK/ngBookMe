@@ -17,6 +17,8 @@ export class SearchBarComponent {
 
   page!: Page;
 
+  mapEnlarged: boolean = false;
+
   constructor(private propertyService: PropertyService,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
@@ -53,5 +55,10 @@ export class SearchBarComponent {
 
   submit(): void{
     console.log(this.startDate?.toISOString())
+  }
+
+  onEnlarge(event: boolean){
+    this.mapEnlarged = event;
+    console.log(this.mapEnlarged);
   }
 }

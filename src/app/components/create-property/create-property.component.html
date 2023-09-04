@@ -80,6 +80,7 @@
 
 
   <mat-step [stepControl]="imageForm" class="step">
+    <ng-template matStepLabel>Upload Images</ng-template>
 <!--    <form [formGroup]="fourthFormGroup" class="step-form" enctype="multipart/form-data">-->
 <!--      <ng-template matStepLabel>Insert images of your property</ng-template>-->
 <!--      <p class="mt-3">-->
@@ -92,7 +93,7 @@
 <!--      </div>-->
 <!--    </form>-->
 
-    <form [formGroup]="imageForm" enctype="multipart/form-data">
+    <form [formGroup]="imageForm" enctype="multipart/form-data" class="step-form">
             <p>
               You can upload more images to showcase different aspects of your property.
               This helps guests get a comprehensive view of what your property has to offer.

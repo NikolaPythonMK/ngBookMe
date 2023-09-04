@@ -1,1 +1,18 @@
 <div id="map" #map></div>
+
+<ng-container *ngIf="!enlarged; else showCollapseIcon">
+  <mat-icon (click)="enlargeMap()">
+  <span matIcon class="map-icon">
+    open_in_full
+  </span>
+  </mat-icon>
+</ng-container>
+
+<ng-template #showCollapseIcon>
+  <mat-icon (click)="collapseMap()">
+  <span class="map-icon">
+    close_fullscreen
+  </span>
+  </mat-icon>
+</ng-template>
+

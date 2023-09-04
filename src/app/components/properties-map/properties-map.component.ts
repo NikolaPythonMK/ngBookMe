@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, ViewChild} from "@angular/core";
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from "@angular/core";
 import {MapService} from "../../services/MapService";
 import * as L from "leaflet";
 import {Property} from "../../models/Property";
@@ -11,10 +11,17 @@ import {PropertyPopup} from "../../models/PropertyPopup";
   styleUrls: ['./properties-map.component.css']
 })
 export class PropertiesMapComponent {
+  @Output() enlargeMapEvent = new EventEmitter<boolean>();
+  @Input() enlarged!: boolean;
   @Input() properties: Property[] = [];
   @ViewChild('map') myDiv!: ElementRef;
 
+
   constructor(private mapService: MapService) {}
+
+  ngOnInit(): void{
+    console.log('isEnlarged: ', this.enlarged);
+  }
 
   ngAfterViewInit(){
     this.mapService.initMap();
@@ -48,5 +55,13 @@ export class PropertiesMapComponent {
     const lat = parseFloat(latLng[0]);
     const lng = parseFloat(latLng[1]);
     return [lat, lng] as LatLngExpression;
+  }
+
+  enlargeMap(){
+    this.enlargeMapEvent.emit(true);
+  }
+
+  collapseMap(){
+    this.enlargeMapEvent.emit(false);
   }
 }

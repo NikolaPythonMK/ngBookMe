@@ -179,6 +179,7 @@ export class CreatePropertyComponent {
     if(this.allFormsValid() && this.selectedImage){
       this.displayInvalidMessage = false;
       this.isSubmitted = true;
+      console.log('test: ', this.selectedImage)
       this.property = {
         propertyName: this.firstFormGroup.get('propertyName')!.value,
         propertyDescription: this.firstFormGroup.get('propertyDescription')!.value,
@@ -192,6 +193,7 @@ export class CreatePropertyComponent {
         propertyImages: null,
         propertyUser: this.authService.getToken()
       } as SavePropertyRequest;
+      console.log(this.property)
 
       const fd = new FormData();
       fd.append('propertyName', this.firstFormGroup.get('propertyName')!.value);
@@ -231,7 +233,9 @@ export class CreatePropertyComponent {
   }
 
   onSelectedImage(file: File):void{
+    console.log('ff: ', file)
     this.selectedImage = file.name;
+    console.log(this.selectedImage)
   }
 
 }
