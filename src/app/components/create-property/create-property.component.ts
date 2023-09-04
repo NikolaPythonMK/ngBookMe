@@ -49,6 +49,7 @@ export class CreatePropertyComponent {
   property?: SavePropertyRequest;
   dataUrl: string | ArrayBuffer | null = null;
   dataUrls: any[] = [];
+  selectedImage: any | null = null;
 
   propertyTypes = [
     {
@@ -104,6 +105,7 @@ export class CreatePropertyComponent {
   renderImages(files: File[]) {
     this.dataUrls = [];
     for (const file of files) {
+      console.log(file);
       const reader = new FileReader(); // dokolku nema poseben reader za sekoja slika, ke se preoptovari
 
       reader.onload = (event) => {
@@ -162,7 +164,6 @@ export class CreatePropertyComponent {
         })
       }
     })
-
   }
 
   submit(): void{
@@ -197,6 +198,7 @@ export class CreatePropertyComponent {
 
       const imagesControl = this.imageForm.get('images') as FormArray;
       for(const image of imagesControl.value){
+        console.log(image);
         fd.append('images', image);
       }
 
@@ -218,4 +220,9 @@ export class CreatePropertyComponent {
       lng: event[1]
     });
   }
+
+  onSelectedImage(url: string):void{
+    console.log(typeof url);
+  }
+
 }

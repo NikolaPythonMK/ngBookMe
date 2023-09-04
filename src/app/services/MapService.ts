@@ -33,10 +33,6 @@ export class MapService{
         attribution: '© OpenStreetMap contributors'
       }).addTo(this.map)
     }
-
-    L.marker([43.00, 42.00], {icon: this.customIcon}).addTo(this.map!);
-    L.marker([44.99, 41.99], {icon: this.customIcon}).addTo(this.map!);
-    L.marker([45.99, 21.43], {icon: this.customIcon}).addTo(this.map!);
   }
 
   getMapInstance(): L.Map{
@@ -49,7 +45,20 @@ export class MapService{
 
   appendMarker(latLng: LatLngExpression, property: PropertyPopup): void{
     const marker = L.marker(latLng, {icon: this.customIcon}).addTo(this.map!);
-    marker.bindPopup(`<p>${property.name}</p><p>${property.price} MKD</p><p>${property.rating}</p><img src="http://localhost:9090/uploads/${property.id}/${property.image}" width="100" height="100">`);
+    marker.bindPopup(`<div class="d-flex justify-content-between" style="margin-left: -20px; margin-top: -15px; margin-bottom: -14px">
+                            <img src="http://localhost:9090/api/images/${property.id}/${property.image}" width="150" height="150">
+                            <div class="d-flex flex-column justify-content-center mb-0" style="margin-left: 10px;">
+                              <span class="mb-0">${property.name}</span>
+                              <span class="text-body-tertiary mb-0">HOTEL</span>
+                              <span class="mb-0">Street X, Number Y</span>
+                               <span class="mb-0">${property.rating} (432 reviews)</span>
+                               <div class="d-flex justify-content-between align-items-center mb-0">
+                                <span style="color: green; font-size: 1.1rem">${property.price} MKD</span>
+                                <button class="btn btn-primary btn-sm">Details</button>
+                               </div>
+                             </div>
+
+                                </div>`);
 
     marker.openPopup();
   }

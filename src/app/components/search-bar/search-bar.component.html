@@ -38,13 +38,22 @@
 
 <div class="content-wrapper">
 <div class="content row">
-  <div class="properties-container col-7">
-    <display-properties-app [page]="page" (pageEvent)="appendPageNumberParam($event)"></display-properties-app>
-  </div>
+<!--  <div class="properties-container col-7">-->
+<!--    <display-properties-app [page]="page" (pageEvent)="appendPageNumberParam($event)"></display-properties-app>-->
+<!--  </div>-->
 
-    <div class="map-container col-5">
-      <properties-map-app [properties]="page.content"></properties-map-app>
-    </div>
+<!--    <div class="map-container col-5">-->
+<!--      <properties-map-app></properties-map-app>-->
+<!--    </div>-->
+
+    <ng-container *ngIf="page">
+      <div class="properties-container col-7">
+        <display-properties-app [page]="page" (pageEvent)="appendPageNumberParam($event)"></display-properties-app>
+      </div>
+      <div class="map-container col-5">
+        <properties-map-app [properties]="page.content"></properties-map-app>
+      </div>
+    </ng-container>
 </div>
 </div>
 
