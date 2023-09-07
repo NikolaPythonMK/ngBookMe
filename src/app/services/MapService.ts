@@ -15,17 +15,16 @@ export class MapService{
   private userMarker: L.Marker | null = null;
   private propertyMarkers: L.Marker[] = [];
 
-  readonly customIcon: Icon<IconOptions> = L.icon({
-    iconUrl: '../../../assets/gps-icon.png',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-  });
+  customIcon(propertyPrice: Number){
 
-  readonly propertyIcon: Icon<IconOptions> = L.icon({
-    iconUrl: '../../../assets/property-icon.png',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-  });
+    const icon = L.divIcon({
+      html: `<span class="px-3 pt-1 pb-1 rounded-4 bg-white text-black fw-bolder border border-success">MKD${propertyPrice}</span>`,
+      className:"custom-label",
+      iconSize: [40, 30],
+    });
+
+    return icon;
+  }
 
   constructor() {
   }
@@ -50,22 +49,52 @@ export class MapService{
   }
 
   appendMarker(latLng: LatLngExpression, property: PropertyPopup): void{
-    const marker = L.marker(latLng, {icon: this.propertyIcon}).addTo(this.map!);
-    marker.bindPopup(`<div class="d-flex justify-content-between" style="margin-left: -21px; margin-top: -15px; margin-bottom: -14px">
+    const marker = L.marker(latLng, {icon: this.customIcon(property.price)}).addTo(this.map!);
+    marker.bindPopup(L.popup({
+      autoPan: false,
+      interactive: true,
+      content:`
+                          <div class="d-flex justify-content-between" style="margin-left: -20px; margin-top: -15px; margin-bottom: -14px">
                             <img src="http://localhost:9090/api/images/${property.id}/${property.image}" width="150" height="150">
                             <div class="d-flex flex-column justify-content-center mb-0" style="margin-left: 10px;">
                               <span class="mb-0">${property.name}</span>
-                              <span class="text-body-tertiary mb-1">HOTEL</span>
-                              <span class="mb-1">Street X, Number Y</span>
-                               <span class="mb-1"><b>${property.rating}</b> (432 reviews)</span>
+                              <span class="text-body-tertiary mb-0">HOTEL</span>
+                              <span class="mb-0">Street X, Number Y</span>
+                               <span class="mb-0">${property.rating} (432 reviews)</span>
                                <div class="d-flex justify-content-between align-items-center mb-0">
                                 <span style="color: green; font-size: 1.1rem">${property.price} MKD</span>
-                                <button class="btn btn-outline-success btn-sm m-2">Details</button>
+                                <button class="btn btn-primary btn-sm">Details</button>
                                </div>
                              </div>
-                                </div>`);
+                          </div>`,
+      offset: L.point(15, -10)
 
-    marker.openPopup();
+    }))
+    /* marker.bindPopup(`
+                           <div class="d-flex justify-content-between" style="margin-left: -20px; margin-top: -15px; margin-bottom: -14px">
+                             <img src="http://localhost:9090/api/images/${property.id}/${property.image}" width="150" height="150">
+                             <div class="d-flex flex-column justify-content-center mb-0" style="margin-left: 10px;">
+                               <span class="mb-0">${property.name}</span>
+                               <span class="text-body-tertiary mb-0">HOTEL</span>
+                               <span class="mb-0">Street X, Number Y</span>
+                                <span class="mb-0">${property.rating} (432 reviews)</span>
+                                <div class="d-flex justify-content-between align-items-center mb-0">
+                                 <span style="color: green; font-size: 1.1rem">${property.price} MKD</span>
+                                 <button class="btn btn-primary btn-sm">Details</button>
+                                </div>
+                              </div>
+                           </div>`);*/
+
+    marker.on('mousemove', () => {
+      if(!marker.isPopupOpen()){
+        marker.openPopup();
+      }
+    });
+
+    marker.getPopup()?.addEventListener("mouseout", () => {
+      marker.getPopup()?.close();
+    });
+
   }
 
   removeMapInstance(): void{
@@ -82,13 +111,7 @@ export class MapService{
           (position) => {
             const lat = position.coords.latitude;
             const lng = position.coords.longitude;
-            this.userMarker = L.marker([(lat) as number, (lng) as number], {icon: this.customIcon}).addTo(this.map!);
-
-            const popup = new L.Popup()
-              .setLatLng([(lat + 1.145) as number, (lng + 1.145) as number])
-              .setContent("<span style='margin-left: 10px'>You</span>");
-            this.userMarker.bindPopup(popup).openPopup();
-
+            this.userMarker = L.marker([(lat) as number, (lng) as number], {icon: this.customIcon(0)}).addTo(this.map!);
             this.map!.setView([lat, lng], 15);
             observer.next([lat, lng])
             observer.complete();
@@ -119,7 +142,7 @@ export class MapService{
 
   setUserLocationMarker(newLocation: L.LatLng): void{
     if(!this.userMarker){
-      this.userMarker = L.marker(newLocation, {icon: this.customIcon}).addTo(this.map!)
+      this.userMarker = L.marker(newLocation, {icon: this.customIcon(0)}).addTo(this.map!)
     }
     else{
       this.userMarker.setLatLng(newLocation);

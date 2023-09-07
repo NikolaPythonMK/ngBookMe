@@ -1,4 +1,10 @@
-<div id="map" #map></div>
+<ng-container *ngIf="!enlarged; else showEnlarged ">
+  <div id="map" #map class="map"></div>
+</ng-container>
+
+<ng-template #showEnlarged>
+  <div id="map" #map class="map-enlarged"></div>
+</ng-template>
 
 <ng-container *ngIf="!enlarged; else showCollapseIcon">
   <mat-icon (click)="enlargeMap()">

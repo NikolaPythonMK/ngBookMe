@@ -48,15 +48,15 @@
 
     <ng-container *ngIf="page">
       <ng-container *ngIf="mapEnlarged; else showRegular">
-        <div class="map-container">
+        <div class="map-container-enlarged">
           <properties-map-app [properties]="page.content" [enlarged]="true" (enlargeMapEvent)="onEnlarge($event)"></properties-map-app>
         </div>
       </ng-container>
       <ng-template #showRegular>
-        <div class="properties-container col-7">
+        <div class="properties-container col-lg-7 d-none d-lg-block ">
           <display-properties-app [page]="page" (pageEvent)="appendPageNumberParam($event)"></display-properties-app>
         </div>
-        <div class="map-container col-5">
+        <div class="map-container col-sm-12 col-md-12 col-lg-5">
           <properties-map-app [properties]="page.content" [enlarged]="false" (enlargeMapEvent)="onEnlarge($event)"></properties-map-app>
         </div>
       </ng-template>
