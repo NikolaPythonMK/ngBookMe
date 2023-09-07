@@ -21,6 +21,12 @@ export class MapService{
     iconAnchor: [16, 32],
   });
 
+  readonly propertyIcon: Icon<IconOptions> = L.icon({
+    iconUrl: '../../../assets/property-icon.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+  });
+
   constructor() {
   }
 
@@ -44,20 +50,19 @@ export class MapService{
   }
 
   appendMarker(latLng: LatLngExpression, property: PropertyPopup): void{
-    const marker = L.marker(latLng, {icon: this.customIcon}).addTo(this.map!);
-    marker.bindPopup(`<div class="d-flex justify-content-between" style="margin-left: -20px; margin-top: -15px; margin-bottom: -14px">
+    const marker = L.marker(latLng, {icon: this.propertyIcon}).addTo(this.map!);
+    marker.bindPopup(`<div class="d-flex justify-content-between" style="margin-left: -21px; margin-top: -15px; margin-bottom: -14px">
                             <img src="http://localhost:9090/api/images/${property.id}/${property.image}" width="150" height="150">
                             <div class="d-flex flex-column justify-content-center mb-0" style="margin-left: 10px;">
                               <span class="mb-0">${property.name}</span>
-                              <span class="text-body-tertiary mb-0">HOTEL</span>
-                              <span class="mb-0">Street X, Number Y</span>
-                               <span class="mb-0">${property.rating} (432 reviews)</span>
+                              <span class="text-body-tertiary mb-1">HOTEL</span>
+                              <span class="mb-1">Street X, Number Y</span>
+                               <span class="mb-1"><b>${property.rating}</b> (432 reviews)</span>
                                <div class="d-flex justify-content-between align-items-center mb-0">
                                 <span style="color: green; font-size: 1.1rem">${property.price} MKD</span>
-                                <button class="btn btn-primary btn-sm">Details</button>
+                                <button class="btn btn-outline-success btn-sm m-2">Details</button>
                                </div>
                              </div>
-
                                 </div>`);
 
     marker.openPopup();
@@ -78,6 +83,12 @@ export class MapService{
             const lat = position.coords.latitude;
             const lng = position.coords.longitude;
             this.userMarker = L.marker([(lat) as number, (lng) as number], {icon: this.customIcon}).addTo(this.map!);
+
+            const popup = new L.Popup()
+              .setLatLng([(lat + 1.145) as number, (lng + 1.145) as number])
+              .setContent("<span style='margin-left: 10px'>You</span>");
+            this.userMarker.bindPopup(popup).openPopup();
+
             this.map!.setView([lat, lng], 15);
             observer.next([lat, lng])
             observer.complete();

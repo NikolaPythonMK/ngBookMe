@@ -58,10 +58,14 @@
 }
 
 .img-container img:hover{
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, darkslategrey 0px 0px 0px 3px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, greenyellow 0px 0px 0px 3px;
 }
 .select-img-text{
   font-size: 1.4rem;
+}
+
+.selected-image{
+  border: 5px solid greenyellow;
 }
 
 @media (max-width: 768px) {

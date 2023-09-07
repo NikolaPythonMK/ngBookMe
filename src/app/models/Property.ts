@@ -12,5 +12,6 @@ export interface Property{
   propertyPrice: number,
   propertyImage: string,
   propertyUser: PropertyOwnerInfo,
-  propertyImages: string[]
+  propertyImages: string[],
+  bookmarked: boolean
 }

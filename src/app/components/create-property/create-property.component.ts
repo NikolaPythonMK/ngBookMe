@@ -233,9 +233,7 @@ export class CreatePropertyComponent {
   }
 
   onSelectedImage(file: File):void{
-    console.log('ff: ', file)
     this.selectedImage = file.name;
-    console.log(this.selectedImage)
   }
 
 }

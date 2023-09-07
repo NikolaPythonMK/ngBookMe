@@ -61,6 +61,12 @@
     padding-bottom: 10px;
     padding-top: 10px;
   }
+  .properties-container{
+    display: none;
+  }
+  .map-container{
+    width: 100%;
+  }
 }
 
 /*@media (min-width: 1670px) {*/

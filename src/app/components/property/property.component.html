@@ -17,9 +17,25 @@
           <span class="price">{{ property.propertyPrice }} МКД</span>
         </div>
         <div class="card-actions">
-          <button mat-icon-button>
-            <mat-icon>bookmark</mat-icon>
-          </button>
+          <ng-container *ngIf="isUserAuthenticated(); else notAuthenticated">
+            <ng-container *ngIf="property.bookmarked; else notBookmarked">
+              <button mat-icon-button (click)="removeBookmark()">
+                <mat-icon>bookmark</mat-icon>
+              </button>
+            </ng-container>
+
+            <ng-template #notBookmarked>
+              <button mat-icon-button (click)="addBookmark()">
+                <mat-icon>bookmark_outline</mat-icon>
+              </button>
+            </ng-template>
+          </ng-container>
+
+          <ng-template #notAuthenticated>
+            <button mat-icon-button routerLink="/login">
+              <mat-icon>bookmark_outline</mat-icon>
+            </button>
+          </ng-template>
         </div>
       </div>
     </mat-card-content>

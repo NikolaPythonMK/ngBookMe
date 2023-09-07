@@ -3,6 +3,7 @@ import {PropertyService} from "../../services/PropertyService";
 import {Page} from "../../models/Page";
 import {ActivatedRoute, Route, Router} from "@angular/router";
 import {Property} from "../../models/Property";
+import {PropertyResponse} from "../../models/PropertyResponse";
 
 @Component({
   selector: 'search-bar-app',
@@ -28,6 +29,7 @@ export class SearchBarComponent {
     this.propertyService.getProperties(null).subscribe({
       next: (page) => {
         this.page = page;
+        console.log("-> ", this.page.content)
       },
       error: (err) => {
         console.log(err);

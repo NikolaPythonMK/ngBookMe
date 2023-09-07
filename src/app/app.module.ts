@@ -36,6 +36,7 @@ import {CreatePropertyDialogComponent} from "./components/create-property-dialog
 import {CreatePropertyMapComponent} from "./components/create-property-map/create-property-map.component";
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {PropertiesMapComponent} from "./components/properties-map/properties-map.component";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -76,6 +77,7 @@ import {PropertiesMapComponent} from "./components/properties-map/properties-map
     MatRadioModule,
     MatDialogModule,
     MatPaginatorModule,
+    MatSnackBarModule,
   ],
   providers: [
     // {

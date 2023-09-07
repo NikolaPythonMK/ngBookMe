@@ -1,5 +1,9 @@
 <div *ngFor="let property of page.content" class="mb-3">
-  <property-app [property]="property"></property-app>
+  <property-app [property]="property"
+                (bookmarkedEvent)="bookmarkSnackbar($event)">
+
+  </property-app>
+
 </div>
 
 <div class="d-flex justify-content-center pagination-container">

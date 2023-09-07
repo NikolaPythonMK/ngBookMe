@@ -81,17 +81,6 @@
 
   <mat-step [stepControl]="imageForm" class="step">
     <ng-template matStepLabel>Upload Images</ng-template>
-<!--    <form [formGroup]="fourthFormGroup" class="step-form" enctype="multipart/form-data">-->
-<!--      <ng-template matStepLabel>Insert images of your property</ng-template>-->
-<!--      <p class="mt-3">-->
-<!--        Upload an image of your property that will be shown as the main card image. This image will give users a quick-->
-<!--        glimpse of your property.-->
-<!--      </p>-->
-<!--      <input type="file" class="mb-5" formControlName="propertyImage" (change)="onThumbnailSubmit($event)">-->
-<!--      <div class="thumbnail-container mb-5">-->
-<!--        <img *ngIf="dataUrl" [src]="dataUrl" class="thumbnail">-->
-<!--      </div>-->
-<!--    </form>-->
 
     <form [formGroup]="imageForm" enctype="multipart/form-data" class="step-form">
             <p>
@@ -102,7 +91,10 @@
       <input type="file" multiple class="mb-4" (change)="onImageChange($event)">
 
       <div class="img-container">
-        <img *ngFor="let uploadedImage of uploadedImages" [src]="uploadedImage.url" class="uploaded-images" (click)="onSelectedImage(uploadedImage.file)">
+        <img *ngFor="let uploadedImage of uploadedImages"
+             [src]="uploadedImage.url" class="uploaded-images"
+             [class.selected-image]="uploadedImage.file.name === selectedImage"
+             (click)="onSelectedImage(uploadedImage.file)">
       </div>
 
       <p *ngIf="dataUrls.length > 0" class="mt-3 text-success select-img-text">Select the image that you want to appear in the thumbnail.</p>
