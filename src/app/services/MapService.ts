@@ -51,7 +51,7 @@ export class MapService{
   appendMarker(latLng: LatLngExpression, property: PropertyPopup): void{
     const marker = L.marker(latLng, {icon: this.customIcon(property.price)}).addTo(this.map!);
     marker.bindPopup(L.popup({
-      autoPan: false,
+      autoPan: true,
       interactive: true,
       content:`
                           <div class="d-flex justify-content-between" style="margin-left: -20px; margin-top: -15px; margin-bottom: -14px">
@@ -94,7 +94,6 @@ export class MapService{
     marker.getPopup()?.addEventListener("mouseout", () => {
       marker.getPopup()?.close();
     });
-
   }
 
   removeMapInstance(): void{
