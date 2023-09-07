@@ -75,7 +75,7 @@ export class PropertyService {
   }
 
   getBookmarkedProperties(): Observable<any>{
-    return this.http.get<any>(this.url + '/favorites', this.httpOptions)
+    return this.http.get<any>(this.url + '/favourites', this.httpOptions)
       .pipe(
         map(page => {
           return {

@@ -205,7 +205,6 @@ export class CreatePropertyComponent {
       fd.append('propertySize', this.firstFormGroup.get('propertySize')!.value);
       fd.append('propertyPrice', this.firstFormGroup.get('propertyPrice')!.value);
       fd.append('propertyImage', this.selectedImage);
-      fd.append('propertyUser', this.authService.getToken()!);
 
       const imagesControl = this.imageForm.get('images') as FormArray;
       for(const image of imagesControl.value){
