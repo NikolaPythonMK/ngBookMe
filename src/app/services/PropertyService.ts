@@ -65,12 +65,12 @@ export class PropertyService {
   }
 
   bookmarkProperty(id: number): Observable<Property>{
-    const url = `${this.url}/favorite/${id}`;
+    const url = `${this.url}/${id}/favourite`;
     return this.http.post<Property>(url, {}, this.httpOptions);
   }
 
   removeBookmark(id: number): Observable<any>{
-    const url = `${this.url}/favorite/delete/${id}`;
+    const url = `${this.url}/${id}/favourite/delete`;
     return this.http.post<any>(url, {}, this.httpOptions);
   }
 
