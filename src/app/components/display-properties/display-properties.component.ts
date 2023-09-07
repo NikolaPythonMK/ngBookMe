@@ -3,6 +3,7 @@ import {Page} from "../../models/Page";
 import {PageEvent} from "@angular/material/paginator";
 
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {MessengerService} from "../../services/MessengerService";
 
 @Component({
   selector: 'display-properties-app',
@@ -13,7 +14,7 @@ export class DisplayPropertiesComponent{
   @Input() page!: Page;
   @Output() pageEvent = new EventEmitter<number>();
 
-  constructor(private _snackBar: MatSnackBar) {}
+  constructor(private _snackBar: MatSnackBar, private messengerService: MessengerService) {}
 
   onPageNumberChange(event: PageEvent): void{
     this.pageEvent.emit(event.pageIndex)
@@ -25,7 +26,9 @@ export class DisplayPropertiesComponent{
       verticalPosition: 'bottom',
       duration: 3000
     })
-
   }
 
+  hoveredChild(id: number): void{
+    this.messengerService.hoveredPropertyId$.next(id);
+  }
 }

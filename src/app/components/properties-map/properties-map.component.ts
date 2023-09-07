@@ -4,6 +4,7 @@ import * as L from "leaflet";
 import {Property} from "../../models/Property";
 import {LatLngExpression} from "leaflet";
 import {PropertyPopup} from "../../models/PropertyPopup";
+import {MessengerService} from "../../services/MessengerService";
 
 @Component({
   selector: 'properties-map-app',
@@ -17,16 +18,16 @@ export class PropertiesMapComponent {
   @ViewChild('map') myDiv!: ElementRef;
 
 
-  constructor(private mapService: MapService) {}
-
-  ngOnInit(): void{
-    console.log('isEnlarged: ', this.enlarged);
-  }
+  constructor(private mapService: MapService,
+              private messengerService: MessengerService) {}
 
   ngAfterViewInit(){
     this.mapService.initMap();
     this.drawMarkers();
     this.mapService.showUserLocationMarker().subscribe();
+    this.messengerService.hoveredPropertyId$.subscribe(propertyId => {
+      this.mapService.openPopupForMarker(propertyId);
+    })
   }
 
   ngOnDestroy() {
