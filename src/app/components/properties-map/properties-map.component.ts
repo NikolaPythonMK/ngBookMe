@@ -5,6 +5,7 @@ import {Property} from "../../models/Property";
 import {LatLngExpression} from "leaflet";
 import {PropertyPopup} from "../../models/PropertyPopup";
 import {MessengerService} from "../../services/MessengerService";
+import {PropertyService} from "../../services/PropertyService";
 
 @Component({
   selector: 'properties-map-app',
@@ -14,19 +15,21 @@ import {MessengerService} from "../../services/MessengerService";
 export class PropertiesMapComponent {
   @Output() enlargeMapEvent = new EventEmitter<boolean>();
   @Input() enlarged!: boolean;
-  @Input() properties: Property[] = [];
+  properties: Property[] = [];
   @ViewChild('map') myDiv!: ElementRef;
 
 
   constructor(private mapService: MapService,
-              private messengerService: MessengerService) {}
+              private messengerService: MessengerService,) {}
+
+
+
 
   ngAfterViewInit(){
-    this.mapService.initMap();
-    this.drawMarkers();
-    this.mapService.showUserLocationMarker().subscribe();
-    this.messengerService.hoveredPropertyId$.subscribe(propertyId => {
-      this.mapService.openPopupForMarker(propertyId);
+    this.init();
+    this.messengerService.properties$.subscribe(next => {
+      this.properties = next as Property[];
+      this.drawMarkers();
     })
   }
 
@@ -36,17 +39,27 @@ export class PropertiesMapComponent {
     divElement.parentNode.removeChild(divElement);
   }
 
+  private init(){
+    this.mapService.initMap();
+    this.drawMarkers();
+    this.mapService.showUserLocationMarker().subscribe();
+    this.messengerService.hoveredPropertyId$.subscribe(next => {
+      this.mapService.openPopupForMarker(next.id, next.toOpen);
+    })
+  }
+
   drawMarkers(): void{
+    this.mapService.removeAllPropertyMarkers();
     for(let property of this.properties){
-      console.log(property)
       const propertyInfo = {
         id: property.id,
         name: property.propertyName,
+        address: property.propertyAddress,
+        type: property.propertyType,
         price: property.propertyPrice,
         image: property.propertyImage,
         rating: "8-8 excellent"
       } as PropertyPopup;
-      console.log(propertyInfo.image)
       this.mapService.appendMarker(this.extractLatLng(property.propertyLocation), propertyInfo);
     }
   }

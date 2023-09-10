@@ -64,6 +64,11 @@ export class PropertyService {
       )
   }
 
+  getById(id: number): Observable<Property>{
+    const url = `${this.url}/${id}`
+    return this.http.get<Property>(url);
+  }
+
   bookmarkProperty(id: number): Observable<Property>{
     const url = `${this.url}/${id}/favourite`;
     return this.http.post<Property>(url, {}, this.httpOptions);
@@ -75,7 +80,12 @@ export class PropertyService {
   }
 
   getBookmarkedProperties(): Observable<any>{
-    return this.http.get<any>(this.url + '/favourites', this.httpOptions)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.authService.getToken()!,
+      }),
+    };
+    return this.http.get<any>(this.url + '/favourites', httpOptions)
       .pipe(
         map(page => {
           return {

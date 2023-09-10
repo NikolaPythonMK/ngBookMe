@@ -1,8 +1,9 @@
 <div *ngFor="let property of page.content" class="mb-3">
   <property-app [property]="property"
                 (bookmarkedEvent)="bookmarkSnackbar($event)"
-                (mouseenter)="hoveredChild(property.id)">
-
+                (mouseenter)="hoveredChild(property.id)"
+                (mouseleave)="hoveredChild(property.id, false)"
+                (click)="visitDetails(property.id, $event)">
   </property-app>
 
 </div>

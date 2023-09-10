@@ -37,7 +37,7 @@ export class MapService{
 
   initMap(): void{
     if(!this.map){
-      this.map = L.map('map').setView([51.505, -0.09], 13);
+      this.map = L.map('map').setView([41.9925, 21.4313], 13);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -64,8 +64,8 @@ export class MapService{
                             <img src="http://localhost:9090/api/images/${property.id}/${property.image}" width="150" height="150">
                             <div class="d-flex flex-column justify-content-center mb-0" style="margin-left: 10px;">
                               <span class="mb-1">${property.name}</span>
-                              <span class="text-body-tertiary mb-1">HOTEL</span>
-                              <span class="mb-2">Street X, Number Y</span>
+                              <span class="text-body-tertiary mb-1">${property.type}</span>
+                              <span class="mb-2">${property.address}</span>
                                <span class="mb-3"><span style="font-weight: bold">${property.rating}</span> (432 reviews)</span>
                                <div class="d-flex justify-content-between align-items-center mb-0">
                                 <span style="color: green; font-size: 1.1rem">${property.price} MKD</span>
@@ -111,6 +111,11 @@ export class MapService{
     this.propertyMarkers = [];
     this.map?.remove();
     this.map = null;
+  }
+
+  removeAllPropertyMarkers(): void{
+    this.propertyMarkers.forEach(m => m.marker.removeFrom(this.map!))
+    this.propertyMarkers = [];
   }
 
   showUserLocationMarker(): Observable<number[]>{
@@ -171,7 +176,12 @@ export class MapService{
     return null;
   }
 
-  openPopupForMarker(id: number): void{
-    this.propertyMarkers.find(marker => marker.propertyId === id)?.marker.openPopup();
+  openPopupForMarker(id: number, toOpen: boolean): void{
+    if(toOpen){
+      this.propertyMarkers.find(marker => marker.propertyId === id)?.marker.openPopup();
+    }
+    else{
+      this.propertyMarkers.find(marker => marker.propertyId === id)?.marker.closePopup();
+    }
   }
 }

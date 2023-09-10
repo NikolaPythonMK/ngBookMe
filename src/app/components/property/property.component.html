@@ -19,13 +19,13 @@
         <div class="card-actions">
           <ng-container *ngIf="isUserAuthenticated(); else notAuthenticated">
             <ng-container *ngIf="property.bookmarked; else notBookmarked">
-              <button mat-icon-button (click)="removeBookmark()">
+              <button mat-icon-button (click)="removeBookmark($event)">
                 <mat-icon>bookmark</mat-icon>
               </button>
             </ng-container>
 
             <ng-template #notBookmarked>
-              <button mat-icon-button (click)="addBookmark()">
+              <button mat-icon-button (click)="addBookmark($event)">
                 <mat-icon>bookmark_outline</mat-icon>
               </button>
             </ng-template>

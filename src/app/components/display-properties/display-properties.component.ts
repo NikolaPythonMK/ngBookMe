@@ -4,6 +4,7 @@ import {PageEvent} from "@angular/material/paginator";
 
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MessengerService} from "../../services/MessengerService";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'display-properties-app',
@@ -14,7 +15,9 @@ export class DisplayPropertiesComponent{
   @Input() page!: Page;
   @Output() pageEvent = new EventEmitter<number>();
 
-  constructor(private _snackBar: MatSnackBar, private messengerService: MessengerService) {}
+  constructor(private _snackBar: MatSnackBar,
+              private messengerService: MessengerService,
+              private router: Router) {}
 
   onPageNumberChange(event: PageEvent): void{
     this.pageEvent.emit(event.pageIndex)
@@ -28,7 +31,11 @@ export class DisplayPropertiesComponent{
     })
   }
 
-  hoveredChild(id: number): void{
-    this.messengerService.hoveredPropertyId$.next(id);
+  hoveredChild(id: number, toOpen: boolean = true): void{
+    this.messengerService.hoveredPropertyId$.next({id: id, toOpen: toOpen});
+  }
+
+  visitDetails(id: number, event: Event){
+    this.router.navigate(['property', id]);
   }
 }

@@ -15,7 +15,8 @@ export class PropertyComponent{
 
   constructor(private propertyService: PropertyService, private authService: AuthService) {}
 
-  addBookmark(): void{
+  addBookmark(event: Event): void{
+    event.stopPropagation();
     this.propertyService.bookmarkProperty(this.property.id).subscribe({
       next: () => {
         this.bookmarkedEvent.emit('Bookmark Added!');
@@ -27,7 +28,8 @@ export class PropertyComponent{
     })
   }
 
-  removeBookmark(): void{
+  removeBookmark(event: Event): void{
+    event.stopPropagation();
     this.propertyService.removeBookmark(this.property.id).subscribe({
       next: () => {
         this.bookmarkedEvent.emit('Bookmark Removed!');

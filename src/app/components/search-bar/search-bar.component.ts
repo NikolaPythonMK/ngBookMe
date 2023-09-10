@@ -4,6 +4,7 @@ import {Page} from "../../models/Page";
 import {ActivatedRoute, Route, Router} from "@angular/router";
 import {Property} from "../../models/Property";
 import {PropertyResponse} from "../../models/PropertyResponse";
+import {MessengerService} from "../../services/MessengerService";
 
 @Component({
   selector: 'search-bar-app',
@@ -22,14 +23,16 @@ export class SearchBarComponent {
 
   constructor(private propertyService: PropertyService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private messengerService: MessengerService) {
   }
 
   ngOnInit(): void{
     this.propertyService.getProperties(null).subscribe({
       next: (page) => {
         this.page = page;
-        console.log("-> ", this.page.content)
+        console.log(this.page.content)
+        this.messengerService.properties$.next(this.page.content);
       },
       error: (err) => {
         console.log(err);
@@ -40,6 +43,8 @@ export class SearchBarComponent {
       this.propertyService.getProperties(params.get('page')!).subscribe({
         next: page => {
           this.page = page;
+          console.log(this.page.content)
+          this.messengerService.properties$.next(this.page.content);
           window.scrollTo(0, 0);
         }
       })
