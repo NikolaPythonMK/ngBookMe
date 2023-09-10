@@ -38,6 +38,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {PropertiesMapComponent} from "./components/properties-map/properties-map.component";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {PropertyDetailsComponent} from "./components/property-details/property-details.component";
+import {FormatImageUrlPipe} from "./pipes/format-image-url..pipe";
+import {MarkerPopupComponent} from "./components/marker-popup/marker-popup.component";
 
 
 
@@ -57,6 +59,8 @@ import {PropertyDetailsComponent} from "./components/property-details/property-d
     CreatePropertyMapComponent,
     PropertyDetailsComponent,
     PropertiesMapComponent,
+    FormatImageUrlPipe,
+    MarkerPopupComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import {Icon, IconOptions, LatLng, LatLngExpression} from "leaflet";
 import {Observable} from "rxjs";
 import {PropertyPopup} from "../models/PropertyPopup";
 import {PropertyMarker} from "../models/PropertyMarker";
+import {Router} from "@angular/router";
 
 // export const MAP_SERVICE_TOKEN = new InjectionToken<MapService>('MAP_SERVICE_TOKEN');
 
@@ -32,7 +33,7 @@ export class MapService{
     return icon;
   }
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   initMap(): void{
@@ -69,26 +70,13 @@ export class MapService{
                                <span class="mb-3"><span style="font-weight: bold">${property.rating}</span> (432 reviews)</span>
                                <div class="d-flex justify-content-between align-items-center mb-0">
                                 <span style="color: green; font-size: 1.1rem">${property.price} MKD</span>
-                                <button class="btn btn-outline-success btn-sm">Details</button>
+                                <a class="btn btn-outline-primary btn-sm" href="/property/${property.id}">Details</a>
                                </div>
                              </div>
                           </div>`,
+      // content: `<marker-popup-app [property]="${property}"></marker-popup-app>`,
       offset: L.point(15, -10)
     }))
-    /* marker.bindPopup(`
-                           <div class="d-flex justify-content-between" style="margin-left: -20px; margin-top: -15px; margin-bottom: -14px">
-                             <img src="http://localhost:9090/api/images/${property.id}/${property.image}" width="150" height="150">
-                             <div class="d-flex flex-column justify-content-center mb-0" style="margin-left: 10px;">
-                               <span class="mb-0">${property.name}</span>
-                               <span class="text-body-tertiary mb-0">HOTEL</span>
-                               <span class="mb-0">Street X, Number Y</span>
-                                <span class="mb-0">${property.rating} (432 reviews)</span>
-                                <div class="d-flex justify-content-between align-items-center mb-0">
-                                 <span style="color: green; font-size: 1.1rem">${property.price} MKD</span>
-                                 <button class="btn btn-primary btn-sm">Details</button>
-                                </div>
-                              </div>
-                           </div>`);*/
 
     marker.on('mousemove', () => {
       if(!marker.isPopupOpen()){

@@ -1,2 +1,50 @@
+
 <button (click)="goBack()">Back</button>
-<h1>{{ property.propertyName }}</h1>
+<div class="body">
+
+  <div class="wrapper">
+    <div class="upper-content content row" *ngIf="property != null">
+      <div id="carouselExample" class="carousel slide carousel-container col-6">
+        <div class="carousel-inner">
+          <div class="carousel-item" *ngFor="let img of images; let i = index" [class.active]="i === activeSlideIndex">
+            <img [src]="img | formatImageUrl:property.id" class="d-block w-100 carousel-img" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev" (click)="prevSlide()">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next" (click)="nextSlide()">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <div class="col-5">
+        <h1>{{ property.propertyName }}</h1>
+        <h3> {{ property.propertyType }}  </h3>
+        <p> {{ property.propertyDescription }} </p>
+        <h4> {{ property.propertyCity }}  {{property.propertyAddress}} </h4>
+        <h4> 8.8 - Excellent </h4>
+      </div>
+    </div>
+
+    <div class="middle-content content row mt-2">
+      <div class="col-6 album">
+        <div class="row row-cols-3">
+          <img *ngFor="let img of images; let i = index" [src]="img | formatImageUrl:property.id"
+               class="col album-img"
+               (click)="onImageClick(i)"
+                [class.clickedImage]="i === activeSlideIndex">
+        </div>
+      </div>
+      <div class="col-5">
+        sdsad
+      </div>
+    </div>
+
+    <div class="lower-content content">
+
+    </div>
+  </div>
+</div>

@@ -12,7 +12,7 @@ import {Page} from "../models/Page";
 export class PropertyService {
 
   private readonly url = 'http://localhost:9090/api/properties';
-  // private readonly url = 'http://192.168.1.106:9090/api/properties';
+  // private readonly url = 'http://192.168.0.15:9090/api/properties';
 
   readonly httpOptions = {
     headers: new HttpHeaders({

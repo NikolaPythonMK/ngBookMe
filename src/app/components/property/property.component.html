@@ -1,5 +1,5 @@
 <mat-card class="horizontal-card">
-  <img mat-card-image src='http://localhost:9090/api/images/{{property.id}}/{{property.propertyImage}}' alt="Property Image" class="card-avatar">
+  <img mat-card-image [src]="property.propertyImage | formatImageUrl:property.id" alt="Property Image" class="card-avatar">
   <div class="card-content">
     <mat-card-header>
       <mat-card-title>{{ property.propertyName }}</mat-card-title>

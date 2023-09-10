@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^16.1.0",
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
+    "bootstrap": "^5.3.1",
     "fs": "^0.0.1-security",
     "jwt-decode": "^3.1.2",
     "leaflet": "^1.9.4",

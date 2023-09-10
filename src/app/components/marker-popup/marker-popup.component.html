@@ -1,0 +1,13 @@
+<div class="d-flex justify-content-between" style="margin-left: -21px; margin-top: -15px; margin-bottom: -14px">
+  <img src="http://192.168.0.15:9090/api/images/property.id/property.image" width="150" height="150">
+  <div class="d-flex flex-column justify-content-center mb-0" style="margin-left: 10px;">
+    <span class="mb-1">{{property.name}}</span>
+    <span class="text-body-tertiary mb-1">{{property.type}}</span>
+    <span class="mb-2">{{property.address}}</span>
+    <span class="mb-3"><span style="font-weight: bold">{{property.rating}}</span> (432 reviews)</span>
+    <div class="d-flex justify-content-between align-items-center mb-0">
+      <span style="color: green; font-size: 1.1rem">{{property.price}} MKD</span>
+      <a class="btn btn-outline-primary btn-sm" href="/property/${property.id}">Details</a>
+    </div>
+  </div>
+</div>

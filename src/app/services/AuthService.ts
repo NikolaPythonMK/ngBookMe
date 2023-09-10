@@ -10,7 +10,7 @@ import jwt_decode from 'jwt-decode';
 })
 export class AuthService{
   private readonly authUrl = 'http://localhost:9090/api/auth';
-  // private readonly authUrl = 'http://192.168.1.106:9090/api/auth';
+  // private readonly authUrl = 'http://192.168.0.15:9090/api/properties';
   private token: string | null = null;
 
   user$ = new BehaviorSubject<any>(null);
