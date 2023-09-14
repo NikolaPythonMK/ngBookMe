@@ -7,7 +7,7 @@ import {AuthService} from "../../services/AuthService";
 @Component({
   selector: 'property-app',
   templateUrl: './property.component.html',
-  styleUrls: ['./property.component.css']
+  styleUrls: ['./property.component.css', './../../shared-styles/property-cart.css']
 })
 export class PropertyComponent{
   @Input() property!: Property;

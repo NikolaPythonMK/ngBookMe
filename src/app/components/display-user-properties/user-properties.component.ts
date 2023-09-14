@@ -5,10 +5,10 @@ import {PropertyService} from "../../services/PropertyService";
 @Component({
   selector: 'display-user-properties-app',
   templateUrl: './user-properties.component.html',
-  styleUrls: ['./user-properties.component.css']
+  styleUrls: ['./user-properties.component.css', './../../shared-styles/profile-carts.css']
 })
 export class UserPropertiesComponent implements OnInit{
-  page: Page | null = null;
+  page!: Page;
 
   constructor(private propertyService: PropertyService) {}
 
@@ -16,7 +16,6 @@ export class UserPropertiesComponent implements OnInit{
     this.propertyService.getPropertiesForUser().subscribe({
       next: (page) => {
         this.page = page;
-        console.log(page)
       },
       error: (err) => {
         console.log(err);

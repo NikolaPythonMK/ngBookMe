@@ -14,7 +14,7 @@ import { Location } from '@angular/common';
   templateUrl: './profile-component.html',
   styleUrls: ['./profile-component.css']
 })
-export class ProfileComponent{
+export class ProfileComponent implements OnInit{
   title: string = 'Recently viewed';
 
 
@@ -22,6 +22,11 @@ export class ProfileComponent{
               private recentlyViewedService: RecentlyViewedService,
               private router: Router,
               private location: Location) {}
+
+
+  ngOnInit() {
+    this.router.navigate(['/profile/recently-viewed'])
+  }
 
   onTabChange(event: MatTabChangeEvent): void{
     if(event.index === 0){

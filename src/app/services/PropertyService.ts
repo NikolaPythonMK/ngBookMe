@@ -99,7 +99,12 @@ export class PropertyService {
   }
 
   getPropertiesForUser(): Observable<any> {
-    return this.http.get<any>(this.url + '/user', this.httpOptions)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.authService.getToken()!,
+      }),
+    };
+    return this.http.get<any>(this.url + '/user', httpOptions)
       .pipe(
         tap(data => console.log(data)),
         map((page) => {

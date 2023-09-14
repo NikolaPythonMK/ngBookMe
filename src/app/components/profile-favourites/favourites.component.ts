@@ -5,7 +5,7 @@ import {PropertyService} from "../../services/PropertyService";
 @Component({
   selector: 'profile-display-favourites-app',
   templateUrl: './favourites.component.html',
-  styleUrls: ['./favourites.component.css']
+  styleUrls: ['./favourites.component.css', '../../shared-styles/profile-carts.css']
 })
 export class FavouritesComponent implements OnInit{
   page!: Page;

@@ -5,7 +5,7 @@ import {RecentlyViewedService} from "../../services/RecentlyViewedService";
 @Component({
   selector: 'display-history-app',
   templateUrl: './display-history.component.html',
-  styleUrls: ['./display-history.component.css']
+  styleUrls: ['./display-history.component.css', './../../shared-styles/profile-carts.css']
 })
 export class DisplayHistoryComponent implements OnInit{
   page!: RecentlyViewedPage;

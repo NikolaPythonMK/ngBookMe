@@ -1,0 +1,25 @@
+<mat-card class="horizontal-card">
+  <img mat-card-image [src]="property.propertyImage | formatImageUrl:property.id" alt="Property Image" class="card-avatar">
+  <div class="card-content">
+    <div class="options">
+      <mat-icon><span class="cart-icon">delete</span></mat-icon>
+    </div>
+    <mat-card-header>
+      <mat-card-title>{{ property.propertyName }}</mat-card-title>
+      <mat-card-subtitle> {{ property.propertyType }} </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ property.propertyCity }}, {{ property.propertyAddress }} </p>
+      <div>
+        <span class="to-bold"> 8.8 - Excellent </span>
+        <span>(342 reviews)</span>
+      </div>
+
+      <div class="footer">
+        <div>
+          <span class="price">{{ property.propertyPrice }} МКД</span>
+        </div>
+      </div>
+    </mat-card-content>
+  </div>
+</mat-card>

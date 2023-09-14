@@ -1,11 +1,19 @@
-<div *ngIf="page; else showMessage">
-  <display-properties-app [page]="page" (pageEvent)="appendQueryParam($event)"></display-properties-app>
-</div>
-<ng-template #showMessage>
-  <p class="text-center display-6">
-    Ready to List Your Properties?
-  </p>
-  <div class="d-flex justify-content-center mt-5">
-    <button mat-raised-button routerLink="/post">Post Property</button>
+<div class="wrapper">
+  <div *ngIf="page.content.length > 0; else showMessage" class="properties-container">
+<!--    <display-properties-app [page]="page" (pageEvent)="appendQueryParam($event)"></display-properties-app>-->
+    <div *ngFor="let property of page.content" class="mb-3">
+      <property-user-app [property]="property"></property-user-app>
+    </div>
   </div>
-</ng-template>
+  <ng-template #showMessage>
+    <div class="flex flex-column">
+      <p class="display-6">
+        Ready to List Your Properties?
+      </p>
+      <div class="mt-5 d-flex justify-content-center">
+        <button mat-raised-button routerLink="/post">Post Property</button>
+      </div>
+    </div>
+  </ng-template>
+
+</div>

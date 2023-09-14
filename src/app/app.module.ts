@@ -47,6 +47,7 @@ import {DisplayHistoryComponent} from "./components/display-history/display-hist
 import {FavouritesComponent} from "./components/profile-favourites/favourites.component";
 import {UserPropertiesComponent} from "./components/display-user-properties/user-properties.component";
 import {BookingsComponent} from "./components/display-bookings/bookings.component";
+import {PropertyUserComponent} from "./components/property-user/property-user.component";
 
 
 
@@ -74,6 +75,7 @@ import {BookingsComponent} from "./components/display-bookings/bookings.componen
     FavouritesComponent,
     UserPropertiesComponent,
     BookingsComponent,
+    PropertyUserComponent,
   ],
   imports: [
     BrowserModule,
