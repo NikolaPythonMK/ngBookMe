@@ -41,6 +41,13 @@ import {PropertyDetailsComponent} from "./components/property-details/property-d
 import {FormatImageUrlPipe} from "./pipes/format-image-url..pipe";
 import {MarkerPopupComponent} from "./components/marker-popup/marker-popup.component";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {ProfileComponent} from "./components/profile/profile-component";
+import {MatTabsModule} from '@angular/material/tabs';
+import {DisplayHistoryComponent} from "./components/display-history/display-history.component";
+import {FavouritesComponent} from "./components/profile-favourites/favourites.component";
+import {UserPropertiesComponent} from "./components/display-user-properties/user-properties.component";
+import {BookingsComponent} from "./components/display-bookings/bookings.component";
+
 
 
 
@@ -62,6 +69,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PropertiesMapComponent,
     FormatImageUrlPipe,
     MarkerPopupComponent,
+    ProfileComponent,
+    DisplayHistoryComponent,
+    FavouritesComponent,
+    UserPropertiesComponent,
+    BookingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,6 +98,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatPaginatorModule,
     MatSnackBarModule,
     NgbModule,
+    MatTabsModule,
   ],
   providers: [
     // {

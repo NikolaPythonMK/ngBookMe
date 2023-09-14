@@ -1,0 +1,7 @@
+<div class="wrapper">
+  <div class="properties-container">
+    <div *ngFor="let propertyContainer of page.content">
+      <property-app [property]="propertyContainer.property"></property-app>
+    </div>
+  </div>
+</div>

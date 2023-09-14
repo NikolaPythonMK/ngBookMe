@@ -5,6 +5,7 @@ import {PageEvent} from "@angular/material/paginator";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MessengerService} from "../../services/MessengerService";
 import {Router} from "@angular/router";
+import {RecentlyViewedService} from "../../services/RecentlyViewedService";
 
 @Component({
   selector: 'display-properties-app',
@@ -17,7 +18,8 @@ export class DisplayPropertiesComponent{
 
   constructor(private _snackBar: MatSnackBar,
               private messengerService: MessengerService,
-              private router: Router) {}
+              private router: Router,
+              private recentlyViewedService: RecentlyViewedService) {}
 
   onPageNumberChange(event: PageEvent): void{
     this.pageEvent.emit(event.pageIndex)
@@ -36,6 +38,7 @@ export class DisplayPropertiesComponent{
   }
 
   visitDetails(id: number, event: Event){
+    this.recentlyViewedService.save(id).subscribe();
     this.router.navigate(['property', id]);
   }
 }

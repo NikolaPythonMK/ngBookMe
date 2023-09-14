@@ -98,4 +98,18 @@ export class PropertyService {
       );
   }
 
+  getPropertiesForUser(): Observable<any> {
+    return this.http.get<any>(this.url + '/user', this.httpOptions)
+      .pipe(
+        tap(data => console.log(data)),
+        map((page) => {
+          return {
+            content: page.content,
+            pageNumber: page['pageable']['pageNumber'],
+            pageSize: page['pageable']['pageSize'],
+            totalElements: page['totalElements']
+          } as Page;
+        })
+      )
+  }
 }

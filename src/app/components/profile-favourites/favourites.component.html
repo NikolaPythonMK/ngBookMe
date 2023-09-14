@@ -1,0 +1,10 @@
+<div class="wrapper">
+  <div  *ngIf="page.content.length > 0; else showMessage" class="properties-container">
+    <display-properties-app [page]="page" (pageEvent)="appendQueryParam($event)"></display-properties-app>
+  </div>
+  <ng-template #showMessage>
+    <p class="text-center display-6">
+      You haven't saved any properties yet.
+    </p>
+  </ng-template>
+</div>

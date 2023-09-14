@@ -1,0 +1,10 @@
+.wrapper{
+  display: flex;
+  justify-content: center;
+}
+
+.properties-container{
+  width: 70%;
+}
+
+

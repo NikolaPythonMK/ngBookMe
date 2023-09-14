@@ -11,6 +11,11 @@ import {CreatePropertyComponent} from "./components/create-property/create-prope
 import {AuthGuard} from "./guards/AuthGuard";
 import {SavedPropertiesComponent} from "./components/saved-properties/saved-properties.component";
 import {PropertyDetailsComponent} from "./components/property-details/property-details.component";
+import {ProfileComponent} from "./components/profile/profile-component";
+import {DisplayHistoryComponent} from "./components/display-history/display-history.component";
+import {FavouritesComponent} from "./components/profile-favourites/favourites.component";
+import {UserPropertiesComponent} from "./components/display-user-properties/user-properties.component";
+import {BookingsComponent} from "./components/display-bookings/bookings.component";
 
 const routes: Routes = [
   {path: '', component: SearchBarComponent},
@@ -18,7 +23,15 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'post', component: CreatePropertyComponent, canActivate: [AuthGuard]},
   {path: 'saved', component: SavedPropertiesComponent, canActivate: [AuthGuard]},
-  {path: 'property/:id', component: PropertyDetailsComponent}
+  {path: 'property/:id', component: PropertyDetailsComponent},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard],
+    children: [
+      {path: 'recently-viewed', component: DisplayHistoryComponent},
+      {path: 'bookmarks', component: FavouritesComponent},
+      {path: 'my-properties', component: UserPropertiesComponent},
+      {path: 'bookings', component: BookingsComponent}
+    ]
+  },
 ];
 
 @NgModule({
