@@ -3,3 +3,7 @@
 
 /*html, body { height: 100%; }*/
 /*body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }*/
+.example-custom-date-class {
+    background: orange;
+    border-radius: 100%;
+  }

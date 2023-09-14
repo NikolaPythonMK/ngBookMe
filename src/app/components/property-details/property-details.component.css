@@ -41,26 +41,7 @@
   background-color: #007FFF;
 }
 
-.custom-day {
-  text-align: center;
-  padding: 0.185rem 0.25rem;
-  display: inline-block;
-  height: 2rem;
-  width: 2rem;
-}
-.custom-day.focused {
-  background-color: #e6e6e6;
-}
-.custom-day.range,
-.custom-day:hover {
-  background-color: rgb(2, 117, 216);
-  color: white;
-}
-.custom-day.faded {
-  background-color: rgba(2, 117, 216, 0.5);
-}
-.custom-day.usedRange{
-  pointer-events: none;
-  background-color: rgb(255,0,0);
-  color:white;
+button.example-custom-date-class {
+  background: rgba(255,0,0,0.4);
+  border-radius: 0;
 }

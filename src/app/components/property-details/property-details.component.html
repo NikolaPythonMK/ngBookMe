@@ -1,8 +1,6 @@
-
-<button (click)="goBack()">Back</button>
-<div class="body">
-
+<div class="body container">
   <div class="wrapper">
+    <mat-icon (click)="goBack()" class="mb-3">arrow_back_ios</mat-icon>
     <div class="upper-content content row" *ngIf="property != null">
       <div id="carouselExample" class="carousel slide carousel-container col-6">
         <div class="carousel-inner">
@@ -19,8 +17,7 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-
-      <div class="col-5">
+      <div class="col-5 mx-4">
         <h1>{{ property.propertyName }}</h1>
         <h3> {{ property.propertyType }}  </h3>
         <p> {{ property.propertyDescription }} </p>
@@ -38,33 +35,15 @@
                 [class.clickedImage]="i === activeSlideIndex">
         </div>
       </div>
-      <div class="col-5">
-        sdsad
-      </div>
+      <div class="col-5 mx-4">
+        <mat-calendar [selected]="this.selectedRange"
+                      (selectedChange)="this.onChange($event)"
+                      [dateClass]="dateClass"
+                      >
+        </mat-calendar>
     </div>
-
     <div class="lower-content content">
-        <ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="1" [dayTemplate]="t" outsideDays="hidden">
-        </ngb-datepicker>
-
-      <ng-template #t let-date let-focused="focused">
-        <span
-          class="custom-day"
-          [class.focused]="focused"
-          [class.range]="isRange(date)"
-          [class.faded]="isHovered(date) || isInside(date)"
-          [class.usedRange]="isUsedRange(date)"
-          (mouseenter)="hoveredDate = date"
-          (mouseleave)="hoveredDate = null"
-        >
-          {{ date.day }}
-        </span>
-      </ng-template>
-
-      <hr />
-
-      <pre>From: {{ fromDate | json }} </pre>
-      <pre>To: {{ toDate | json }} </pre>
+        
     </div>
   </div>
 </div>
