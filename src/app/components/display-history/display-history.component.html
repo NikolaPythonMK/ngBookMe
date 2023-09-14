@@ -1,7 +1,14 @@
 <div class="wrapper">
-  <div class="properties-container">
-    <div *ngFor="let propertyContainer of page.content">
-      <property-app [property]="propertyContainer.property"></property-app>
+  <div class="properties-container" *ngIf="page.content.length > 0; else showMessage">
+    <button mat-raised-button class="mb-4" (click)="deleteAll()">Delete All</button>
+    <div *ngFor="let propertyContainer of page.content" class="mb-3">
+      <property-app [property]="propertyContainer.property" (bookmarkedEvent)="bookmarkSnackbar($event)"></property-app>
     </div>
   </div>
 </div>
+
+<ng-template #showMessage>
+  <div class="d-flex justify-content-center">
+    <p>Your history is empty.</p>
+  </div>
+</ng-template>
