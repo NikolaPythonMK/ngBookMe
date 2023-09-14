@@ -5,6 +5,7 @@ import {Property} from "../models/Property";
 import {SavePropertyRequest} from "../models/SavePropertyRequest";
 import {AuthService} from "./AuthService";
 import {Page} from "../models/Page";
+import { PropertyDetails } from "../models/PropertyDetails";
 
 @Injectable({
   providedIn: 'root'
@@ -64,9 +65,9 @@ export class PropertyService {
       )
   }
 
-  getById(id: number): Observable<Property>{
+  getById(id: number): Observable<PropertyDetails>{
     const url = `${this.url}/${id}`
-    return this.http.get<Property>(url);
+    return this.http.get<PropertyDetails>(url);
   }
 
   bookmarkProperty(id: number): Observable<Property>{

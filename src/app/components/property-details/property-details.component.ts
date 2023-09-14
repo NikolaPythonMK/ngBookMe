@@ -1,12 +1,13 @@
-import {Component, OnInit, ViewEncapsulation} from "@angular/core";
+import {Component, OnInit, ViewChild, ViewEncapsulation} from "@angular/core";
 import {Property} from "../../models/Property";
 import {PropertyService} from "../../services/PropertyService";
 import {ActivatedRoute} from "@angular/router";
 import { Location } from '@angular/common';
 import { NgbDate, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
-import { DateRange, MAT_RANGE_DATE_SELECTION_MODEL_PROVIDER } from '@angular/material/datepicker';
+import { DateRange, MAT_RANGE_DATE_SELECTION_MODEL_PROVIDER, MatCalendar } from '@angular/material/datepicker';
 import {MatCalendarCellClassFunction, MatDatepickerModule} from '@angular/material/datepicker';
 import { from } from "rxjs";
+import { PropertyDetails } from "src/app/models/PropertyDetails";
 
 @Component({
   selector: 'component-details',
@@ -16,56 +17,16 @@ import { from } from "rxjs";
 })
 export class PropertyDetailsComponent implements OnInit{
 
-  // onDateSelection(date: NgbDate) {
-  //   if (!this.fromDate && !this.toDate) {
-  //     this.fromDate = date;
-  //   } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
-  //     this.toDate = date;
-  //   } else {
-  //     this.toDate = null;
-  //     this.fromDate = date;
-  //   }
-  // }
 
-  // isHovered(date: NgbDate) {
-  //   return (
-  //     this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate)
-  //   );
-  // }
-
-  // isInside(date: NgbDate) {
-  //   return this.toDate && date.after(this.fromDate) && date.before(this.toDate);
-  // }
-
-  // isRange(date: NgbDate) {
-  //   return (
-  //     date.equals(this.fromDate) ||
-  //     (this.toDate && date.equals(this.toDate)) ||
-  //     this.isInside(date) ||
-  //     this.isHovered(date)
-  //   );
-  // }
-
-  // isUsedRange(date: NgbDate) {
-  //   return(
-  //     (date.after(this.date1) || date.equals(this.date1)) && (date.before(this.date2) || date.equals(this.date2))
-  //   )
-  // }
-  dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
-    if (view === 'month') {
-      const date = cellDate.getDate();
-      return date >= 14 && date <= 20 ? 'example-custom-date-class' : '';
-    }
-    return '';
-  };
-
-  property!: Property;
+  property!: PropertyDetails;
   images: string[] = [];
   first: boolean = true;
   activeSlideIndex: number = 0;
   selectedRange: DateRange<Date> | any = null;
   fromDate:  Date | any = null;
   toDate: Date | any = null;
+  reservationMap: Map<number, number[]> = new Map();
+  @ViewChild("calendar") calendar! : MatCalendar<Date>;
 
   constructor(private propertyService: PropertyService,
               private route: ActivatedRoute,
@@ -81,12 +42,42 @@ export class PropertyDetailsComponent implements OnInit{
 
         this.images = String(this.property.propertyImages).split(";");
         this.images = this.images.slice(0, this.images.length - 1);
+
+        this.setReservationDates();
+        this.calendar.updateTodaysDate();
       },
       error: (err) => {
         console.log(err);
       }
     })
   }
+
+  setReservationDates() : void {
+      this.property.reservationList.forEach(i => {
+        const resStartDate = new Date(i.reservationStartDate);
+        const resEndDate = new Date(i.reservationEndDate);
+
+        if(resStartDate.getMonth() === resEndDate.getMonth()){
+          let tempArr = this.reservationMap.get(resStartDate.getMonth());
+          if(tempArr === undefined){
+            tempArr = [];
+          }
+          for(let i=resStartDate.getDate(); i<=resEndDate.getDate(); i++){
+            tempArr?.push(i);
+          }
+          console.log(tempArr);
+          this.reservationMap.set(resStartDate.getMonth(), tempArr!);
+        }
+      });
+  }
+
+  dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
+    if (view === 'month') {
+      const monthReservations = this.reservationMap.get(cellDate.getMonth());
+      return monthReservations?.includes(cellDate.getDate()) ? 'example-custom-date-class' : '';
+    }
+    return '';
+  };
 
   refreshDR() {
     this.selectedRange = new DateRange(this.fromDate, this.toDate);
