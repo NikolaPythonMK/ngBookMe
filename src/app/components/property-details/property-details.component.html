@@ -23,6 +23,10 @@
         <p> {{ property.propertyDescription }} </p>
         <h4> {{ property.propertyCity }}  {{property.propertyAddress}} </h4>
         <h4> 8.8 - Excellent </h4>
+        <div *ngFor="let ameniti of getAmenities()">
+          <mat-icon>{{ameniti.value}}</mat-icon>
+          <span>{{ameniti.name}}</span>
+        </div>
       </div>
     </div>
 

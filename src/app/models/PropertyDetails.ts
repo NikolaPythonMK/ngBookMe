@@ -1,4 +1,5 @@
 import {PropertyOwnerInfo} from "./PropertyOwnerInfo";
+import { Rating } from "./Rating";
 import { Reservation } from "./Reservation";
 
 export interface PropertyDetails{
@@ -15,5 +16,7 @@ export interface PropertyDetails{
   propertyUser: PropertyOwnerInfo,
   propertyImages: string[],
   bookmarked: boolean,
-  reservationList: Reservation[]
+  reservationList: Reservation[],
+  propertyRating: Rating[],
+  propertyAmenities: string
 }

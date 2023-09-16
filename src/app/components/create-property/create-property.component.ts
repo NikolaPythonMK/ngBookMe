@@ -9,7 +9,8 @@ import 'leaflet.locatecontrol';
 import {PropertyService} from "../../services/PropertyService";
 import {Router} from "@angular/router";
 import {UploadedImage} from "../../models/UploadedImage";
-
+import { propertyTypes } from "src/app/constants/PropertyConstants";
+import { propertyAmenities } from "src/app/constants/AmenitiesConstants";
 // import * as amenities from '../../../assets/json/amenities.json'
 
 
@@ -19,117 +20,23 @@ import {UploadedImage} from "../../models/UploadedImage";
   styleUrls: ['./create-property.component.css']
 })
 export class CreatePropertyComponent {
-
-  propertyAmenities = [
-    {
-      name: 'Air Conditioning (AC)',
-      value: 'ac_unit'
-    },
-    {
-      name: 'Heating',
-      value: 'light_mode'
-    },
-    {
-      name: 'Free Wi-Fi',
-      value: 'wifi'
-    },
-    {
-      name: 'TV',
-      value: 'tv'
-    },
-    {
-      name: 'Kitchen',
-      value: 'kitchen'
-    },
-    {
-      name: 'Swimming Pool',
-      value: 'pool'
-    },
-    {
-      name: 'Hot Tub',
-      value: 'hot_tub'
-    },
-    {
-      name: 'Free Parking',
-      value: 'local_parking'
-    },
-    {
-      name: 'Gym',
-      value: 'fitness_center'
-    },
-    {
-      name: 'Breakfast Included',
-      value: 'bakery_dining'
-    },
-    {
-      name: 'Pet-Friendly',
-      value: 'pets'
-    },
-    {
-      name: 'Smoking Allowed',
-      value: 'smoking_rooms'
-    },
-    {
-      name: 'Wheelchair Accessible',
-      value: 'accessible'
-    },
-    {
-      name: 'Laundry Facilities',
-      value: 'local_laundry_service'
-    },
-    {
-      name: '24/7 Reception',
-      value: 'event_available'
-    },
-    {
-      name: 'On-Site Restaurant',
-      value: 'restaurant'
-    },
-    {
-      name: 'Bar/Lounge',
-      value: 'local_bar'
-    },
-    {
-      name: 'Spa',
-      value: 'spa'
-    },
-    {
-      name: 'Conference Room',
-      value: 'videocam'
-    },
-    {
-      name: 'Balcony/Patio',
-      value: 'balcony'
-    },
-    {
-      name: 'Ocean View',
-      value: 'water'
-    },
-    {
-      name: 'Mountain View',
-      value: 'filter_hdr'
-    },
-    {
-      name: 'City View',
-      value: 'location_city'
-    },
-    {
-      name: 'Room Service',
-      value: 'room_service'
-    },
-    {
-      name: 'Card Entry',
-      value: 'room_service'
-    },
-  ];
-
-
   constructor(private _formBuilder: FormBuilder,
               public dialog: MatDialog,
               private authService: AuthService,
               private propertyService: PropertyService,
               private router: Router) {}
 
+  checkedAmenities: any[] = [];
+  displayInvalidMessage: boolean = false;
+  isSubmitted: boolean = false;
+  property?: SavePropertyRequest;
+  dataUrl: string | ArrayBuffer | null = null;
+  dataUrls: any[] = [];
+  selectedImage: any | null = null;
+  uploadedImages: UploadedImage[] = [];
+  propertyAmenitiesDetails: any[] = [];
+  propertyTypes = propertyTypes;
+  propertyAmenities = propertyAmenities;
 
   firstFormGroup: FormGroup = this._formBuilder.group({
     propertyName: ['', Validators.required],
@@ -146,75 +53,10 @@ export class CreatePropertyComponent {
   thirdFormGroup: FormGroup = this._formBuilder.group({
     propertyType: ['', Validators.required]
   });
-  fourthFormGroup: FormGroup = this._formBuilder.group({
-    // propertyAmenities: ['', Validators.required],
-    // propertyAmenities: this._formBuilder.array([])
-  })
+  fourthFormGroup: FormGroup = this._formBuilder.group({})
   imageForm: FormGroup = this._formBuilder.group({
     images: this._formBuilder.array([])
   })
-
-  checkedAmenities: any[] = [];
-
-  displayInvalidMessage: boolean = false;
-  isSubmitted: boolean = false;
-  property?: SavePropertyRequest;
-  dataUrl: string | ArrayBuffer | null = null;
-  dataUrls: any[] = [];
-  selectedImage: any | null = null;
-
-  uploadedImages: UploadedImage[] = [];
-
-  propertyTypes = [
-    {
-      name: 'Apartment',
-      value: 'APARTMENT',
-    },
-    {
-      name: 'Bed and Breakfast (B&B)',
-      value: 'BED_AND_BREAKFAST',
-    },
-    {
-      name: 'Boat/Ship',
-      value: 'BOAT_SHIP',
-    },
-    {
-      name: 'Condo',
-      value: 'CONDO',
-    },
-    {
-      name: 'Guesthouse',
-      value: 'GUESTHOUSE',
-    },
-    {
-      name: 'Lodge',
-      value: 'LODGE',
-    },
-    {
-      name: 'Hostel',
-      value: 'HOSTEL',
-    },
-    {
-      name: 'Motel',
-      value: 'MOTEL',
-    },
-    {
-      name: 'Hotel',
-      value: 'HOTEL',
-    },
-    {
-      name: 'Ranch/Farm stay',
-      value: 'RANCH_FARM_STAY',
-    },
-    {
-      name: 'Resort',
-      value: 'RESORT',
-    },
-    {
-      name: 'Villa',
-      value: 'VILLA',
-    },
-  ];
 
   renderImages(files: File[]) {
     this.dataUrls = [];
@@ -303,7 +145,7 @@ export class CreatePropertyComponent {
         propertyPrice: this.firstFormGroup.get('propertyPrice')!.value,
         propertyImage: this.selectedImage,
         propertyImages: null,
-        propertyUser: this.authService.getToken()
+        propertyAmenities: this.checkedAmenities.join(';')
       } as SavePropertyRequest;
       console.log(this.property)
 
@@ -317,6 +159,7 @@ export class CreatePropertyComponent {
       fd.append('propertySize', this.firstFormGroup.get('propertySize')!.value);
       fd.append('propertyPrice', this.firstFormGroup.get('propertyPrice')!.value);
       fd.append('propertyImage', this.selectedImage);
+      fd.append('propertyAmenities', this.checkedAmenities.join(';'));
 
       const imagesControl = this.imageForm.get('images') as FormArray;
       for(const image of imagesControl.value){
@@ -348,7 +191,6 @@ export class CreatePropertyComponent {
   }
 
   addAmenity(type: any): void{
-    this.checkedAmenities.push({type: type.name, value: type.value})
+    this.checkedAmenities.push(type.value)
   }
-
 }

@@ -1,13 +1,11 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from "@angular/core";
-import {Property} from "../../models/Property";
 import {PropertyService} from "../../services/PropertyService";
 import {ActivatedRoute} from "@angular/router";
 import { Location } from '@angular/common';
-import { NgbDate, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { DateRange, MAT_RANGE_DATE_SELECTION_MODEL_PROVIDER, MatCalendar } from '@angular/material/datepicker';
 import {MatCalendarCellClassFunction, MatDatepickerModule} from '@angular/material/datepicker';
-import { from } from "rxjs";
 import { PropertyDetails } from "src/app/models/PropertyDetails";
+import { propertyAmenities } from "src/app/constants/AmenitiesConstants";
 
 @Component({
   selector: 'component-details',
@@ -26,6 +24,8 @@ export class PropertyDetailsComponent implements OnInit{
   fromDate:  Date | any = null;
   toDate: Date | any = null;
   reservationMap: Map<number, number[]> = new Map();
+  propertyAmenitiesConstants = propertyAmenities;
+
   @ViewChild("calendar") calendar! : MatCalendar<Date>;
 
   constructor(private propertyService: PropertyService,
@@ -39,7 +39,7 @@ export class PropertyDetailsComponent implements OnInit{
     this.propertyService.getById(id).subscribe({
       next: (property) => {
         this.property = property;
-
+        console.log(property);
         this.images = String(this.property.propertyImages).split(";");
         this.images = this.images.slice(0, this.images.length - 1);
 
@@ -50,6 +50,14 @@ export class PropertyDetailsComponent implements OnInit{
         console.log(err);
       }
     })
+  }
+
+  getAmenities() : any[]{
+    if(this.property.propertyAmenities === null || this.property.propertyAmenities === undefined){
+      return [];
+    }
+    let amenities = this.property.propertyAmenities.split(';');
+    return this.propertyAmenitiesConstants.filter(i => amenities.includes(i.value));
   }
 
   setReservationDates() : void {
@@ -65,7 +73,6 @@ export class PropertyDetailsComponent implements OnInit{
           for(let i=resStartDate.getDate(); i<=resEndDate.getDate(); i++){
             tempArr?.push(i);
           }
-          console.log(tempArr);
           this.reservationMap.set(resStartDate.getMonth(), tempArr!);
         }
       });
@@ -127,7 +134,6 @@ export class PropertyDetailsComponent implements OnInit{
   }
 
   transform(imageName: string, propertyId: number): string {
-    console.log('called');
     return `http://192.168.0.15:9090/api/images/${propertyId}/${imageName}`;
   }
 }
