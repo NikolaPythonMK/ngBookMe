@@ -16,6 +16,7 @@ import {DisplayHistoryComponent} from "./components/display-history/display-hist
 import {FavouritesComponent} from "./components/profile-favourites/favourites.component";
 import {UserPropertiesComponent} from "./components/display-user-properties/user-properties.component";
 import {BookingsComponent} from "./components/display-bookings/bookings.component";
+import {PropertyUpdateComponent} from "./components/property-update/property-update.component";
 
 const routes: Routes = [
   {path: '', component: SearchBarComponent},
@@ -32,6 +33,7 @@ const routes: Routes = [
       {path: 'bookings', component: BookingsComponent}
     ]
   },
+  {path: 'update/:id', component: PropertyUpdateComponent}
 ];
 
 @NgModule({

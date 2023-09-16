@@ -6,6 +6,7 @@ import {SavePropertyRequest} from "../models/SavePropertyRequest";
 import {AuthService} from "./AuthService";
 import {Page} from "../models/Page";
 import { PropertyDetails } from "../models/PropertyDetails";
+import {PropertyUpdate} from "../models/PropertyUpdate";
 
 @Injectable({
   providedIn: 'root'
@@ -129,5 +130,14 @@ export class PropertyService {
     return this.http.delete<any>(url, httpOptions)
   }
 
+  getPropertyUpdate(id: number): Observable<PropertyUpdate>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.authService.getToken()!,
+      }),
+    };
+    const url = `${this.url}/${id}/edit`
+    return this.http.get<PropertyUpdate>(url, this.httpOptions);
+  }
 
 }

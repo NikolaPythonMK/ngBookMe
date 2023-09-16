@@ -3,7 +3,9 @@
     <button mat-raised-button routerLink="/post" class="mb-4">Post new property</button>
 
     <div *ngFor="let property of page.content" class="mb-3">
-      <property-user-app [property]="property" (deletePropertyEvent)="deleteProperty($event)"></property-user-app>
+      <property-user-app [property]="property"
+                         (deletePropertyEvent)="deleteProperty($event)"
+                          (click)="visitUpdate(property.id)"></property-user-app>
     </div>
   </div>
   <ng-template #showMessage>
