@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Subject} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
 import {Property} from "../models/Property";
 
 @Injectable({
@@ -8,7 +8,7 @@ import {Property} from "../models/Property";
 export class MessengerService{
   registration: boolean = false;
   hoveredPropertyId$ = new Subject<{id: number, toOpen: boolean}>();
-  properties$ = new Subject<Property[]>();
+  properties$ = new BehaviorSubject<Property[]>([]);
 
   accountRegistered(): void{
     this.registration = true;

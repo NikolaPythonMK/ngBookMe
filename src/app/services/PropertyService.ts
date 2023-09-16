@@ -118,4 +118,16 @@ export class PropertyService {
         })
       )
   }
+
+  deleteProperty(id: number): Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.authService.getToken()!,
+      }),
+    };
+    const url = `${this.url}/${id}/delete`;
+    return this.http.delete<any>(url, httpOptions)
+  }
+
+
 }

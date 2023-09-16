@@ -23,8 +23,6 @@ export class PropertiesMapComponent {
               private messengerService: MessengerService,) {}
 
 
-
-
   ngAfterViewInit(){
     this.init();
     this.messengerService.properties$.subscribe(next => {

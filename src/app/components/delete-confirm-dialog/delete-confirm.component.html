@@ -1,0 +1,11 @@
+
+
+<h1 mat-dialog-title>Delete Property</h1>
+<div mat-dialog-content>
+  Permanently delete your property? You can't undo this.
+</div>
+<div mat-dialog-actions class="d-flex justify-content-end buttons">
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="warn" mat-dialog-close cdkFocusInitial (click)="confirm()">Delete</button>
+</div>
+

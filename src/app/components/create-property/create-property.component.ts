@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {AuthService} from "../../services/AuthService";
 import {SavePropertyRequest} from "../../models/SavePropertyRequest";
@@ -10,6 +10,8 @@ import {PropertyService} from "../../services/PropertyService";
 import {Router} from "@angular/router";
 import {UploadedImage} from "../../models/UploadedImage";
 
+// import * as amenities from '../../../assets/json/amenities.json'
+
 
 @Component({
   selector: 'create-component-app',
@@ -17,11 +19,117 @@ import {UploadedImage} from "../../models/UploadedImage";
   styleUrls: ['./create-property.component.css']
 })
 export class CreatePropertyComponent {
+
+  propertyAmenities = [
+    {
+      name: 'Air Conditioning (AC)',
+      value: 'ac_unit'
+    },
+    {
+      name: 'Heating',
+      value: 'light_mode'
+    },
+    {
+      name: 'Free Wi-Fi',
+      value: 'wifi'
+    },
+    {
+      name: 'TV',
+      value: 'tv'
+    },
+    {
+      name: 'Kitchen',
+      value: 'kitchen'
+    },
+    {
+      name: 'Swimming Pool',
+      value: 'pool'
+    },
+    {
+      name: 'Hot Tub',
+      value: 'hot_tub'
+    },
+    {
+      name: 'Free Parking',
+      value: 'local_parking'
+    },
+    {
+      name: 'Gym',
+      value: 'fitness_center'
+    },
+    {
+      name: 'Breakfast Included',
+      value: 'bakery_dining'
+    },
+    {
+      name: 'Pet-Friendly',
+      value: 'pets'
+    },
+    {
+      name: 'Smoking Allowed',
+      value: 'smoking_rooms'
+    },
+    {
+      name: 'Wheelchair Accessible',
+      value: 'accessible'
+    },
+    {
+      name: 'Laundry Facilities',
+      value: 'local_laundry_service'
+    },
+    {
+      name: '24/7 Reception',
+      value: 'event_available'
+    },
+    {
+      name: 'On-Site Restaurant',
+      value: 'restaurant'
+    },
+    {
+      name: 'Bar/Lounge',
+      value: 'local_bar'
+    },
+    {
+      name: 'Spa',
+      value: 'spa'
+    },
+    {
+      name: 'Conference Room',
+      value: 'videocam'
+    },
+    {
+      name: 'Balcony/Patio',
+      value: 'balcony'
+    },
+    {
+      name: 'Ocean View',
+      value: 'water'
+    },
+    {
+      name: 'Mountain View',
+      value: 'filter_hdr'
+    },
+    {
+      name: 'City View',
+      value: 'location_city'
+    },
+    {
+      name: 'Room Service',
+      value: 'room_service'
+    },
+    {
+      name: 'Card Entry',
+      value: 'room_service'
+    },
+  ];
+
+
   constructor(private _formBuilder: FormBuilder,
               public dialog: MatDialog,
               private authService: AuthService,
               private propertyService: PropertyService,
               private router: Router) {}
+
 
   firstFormGroup: FormGroup = this._formBuilder.group({
     propertyName: ['', Validators.required],
@@ -38,12 +146,15 @@ export class CreatePropertyComponent {
   thirdFormGroup: FormGroup = this._formBuilder.group({
     propertyType: ['', Validators.required]
   });
-  // fourthFormGroup: FormGroup = this._formBuilder.group({
-  //   propertyImage: ['', Validators.required],
-  // })
+  fourthFormGroup: FormGroup = this._formBuilder.group({
+    // propertyAmenities: ['', Validators.required],
+    // propertyAmenities: this._formBuilder.array([])
+  })
   imageForm: FormGroup = this._formBuilder.group({
     images: this._formBuilder.array([])
   })
+
+  checkedAmenities: any[] = [];
 
   displayInvalidMessage: boolean = false;
   isSubmitted: boolean = false;
@@ -176,6 +287,7 @@ export class CreatePropertyComponent {
   }
 
   submit(): void{
+    console.log('4: ', this.checkedAmenities);
     if(this.allFormsValid() && this.selectedImage){
       this.displayInvalidMessage = false;
       this.isSubmitted = true;
@@ -233,6 +345,10 @@ export class CreatePropertyComponent {
 
   onSelectedImage(file: File):void{
     this.selectedImage = file.name;
+  }
+
+  addAmenity(type: any): void{
+    this.checkedAmenities.push({type: type.name, value: type.value})
   }
 
 }

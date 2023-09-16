@@ -78,6 +78,27 @@
     </form>
   </mat-step>
 
+  <mat-step [stepControl]="fourthFormGroup" class="step">
+    <form [formGroup]="fourthFormGroup" class="step-form">
+      <ng-template matStepLabel>List of amentities</ng-template>
+
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="d-flex row row-cols-3" formControlName="propertyAmenities">
+        <mat-checkbox (click)="addAmenity(type)"
+          *ngFor="let type of propertyAmenities" name="{{type.value}}" class="col" [value]="type.value">
+          {{type.name}}
+          <mat-icon>{{type.value}}</mat-icon>
+        </mat-checkbox>
+      </mat-radio-group>
+
+      <div class="mt-4">
+        <button mat-raised-button matStepperPrevious class="m-right">Back</button>
+        <button mat-raised-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
 
   <mat-step [stepControl]="imageForm" class="step">
     <ng-template matStepLabel>Upload Images</ng-template>

@@ -6,6 +6,8 @@
   <div id="map" #map class="map-enlarged"></div>
 </ng-template>
 
+<!--<div id="map" #map [ngClass]="{'map': !enlarged, 'map-enlarged': enlarged}"></div>-->
+
 <ng-container *ngIf="!enlarged; else showCollapseIcon">
   <mat-icon (click)="enlargeMap()">
   <span matIcon class="map-icon">

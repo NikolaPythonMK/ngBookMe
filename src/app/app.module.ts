@@ -48,6 +48,8 @@ import {FavouritesComponent} from "./components/profile-favourites/favourites.co
 import {UserPropertiesComponent} from "./components/display-user-properties/user-properties.component";
 import {BookingsComponent} from "./components/display-bookings/bookings.component";
 import {PropertyUserComponent} from "./components/property-user/property-user.component";
+import {DeleteConfirmComponent} from "./components/delete-confirm-dialog/delete-confirm.component";
+import {MatCheckbox, MatCheckboxModule} from "@angular/material/checkbox";
 
 
 
@@ -76,6 +78,7 @@ import {PropertyUserComponent} from "./components/property-user/property-user.co
     UserPropertiesComponent,
     BookingsComponent,
     PropertyUserComponent,
+    DeleteConfirmComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,6 +104,7 @@ import {PropertyUserComponent} from "./components/property-user/property-user.co
     MatSnackBarModule,
     NgbModule,
     MatTabsModule,
+    MatCheckboxModule,
   ],
   providers: [
     // {

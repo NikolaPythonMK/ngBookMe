@@ -1,8 +1,9 @@
 <div class="wrapper">
   <div *ngIf="page.content.length > 0; else showMessage" class="properties-container">
-<!--    <display-properties-app [page]="page" (pageEvent)="appendQueryParam($event)"></display-properties-app>-->
+    <button mat-raised-button routerLink="/post" class="mb-4">Post new property</button>
+
     <div *ngFor="let property of page.content" class="mb-3">
-      <property-user-app [property]="property"></property-user-app>
+      <property-user-app [property]="property" (deletePropertyEvent)="deleteProperty($event)"></property-user-app>
     </div>
   </div>
   <ng-template #showMessage>

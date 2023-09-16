@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Property} from "../../models/Property";
 import {PropertyService} from "../../services/PropertyService";
 import {AuthService} from "../../services/AuthService";
+import {Event} from "@angular/router";
 
 @Component({
   selector: 'property-user-app',
@@ -10,7 +11,12 @@ import {AuthService} from "../../services/AuthService";
 })
 export class PropertyUserComponent {
   @Input() property!: Property;
-  @Output() bookmarkedEvent = new EventEmitter<string>()
+  @Output() deletePropertyEvent = new EventEmitter<number>();
 
   constructor(private propertyService: PropertyService, private authService: AuthService) {}
+
+  deleteProperty(id: number, event: MouseEvent): void{
+    event.stopPropagation();
+    this.deletePropertyEvent.emit(id);
+  }
 }

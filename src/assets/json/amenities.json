@@ -1,0 +1,98 @@
+[
+  {
+    "description": "Wi-Fi",
+    "icon": "wifi"
+  },
+  {
+    "description": "Parking",
+    "icon": "local_parking"
+  },
+  {
+    "description": "Garage",
+    "icon": "garage_home"
+  },
+  {
+    "description": "Laundry Facilities",
+    "icon": "local_laundry_service"
+  },
+  {
+    "description": "Elevator",
+    "icon": "elevator"
+  },
+  {
+    "description": "Wheelchair accessibility",
+    "icon": "accessible"
+  },
+  {
+    "description": "Pet-friendly",
+    "icon": "pets"
+  },
+  {
+    "description": "Swimming pool",
+    "icon": "pool"
+  },
+  {
+    "description": "Fitness center",
+    "icon": "fitness_center"
+  },
+  {
+    "description": "Spa and wellness",
+    "icon": "spa"
+  },
+  {
+    "description": "Restaurant",
+    "icon": "restaurant"
+  },
+  {
+    "description": "TV",
+    "icon": "tv"
+  },
+  {
+    "description": "Ocean view",
+    "icon": "water"
+  },
+  {
+    "description": "Garden",
+    "icon": "yard"
+  },
+  {
+    "description": "Bathtub",
+    "icon": "bathtub"
+  },
+  {
+    "description": "Smoking rooms",
+    "icon": "smoking_rooms"
+  },
+  {
+    "description": "Non-smoking rooms",
+    "icon": "smoke_free"
+  },
+  {
+    "description": "Key card access",
+    "icon": "done"
+  },
+  {
+    "description": "Room service",
+    "icon": "room_service"
+  },
+  {
+    "description": "Bar",
+    "icon": "local_bar"
+  },
+  {
+    "description": "Beachfront",
+    "icon": "beach_access"
+  },
+  {
+    "description": "Terrace",
+    "icon": "deck"
+  },
+  {
+    "description": "Balcony",
+    "icon": "deck"
+  },
+  {
+    "description": "BBQ facilities",
+    "icon": "outdoor_grill"
+  }
+]
