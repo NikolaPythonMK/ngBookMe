@@ -9,5 +9,5 @@ export interface SavePropertyRequest {
   propertyPrice: number,
   propertyImage: string | null,
   propertyImages: string | null,
-  propertyUser: string
+  propertyAmenities: string
 }

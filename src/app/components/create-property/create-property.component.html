@@ -84,7 +84,7 @@
 
       <mat-radio-group
         aria-labelledby="example-radio-group-label"
-        class="d-flex row row-cols-3" formControlName="propertyAmenities">
+        class="d-flex row row-cols-3">
         <mat-checkbox (click)="addAmenity(type)"
           *ngFor="let type of propertyAmenities" name="{{type.value}}" class="col" [value]="type.value">
           {{type.name}}
