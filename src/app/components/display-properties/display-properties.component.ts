@@ -6,6 +6,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {MessengerService} from "../../services/MessengerService";
 import {Router} from "@angular/router";
 import {RecentlyViewedService} from "../../services/RecentlyViewedService";
+import {NotificationService} from "../../services/NotificationService";
 
 @Component({
   selector: 'display-properties-app',
@@ -16,7 +17,7 @@ export class DisplayPropertiesComponent{
   @Input() page!: Page;
   @Output() pageEvent = new EventEmitter<number>();
 
-  constructor(private _snackBar: MatSnackBar,
+  constructor(private notificationService: NotificationService,
               private messengerService: MessengerService,
               private router: Router,
               private recentlyViewedService: RecentlyViewedService) {}
@@ -26,18 +27,14 @@ export class DisplayPropertiesComponent{
   }
 
   bookmarkSnackbar(text: string): void{
-    this._snackBar.open(text, 'Close', {
-      horizontalPosition: 'start',
-      verticalPosition: 'bottom',
-      duration: 3000
-    })
+    this.notificationService.success(text);
   }
 
   hoveredChild(id: number, toOpen: boolean = true): void{
     this.messengerService.hoveredPropertyId$.next({id: id, toOpen: toOpen});
   }
 
-  visitDetails(id: number, event: Event){
+  visitDetails(id: number){
     this.recentlyViewedService.save(id).subscribe();
     this.router.navigate(['property', id]);
   }

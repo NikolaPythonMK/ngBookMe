@@ -1,7 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {RecentlyViewedPage} from "../../models/RecentlyViewedPage";
 import {RecentlyViewedService} from "../../services/RecentlyViewedService";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {NotificationService} from "../../services/NotificationService";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'display-history-app',
@@ -12,7 +13,8 @@ export class DisplayHistoryComponent implements OnInit{
   page!: RecentlyViewedPage;
 
   constructor(private recentlyViewedService: RecentlyViewedService,
-              private _snackBar: MatSnackBar,) {}
+              private notificationService: NotificationService,
+              private router: Router) {}
 
   ngOnInit(): void {
     this.recentlyViewedService.getAll().subscribe({
@@ -26,15 +28,35 @@ export class DisplayHistoryComponent implements OnInit{
     })
   }
 
+  visitDetails(id: number): void{
+    this.recentlyViewedService.save(id).subscribe();
+    this.router.navigate(['property', id]);
+  }
+
   bookmarkSnackbar(text: string): void{
-    this._snackBar.open(text, 'Close', {
-      horizontalPosition: 'start',
-      verticalPosition: 'bottom',
-      duration: 3000
-    })
+    this.notificationService.success(text);
   }
 
   deleteAll(): void{
+    this.recentlyViewedService.deleteAll().subscribe({
+      next: () => {
+        this.page.content = [];
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
 
+  deleteById(propertyId: number): void{
+    const recentlyViewedId = this.page.content.find(i => i.property.id === propertyId)!.id;
+    this.recentlyViewedService.deleteProperty(recentlyViewedId).subscribe({
+      next: () => {
+        this.page.content = this.page.content.filter(i => i.property.id !== propertyId);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
   }
 }

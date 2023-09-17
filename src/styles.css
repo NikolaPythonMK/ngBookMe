@@ -6,4 +6,22 @@
 .example-custom-date-class {
     background: orange;
     border-radius: 100%;
-  }
+}
+
+.snackbar-success > div{
+  background-color: #54ac68 !important;
+  color: #fff !important;
+}
+
+.snackbar-error > div{
+  background-color: #cc0000 !important;
+  color: #fff !important;
+}
+
+.snackbar-success .mdc-button__label {
+  color: #fff !important;
+}
+
+.snackbar-error .mdc-button__label {
+  color: #fff !important;
+}

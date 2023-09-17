@@ -8,5 +8,4 @@ export interface PropertyUpdate {
   propertySize: number,
   propertyPrice: number,
   propertyAmenities: string,
-  userId: number
 }

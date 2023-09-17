@@ -10,7 +10,7 @@
           <input matInput placeholder="Property name" formControlName="propertyName" required>
         </mat-form-field>
         <mat-form-field>
-          <textarea  matInput placeholder="Describe your property"  formControlName="propertyDescription" required></textarea>
+          <textarea  rows="10" matInput placeholder="Describe your property"  formControlName="propertyDescription" required></textarea>
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="Number of rooms" formControlName="propertySize" required>
@@ -80,7 +80,7 @@
 
   <mat-step [stepControl]="fourthFormGroup" class="step">
     <form [formGroup]="fourthFormGroup" class="step-form">
-      <ng-template matStepLabel>List of amentities</ng-template>
+      <ng-template matStepLabel>List of amenities</ng-template>
 
       <mat-radio-group
         aria-labelledby="example-radio-group-label"

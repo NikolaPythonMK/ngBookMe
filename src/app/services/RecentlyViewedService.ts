@@ -44,4 +44,23 @@ export class RecentlyViewedService {
       tap(data => console.log(data))
     )
   }
+
+  deleteAll(): Observable<boolean>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.authService.getToken()!,
+      }),
+    };
+    return this.http.delete<boolean>(this.url + '/delete-all', httpOptions);
+  }
+
+  deleteProperty(id: number): Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.authService.getToken()!,
+      }),
+    };
+    const url = `${this.url}/delete/${id}`
+    return this.http.delete<any>(url, httpOptions);
+  }
 }

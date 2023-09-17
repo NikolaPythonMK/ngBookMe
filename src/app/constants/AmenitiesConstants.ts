@@ -99,4 +99,5 @@ export const propertyAmenities = [
       name: 'Card Entry',
       value: 'room_service'
     },
-  ];
+
+];

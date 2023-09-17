@@ -11,7 +11,9 @@ import {AuthService} from "../../services/AuthService";
 })
 export class PropertyComponent{
   @Input() property!: Property;
+  @Input() removeIcon: boolean = false;
   @Output() bookmarkedEvent = new EventEmitter<string>()
+  @Output() removeFromHistoryEvent = new EventEmitter<number>();
 
   constructor(private propertyService: PropertyService, private authService: AuthService) {}
 
@@ -39,6 +41,11 @@ export class PropertyComponent{
         console.log(err);
       }
     })
+  }
+
+  toRemove(event: Event): void{
+    event.stopPropagation();
+    this.removeFromHistoryEvent.emit(this.property.id);
   }
 
   isUserAuthenticated(): boolean{

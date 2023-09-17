@@ -1,3 +1,10 @@
+.optional-icon{
+  position: absolute;
+  cursor: pointer;
+  top: 7%;
+  right: 3%;
+}
+
 /*.horizontal-card{*/
 /*  display: flex;*/
 /*  flex-direction: row;*/

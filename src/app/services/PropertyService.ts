@@ -137,7 +137,18 @@ export class PropertyService {
       }),
     };
     const url = `${this.url}/${id}/edit`
-    return this.http.get<PropertyUpdate>(url, this.httpOptions);
+    return this.http.get<PropertyUpdate>(url, httpOptions);
   }
+
+  updateProperty(id: number, property: PropertyUpdate): Observable<Property>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.authService.getToken()!,
+      }),
+    };
+    const url = `${this.url}/${id}/edit`
+    return this.http.put<Property>(url, property, httpOptions);
+  }
+
 
 }

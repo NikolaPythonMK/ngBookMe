@@ -17,13 +17,13 @@ export class MapService{
   private userMarker: L.Marker | null = null;
   private propertyMarkers: PropertyMarker[] = [];
 
-  readonly customUserIcon: Icon<IconOptions> = L.icon({
+  readonly customIcon: Icon<IconOptions> = L.icon({
     iconUrl: '../../../assets/gps-icon.png',
     iconSize: [32, 32],
     iconAnchor: [16, 32],
   });
 
-  customIcon(propertyPrice: Number){
+  priceIcon(propertyPrice: Number){
     const icon = L.divIcon({
       html: `<span class="px-3 pt-1 pb-1 rounded-4 bg-white text-black fw-bolder border border-success">${propertyPrice}&nbsp;MKD</span>`,
       className:"custom-label",
@@ -56,7 +56,7 @@ export class MapService{
   }
 
   appendMarker(latLng: LatLngExpression, property: PropertyPopup): void{
-    const marker = L.marker(latLng, {icon: this.customIcon(property.price)}).addTo(this.map!);
+    const marker = L.marker(latLng, {icon: this.priceIcon(property.price)}).addTo(this.map!);
     marker.bindPopup(L.popup({
       autoPan: true,
       interactive: true,
@@ -113,7 +113,7 @@ export class MapService{
           (position) => {
             const lat = position.coords.latitude;
             const lng = position.coords.longitude;
-            this.userMarker = L.marker([(lat) as number, (lng) as number], {icon: this.customUserIcon}).addTo(this.map!);
+            this.userMarker = L.marker([(lat) as number, (lng) as number], {icon: this.customIcon}).addTo(this.map!);
             this.userMarker.bindPopup(L.popup({
               content: `<span class="d-flex justify-content-center">You</span>`,
               offset: L.point(0, -10)
@@ -148,7 +148,7 @@ export class MapService{
 
   setUserLocationMarker(newLocation: L.LatLng): void{
     if(!this.userMarker){
-      this.userMarker = L.marker(newLocation, {icon: this.customUserIcon}).addTo(this.map!)
+      this.userMarker = L.marker(newLocation, {icon: this.customIcon}).addTo(this.map!)
     }
     else{
       this.userMarker.setLatLng(newLocation);
@@ -171,5 +171,12 @@ export class MapService{
     else{
       this.propertyMarkers.find(marker => marker.propertyId === id)?.marker.closePopup();
     }
+  }
+
+  isPropertyMarker(): void{
+    this.userMarker!.bindPopup(L.popup({
+      content: `<span class="d-flex justify-content-center">Your property</span>`,
+      offset: L.point(0, -10)
+    })).openPopup();
   }
 }

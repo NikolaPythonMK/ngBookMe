@@ -51,6 +51,7 @@ import {PropertyUserComponent} from "./components/property-user/property-user.co
 import {DeleteConfirmComponent} from "./components/delete-confirm-dialog/delete-confirm.component";
 import {MatCheckbox, MatCheckboxModule} from "@angular/material/checkbox";
 import {PropertyUpdateComponent} from "./components/property-update/property-update.component";
+import {UpdatePropertyMapComponent} from "./components/update-property-map/update-property-map.component";
 
 
 
@@ -80,7 +81,8 @@ import {PropertyUpdateComponent} from "./components/property-update/property-upd
     BookingsComponent,
     PropertyUserComponent,
     DeleteConfirmComponent,
-    PropertyUpdateComponent
+    PropertyUpdateComponent,
+    UpdatePropertyMapComponent,
   ],
   imports: [
     BrowserModule,

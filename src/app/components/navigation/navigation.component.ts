@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {AuthService} from "../../services/AuthService";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'navigation-app',
@@ -9,8 +9,10 @@ import {Router} from "@angular/router";
 })
 export class NavigationComponent implements OnInit{
   loggedInUser: any | null = null;
+  currentPath: string = 'home';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService,
+              private router: Router) {}
 
   logout(): void{
     this.authService.logout();
