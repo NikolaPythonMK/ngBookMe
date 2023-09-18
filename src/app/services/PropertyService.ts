@@ -27,10 +27,13 @@ export class PropertyService {
 
   saveProperty(formData: FormData): Observable<Property>{
     // Why won't it work with .append()?
-    // const headers = new HttpHeaders({
-    //   'Authorization': this.authService.getToken()!,
-    // });
-    return this.http.post<Property>(this.url, formData, this.httpOptions)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.authService.getToken()!,
+      })
+    }
+    console.log(httpOptions);
+    return this.http.post<Property>(this.url, formData, httpOptions)
   }
 
   getProperties(urlParams: string | null): Observable<Page>{
