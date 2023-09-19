@@ -1,0 +1,31 @@
+
+.mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}
+
+.select{
+
+}
+.test{
+  transform: scale(0.9);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1em;
+}
+
+mat-slider {
+  width: 250px;
+}
+
+.filter-element{
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em;
+}
+
+.filter-element p{
+  font-weight: bold;
+  padding-bottom: 0;
+  margin-bottom: 0.3em;
+}

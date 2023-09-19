@@ -1,7 +1,9 @@
 .search-menu-wrapper{
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  margin-bottom: 5em;
+  margin-bottom: 2em; /*5*/
   top: 0;
   position: sticky;
   z-index: 1000;
@@ -17,7 +19,6 @@
 
   border-top-right-radius: 0.7em;
   border-bottom-right-radius: 0.7em;
-
 }
 
 .search-btn{

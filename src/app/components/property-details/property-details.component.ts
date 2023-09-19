@@ -6,6 +6,7 @@ import { DateRange, MAT_RANGE_DATE_SELECTION_MODEL_PROVIDER, MatCalendar } from 
 import {MatCalendarCellClassFunction, MatDatepickerModule} from '@angular/material/datepicker';
 import { PropertyDetails } from "src/app/models/PropertyDetails";
 import { propertyAmenities } from "src/app/constants/AmenitiesConstants";
+import {MessengerService} from "../../services/MessengerService";
 
 @Component({
   selector: 'component-details',
@@ -30,7 +31,8 @@ export class PropertyDetailsComponent implements OnInit{
 
   constructor(private propertyService: PropertyService,
               private route: ActivatedRoute,
-              private location: Location) {
+              private location: Location,
+              private messengerService: MessengerService) {
     this.refreshDR();
   }
 
@@ -106,6 +108,8 @@ export class PropertyDetailsComponent implements OnInit{
   }
 
   goBack(): void{
+    console.log('going back...')
+    this.messengerService.exitsFromDetails$.next(true);
     this.location.back();
   }
 

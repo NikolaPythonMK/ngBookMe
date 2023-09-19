@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {PropertyService} from "../../services/PropertyService";
 import {Page} from "../../models/Page";
 import {ActivatedRoute, Route, Router} from "@angular/router";
@@ -21,6 +21,8 @@ export class SearchBarComponent {
 
   mapEnlarged: boolean = false;
 
+  positionY: number = 0;
+
   constructor(private propertyService: PropertyService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -28,27 +30,36 @@ export class SearchBarComponent {
   }
 
   ngOnInit(): void{
-    this.propertyService.getProperties(null).subscribe({
-      next: (page) => {
-        this.page = page;
-        console.log(this.page.content)
-        this.messengerService.properties$.next(this.page.content);
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
+    // this.propertyService.getProperties(null).subscribe({
+    //   next: (page) => {
+    //     this.page = page;
+    //     console.log(this.page.content)
+    //     this.messengerService.properties$.next(this.page.content);
+    //   },
+    //   error: (err) => {
+    //     console.log(err);
+    //   }
+    // })
 
     this.activatedRoute.queryParamMap.subscribe(params => {
       this.propertyService.getProperties(params.get('page')!).subscribe({
         next: page => {
           this.page = page;
-          console.log(this.page.content)
           this.messengerService.properties$.next(this.page.content);
-          window.scrollTo(0, 0);
+          window.scrollTo(0, this.positionY);
         }
       })
     })
+
+    this.messengerService.exitsFromDetails$.subscribe(value => {
+      this.positionY = Number(localStorage.getItem('positionY'));
+      localStorage.setItem('positionY', '0');
+    })
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: Event): void{
+    localStorage.setItem('positionY', String(window.scrollY));
   }
 
   appendPageNumberParam(pageNumber: number): void{

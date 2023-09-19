@@ -9,6 +9,7 @@ export class MessengerService{
   registration: boolean = false;
   hoveredPropertyId$ = new Subject<{id: number, toOpen: boolean}>();
   properties$ = new BehaviorSubject<Property[]>([]);
+  exitsFromDetails$ = new Subject<boolean>();
 
   accountRegistered(): void{
     this.registration = true;

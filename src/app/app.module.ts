@@ -52,6 +52,9 @@ import {DeleteConfirmComponent} from "./components/delete-confirm-dialog/delete-
 import {MatCheckbox, MatCheckboxModule} from "@angular/material/checkbox";
 import {PropertyUpdateComponent} from "./components/property-update/property-update.component";
 import {UpdatePropertyMapComponent} from "./components/update-property-map/update-property-map.component";
+import {FilterPropertiesComponent} from "./components/filter-properties/filter-properties.component";
+import {MatSelectModule} from "@angular/material/select";
+import {MatSliderModule} from "@angular/material/slider";
 
 
 
@@ -83,6 +86,7 @@ import {UpdatePropertyMapComponent} from "./components/update-property-map/updat
     DeleteConfirmComponent,
     PropertyUpdateComponent,
     UpdatePropertyMapComponent,
+    FilterPropertiesComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,6 +113,8 @@ import {UpdatePropertyMapComponent} from "./components/update-property-map/updat
     NgbModule,
     MatTabsModule,
     MatCheckboxModule,
+    MatSelectModule,
+    MatSliderModule,
   ],
   providers: [
     // {
