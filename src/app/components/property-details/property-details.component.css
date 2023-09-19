@@ -1,47 +1,75 @@
-.body{
-  /*display: flex;*/
-  /*justify-content: center;*/
-}
-.wrapper{
-
-}
-
-.carousel-container{
-
-}
-
 .carousel-img{
   width: 100%;
-  height: 550px;
+  height: 400px;
 }
 
 .album{
   height: 400px;
   overflow-y: auto;
 }
+
+.album::-webkit-scrollbar{
+  width: 3px;
+}
+
+.album::-webkit-scrollbar-track{
+  background: #f1f1f1;
+}
+
+.album::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
 .album-img{
-  height: 220px;
+  height: 150px;
   padding: 0.1em;
 }
 
 .upper-content{
   margin-left: 0.1em;
 }
+
 .middle-content{
   margin-left: 0.7em;
 }
 
 .album-img:hover{
   cursor: pointer;
-}
+} 
 
 .clickedImage{
-  padding: 0.4em;
+  padding: 0.3em !important;
+  transform: scale(0.95);
   border: 1px solid #007FFF;
   background-color: #007FFF;
 }
 
+.back-button:hover{
+  cursor: pointer;
+}
+
 button.example-custom-date-class {
   background: rgba(255,0,0,0.4);
-  border-radius: 0;
+  border-radius: 50%;
+}
+
+.col{
+  width: 32% !important;
+}
+
+.amenity-border{
+  border-color: #888;
+  box-shadow: 1px 1px rgba(110, 110, 110, 0.4);
+}
+
+.location-text{
+  font-size: 1.1rem;
+}
+
+.star-icon{
+  color:orange;
+}
+
+.mat-calendar{
+  border: 1px solid rgb(212, 208, 208);
 }
