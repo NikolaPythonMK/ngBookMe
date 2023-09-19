@@ -1,9 +1,13 @@
 <mat-card class="horizontal-card">
+  <div *ngIf="removeIcon" class="optional-icon">
+    <mat-icon (click)="toRemove($event)">close</mat-icon>
+  </div>
+
   <img mat-card-image [src]="property.propertyImage | formatImageUrl:property.id" alt="Property Image" class="card-avatar">
   <div class="card-content">
     <mat-card-header>
-      <mat-card-title>{{ property.propertyName }}</mat-card-title>
-      <mat-card-subtitle> {{ property.propertyType }} </mat-card-subtitle>
+      <mat-card-title>{{ property.propertyName }}     </mat-card-title>
+      <mat-card-subtitle> {{ this.propertyType}} </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <p>{{ property.propertyCity }}, {{ property.propertyAddress }} </p>

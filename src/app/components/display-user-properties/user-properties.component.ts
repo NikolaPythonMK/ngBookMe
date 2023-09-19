@@ -4,6 +4,8 @@ import {PropertyService} from "../../services/PropertyService";
 import {MatDialog} from "@angular/material/dialog";
 import {DeleteConfirmComponent} from "../delete-confirm-dialog/delete-confirm.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Router} from "@angular/router";
+import {NotificationService} from "../../services/NotificationService";
 
 @Component({
   selector: 'display-user-properties-app',
@@ -15,7 +17,8 @@ export class UserPropertiesComponent implements OnInit{
 
   constructor(private propertyService: PropertyService,
               public dialog: MatDialog,
-              public snackBar: MatSnackBar) {}
+              public notificationService: NotificationService,
+              private router: Router) {}
 
   ngOnInit(): void {
     this.propertyService.getPropertiesForUser().subscribe({
@@ -51,10 +54,10 @@ export class UserPropertiesComponent implements OnInit{
   }
 
   openSnackBar(): void{
-    this.snackBar.open('Property deleted successfully!', 'Close', {
-      horizontalPosition: 'start',
-      verticalPosition: 'bottom',
-      duration: 3000
-    })
+    this.notificationService.success('Property deleted successfully!');
+  }
+
+  visitUpdate(id: number){
+    this.router.navigate(['update', id]);
   }
 }

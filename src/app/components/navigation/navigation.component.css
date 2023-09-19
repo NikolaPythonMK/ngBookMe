@@ -13,11 +13,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px 10px 20px;
+  padding: 10px 20px 8px 20px;
   cursor: pointer;
 }
 
 .navbar-icons div:hover{
+  background-color: lightgray;
+}
+
+.active-element{
   background-color: lightgray;
 }
 

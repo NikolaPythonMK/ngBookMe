@@ -2,23 +2,24 @@
   <mat-toolbar color="basic" class="navbar-container">
     <span class="navbar-title" routerLink="">BookingSite</span>
     <div class="navbar-icons">
-      <div routerLink="">
+      <div routerLink="" (click)="currentPath = 'home'">
         <mat-icon class="navbar-icon"><span>home</span></mat-icon>
         <span class="navbar-text">Home</span>
       </div>
 
-      <div routerLink="/saved">
+      <div routerLink="/saved" (click)="currentPath = 'favorites'" [class.active-element]="currentPath === 'favorites'">
         <mat-icon class="navbar-icon" color="warn"><span>favorite</span></mat-icon>
         <span class="navbar-text">Favorites</span>
       </div>
 
-      <div routerLink="/post">
+      <div routerLink="/post" (click)="currentPath = 'post'" [class.active-element]="currentPath === 'post'">
         <mat-icon class="navbar-icon"><span>post_add</span></mat-icon>
         <span class="navbar-text">Post property</span>
       </div>
 
       <ng-container *ngIf="loggedInUser; else notLoggedIn">
-        <div mat-button [matMenuTriggerFor]="menu" class="menu-container">
+        <div mat-button [matMenuTriggerFor]="menu" class="menu-container"
+             (click)="currentPath = 'profile'" [class.active-element]="currentPath === 'profile'">
           <mat-icon class="navbar-icon"><span>account_circle</span></mat-icon>
           <span class="navbar-text">Welcome, {{loggedInUser.firstName}}</span>
           <mat-icon class="navbar-icon" [ngStyle]="{'margin-left': '10px'}"><span>expand_more</span></mat-icon>
@@ -32,7 +33,7 @@
         </div>
       </ng-container>
       <ng-template #notLoggedIn>
-        <div routerLink="/login">
+        <div routerLink="/login" (click)="currentPath = 'profile'" [class.active-element]="currentPath === 'profile'">
           <mat-icon class="navbar-icon"><span>account_circle</span></mat-icon>
           <span class="navbar-text">Log in</span>
         </div>

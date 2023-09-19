@@ -6,6 +6,7 @@ import {SavePropertyRequest} from "../models/SavePropertyRequest";
 import {AuthService} from "./AuthService";
 import {Page} from "../models/Page";
 import { PropertyDetails } from "../models/PropertyDetails";
+import {PropertyUpdate} from "../models/PropertyUpdate";
 
 @Injectable({
   providedIn: 'root'
@@ -26,10 +27,13 @@ export class PropertyService {
 
   saveProperty(formData: FormData): Observable<Property>{
     // Why won't it work with .append()?
-    // const headers = new HttpHeaders({
-    //   'Authorization': this.authService.getToken()!,
-    // });
-    return this.http.post<Property>(this.url, formData, this.httpOptions)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.authService.getToken()!,
+      })
+    }
+    console.log(httpOptions);
+    return this.http.post<Property>(this.url, formData, httpOptions)
   }
 
   getProperties(urlParams: string | null): Observable<Page>{
@@ -127,6 +131,26 @@ export class PropertyService {
     };
     const url = `${this.url}/${id}/delete`;
     return this.http.delete<any>(url, httpOptions)
+  }
+
+  getPropertyUpdate(id: number): Observable<PropertyUpdate>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.authService.getToken()!,
+      }),
+    };
+    const url = `${this.url}/${id}/edit`
+    return this.http.get<PropertyUpdate>(url, httpOptions);
+  }
+
+  updateProperty(id: number, property: PropertyUpdate): Observable<Property>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.authService.getToken()!,
+      }),
+    };
+    const url = `${this.url}/${id}/edit`
+    return this.http.put<Property>(url, property, httpOptions);
   }
 
 

@@ -5,7 +5,7 @@ import {PropertyService} from "../../services/PropertyService";
 import {RecentlyViewedService} from "../../services/RecentlyViewedService";
 import {RecentlyViewedPage} from "../../models/RecentlyViewedPage";
 import {MatTabChangeEvent} from "@angular/material/tabs";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { Location } from '@angular/common';
 
 
@@ -21,7 +21,8 @@ export class ProfileComponent implements OnInit{
   constructor(private propertyService: PropertyService,
               private recentlyViewedService: RecentlyViewedService,
               private router: Router,
-              private location: Location) {}
+              private location: Location,
+              private route: ActivatedRoute) {}
 
 
   ngOnInit() {

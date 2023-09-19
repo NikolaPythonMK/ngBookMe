@@ -1,7 +1,8 @@
-import {Component, ElementRef, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild} from "@angular/core";
+import {Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Output, ViewChild} from "@angular/core";
 import * as L from "leaflet";
 import {Icon, IconOptions, LatLng, LatLngExpression} from "leaflet";
 import {MapService} from "../../services/MapService";
+
 
 // import {MAP_SERVICE_TOKEN, MapService} from "../../services/MapService";
 //  constructor(@Inject(MAP_SERVICE_TOKEN) private mapService: MapService)
@@ -11,7 +12,7 @@ import {MapService} from "../../services/MapService";
   templateUrl: './create-property-map.component.html',
   styleUrls: ['./create-property-map.component.css']
 })
-export class CreatePropertyMapComponent implements OnDestroy{
+export class CreatePropertyMapComponent implements OnDestroy {
   @Output() propertyLocationEmit = new EventEmitter<number[]>();
   @ViewChild('map') myDiv!: ElementRef;
 

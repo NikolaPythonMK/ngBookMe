@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 import {UploadedImage} from "../../models/UploadedImage";
 import { propertyTypes } from "src/app/constants/PropertyConstants";
 import { propertyAmenities } from "src/app/constants/AmenitiesConstants";
+import {NotificationService} from "../../services/NotificationService";
 // import * as amenities from '../../../assets/json/amenities.json'
 
 
@@ -24,7 +25,8 @@ export class CreatePropertyComponent {
               public dialog: MatDialog,
               private authService: AuthService,
               private propertyService: PropertyService,
-              private router: Router) {}
+              private router: Router,
+              private notificationService: NotificationService) {}
 
   checkedAmenities: any[] = [];
   displayInvalidMessage: boolean = false;
@@ -116,11 +118,13 @@ export class CreatePropertyComponent {
     }).afterClosed().subscribe(result => {
       if(result.confirmed){
         this.propertyService.saveProperty(formData).subscribe({
-          next: value => {
-            //TODO: redirect to value.id details
-            this.router.navigate(['']);
+          next: (property) => {
+            this.notificationService.success("Property created successfully!")
+            this.router.navigate(['property', property.id]);
           },
           error: err => {
+            this.notificationService.error("Property creation failed")
+            this.router.navigate([''])
             console.log(err);
           },
         })
@@ -129,11 +133,9 @@ export class CreatePropertyComponent {
   }
 
   submit(): void{
-    console.log('4: ', this.checkedAmenities);
     if(this.allFormsValid() && this.selectedImage){
       this.displayInvalidMessage = false;
       this.isSubmitted = true;
-      console.log('test: ', this.selectedImage)
       this.property = {
         propertyName: this.firstFormGroup.get('propertyName')!.value,
         propertyDescription: this.firstFormGroup.get('propertyDescription')!.value,
@@ -147,7 +149,6 @@ export class CreatePropertyComponent {
         propertyImages: null,
         propertyAmenities: this.checkedAmenities.join(';')
       } as SavePropertyRequest;
-      console.log(this.property)
 
       const fd = new FormData();
       fd.append('propertyName', this.firstFormGroup.get('propertyName')!.value);
@@ -163,7 +164,6 @@ export class CreatePropertyComponent {
 
       const imagesControl = this.imageForm.get('images') as FormArray;
       for(const image of imagesControl.value){
-        console.log(image);
         fd.append('images', image);
       }
 
@@ -172,7 +172,6 @@ export class CreatePropertyComponent {
     else{
       this.displayInvalidMessage = true;
     }
-
   }
 
   allFormsValid(): boolean{
@@ -191,6 +190,13 @@ export class CreatePropertyComponent {
   }
 
   addAmenity(type: any): void{
-    this.checkedAmenities.push(type.value)
+    console.log(type);
+    const index = this.checkedAmenities.indexOf(type.value);
+    if (index !== -1) {
+      this.checkedAmenities.splice(index, 1);
+    } else {
+      this.checkedAmenities.push(type.value);
+    }
+    console.log(this.checkedAmenities);
   }
 }
