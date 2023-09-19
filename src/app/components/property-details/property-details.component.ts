@@ -39,10 +39,8 @@ export class PropertyDetailsComponent implements OnInit{
     this.propertyService.getById(id).subscribe({
       next: (property) => {
         this.property = property;
-        console.log(property);
         this.images = String(this.property.propertyImages).split(";");
         this.images = this.images.slice(0, this.images.length - 1);
-
         this.setReservationDates();
         this.calendar.updateTodaysDate();
       },
@@ -135,5 +133,25 @@ export class PropertyDetailsComponent implements OnInit{
 
   transform(imageName: string, propertyId: number): string {
     return `http://192.168.0.15:9090/api/images/${propertyId}/${imageName}`;
+  }
+  
+  range(n: number): number[] {
+    return Array.from({ length: n }, (_, i) => i);
+  }
+
+  satisfaction(n: number): string {
+    const satisfactionScale: { [key: number]: string } = {
+      1: "Poor",
+      2: "Fair",
+      3: "Good",
+      4: "Very Good",
+      5: "Excellent"
+    };
+  
+    if (n >= 1 && n <= 5) {
+      return satisfactionScale[Math.trunc(n)];
+    } else {
+      return "Invalid input";
+    }
   }
 }

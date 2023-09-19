@@ -1,8 +1,11 @@
-<div class="body container">
-  <div class="wrapper">
-    <mat-icon (click)="goBack()" class="mb-3">arrow_back_ios</mat-icon>
-    <div class="upper-content content row" *ngIf="property != null">
-      <div id="carouselExample" class="carousel slide carousel-container col-6">
+<!-- <div class="container">
+  <mat-icon (click)="goBack()" class="mb-3">arrow_back_ios</mat-icon>
+
+  <div class="row" *ngIf="property != null">
+
+    <div class="col-6">
+
+      <div id="carouselExample" class="carousel slide carousel-container">
         <div class="carousel-inner">
           <div class="carousel-item" *ngFor="let img of images; let i = index" [class.active]="i === activeSlideIndex">
             <img [src]="img | formatImageUrl:property.id" class="d-block w-100 carousel-img" alt="...">
@@ -17,38 +20,186 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-      <div class="col-5 mx-4">
+      
+      <div class="mt-3">
+        <div class="row row-cols-3 m-0">
+          <img *ngFor="let img of images; let i = index" [src]="img | formatImageUrl:property.id"
+               class="mb-2 album-img p-1"
+               (click)="onImageClick(i)"
+                [class.clickedImage]="i === activeSlideIndex">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-6">
+
+      <div class="px-2">
         <h1>{{ property.propertyName }}</h1>
         <h3> {{ property.propertyType }}  </h3>
         <p> {{ property.propertyDescription }} </p>
         <h4> {{ property.propertyCity }}  {{property.propertyAddress}} </h4>
         <h4> 8.8 - Excellent </h4>
-        <div *ngFor="let ameniti of getAmenities()">
-          <mat-icon>{{ameniti.value}}</mat-icon>
-          <span>{{ameniti.name}}</span>
+        <div class="d-flex row row-cols-3">
+          <div class="col p-2 border border-1 border-x-0 border-success mb-1 bordered mx-1" *ngFor="let ameniti of getAmenities()">
+            <mat-icon>{{ameniti.value}}</mat-icon>
+            <span>{{ameniti.name}}</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="middle-content content row mt-2">
-      <div class="col-6 album">
-        <div class="row row-cols-3">
-          <img *ngFor="let img of images; let i = index" [src]="img | formatImageUrl:property.id"
-               class="col album-img"
-               (click)="onImageClick(i)"
-                [class.clickedImage]="i === activeSlideIndex">
-        </div>
-      </div>
-      <div class="col-5 mx-4">
+      <div class="px-2">
         <mat-calendar [selected]="this.selectedRange"
                       (selectedChange)="this.onChange($event)"
                       [dateClass]="dateClass"
                       #calendar
                       >
         </mat-calendar>
+      </div>
+
     </div>
-    <div class="lower-content content">
-        
+
+  </div>
+
+</div> -->
+
+<div class="container">
+
+  <div class="d-flex back-button" (click)="goBack()">
+    <mat-icon class="mb-3">arrow_back_ios</mat-icon>
+    <span>Go Back</span>
+  </div>
+
+  <div class="mt-3 mb-3 d-flex justify-content-between">
+    <div class="">
+      <div class="d-flex mb-2" *ngIf="property.averageRating !== 0">
+        <mat-icon class="star-icon" *ngFor="let i of range(property.averageRating)">star</mat-icon>
+        <span class="mx-3 fst-italic">{{ property.averageRating.toFixed(1) }} out of 5.0</span>
+      </div>
+  
+      <div class="d-flex mb-2" *ngIf="property.averageRating === 0">
+        <span class="fw-bold">Property not rated yet.</span>
+      </div>
+      
+      <p class="display-6 fw-bold mb-0">{{ property.propertyName }}</p>
+      <p class="location-text">{{ property.propertyAddress }}-{{ property.propertyCity }}, Macedonia</p>
+    </div>
+    <div class="rounded-1 align-self-center p-3">
+      <h2 class="d-block">{{ property.propertyUser.firstName }} {{ property.propertyUser.lastName }}</h2>
+      <h6 class="d-block">{{ property.propertyUser.mobilePhone }}</h6>
+      <h6 class="d-block">{{ property.propertyUser.email }}</h6>
     </div>
   </div>
-</div>
+  
+  <div class="row" *ngIf="property != null">
+
+    <div class="col-6 m-0 p-0">
+      <div id="carouselExample" class="carousel slide carousel-container">
+        <div class="carousel-inner">
+          <div class="carousel-item" *ngFor="let img of images; let i = index" [class.active]="i === activeSlideIndex">
+            <img [src]="img | formatImageUrl:property.id" class="d-block w-100 carousel-img" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev" (click)="prevSlide()">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next" (click)="nextSlide()">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="col-6 p-1 pt-0">
+      <div class="album">
+        <div class="row row-cols-3 m-0">
+          <img *ngFor="let img of images; let i = index" [src]="img | formatImageUrl:property.id"
+               class="mb-1 album-img p-1"
+               (click)="onImageClick(i)"
+                [class.clickedImage]="i === activeSlideIndex">
+        </div>
+      </div>
+    </div>
+
+  </div>
+  
+  <div class="row mt-3">
+    <div class="col">
+      <div class="d-flex row row-cols-3">
+        <div class="col p-2 pt-3 pb-3 border border-1 border-x-0 mb-2 bordered rounded-1 mx-1 d-flex amenity-border" *ngFor="let amenity of getAmenities()">
+          <mat-icon>{{amenity.value}}</mat-icon>
+          <span class="mx-3">{{amenity.name}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-6"> 
+      <div class="px-2">
+        <h1>{{ property.propertyName }}</h1>
+        <h4> {{ property.propertyType }}  </h4>
+        <h4 *ngIf="property.averageRating !== 0"> {{ property.averageRating.toFixed(1) }} - {{ satisfaction(property.averageRating) }} <mat-icon class="star-icon" *ngFor="let i of range(property.averageRating)">star</mat-icon></h4>
+        <h4 *ngIf="property.averageRating === 0"> Property not rated yet. </h4>
+        <h5> {{ property.propertyAddress }}-{{ property.propertyCity }}, Macedonia </h5>
+        <p> {{ property.propertyDescription }} </p>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="px-2">
+        <mat-calendar [selected]="this.selectedRange"
+                      (selectedChange)="this.onChange($event)"
+                      [dateClass]="dateClass"
+                      #calendar
+                      >
+        </mat-calendar>
+      </div>
+    </div>
+    <hr class="mt-5">
+  </div>
+
+  <div class="row map">
+    <create-property-map-app></create-property-map-app>
+  </div>
+
+  <div class="mt-0">
+      <section style="background-color: #ffffff;" class="rounded-2">
+        <div class="container py-5">
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-12 col-lg-10">
+              <div class="card text-dark">
+                <div class="card-body p-4">
+                  <h4 class="mb-0">Recent reviews</h4>
+                  <p class="fw-light mb-4 pb-2">Latest reviews section</p>
+      
+                  <div class="d-flex flex-start mb-5" *ngFor="let rating of property.propertyRating">
+                    <img class="rounded-circle shadow-1-strong me-3"
+                      src="../../../assets/avatar.png" alt="avatar" width="60"
+                      height="60" />
+                    <div>
+                      <h6 class="fw-bold mb-1">{{ rating.ratedBy.firstName }} {{ rating.ratedBy.lastName }}</h6>
+                      <div class="d-flex align-items-center mb-3">
+                        <p class="mb-0">
+                          {{ rating.ratingTime | date: 'longDate'}}
+                        </p>
+                      </div>
+                      <div class="d-flex mb-2" *ngIf="rating.userRating !== 0">
+                        <mat-icon class="star-icon" *ngFor="let i of range(rating.userRating)">star</mat-icon>
+                        <span class="mx-3 fst-italic">{{ rating.userRating.toFixed(1) }} out of 5.0</span>
+                      </div>
+                      <p class="mb-0">
+                        {{ rating.userComment }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  </div>
+</div> 
+

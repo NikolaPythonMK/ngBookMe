@@ -18,5 +18,6 @@ export interface PropertyDetails{
   bookmarked: boolean,
   reservationList: Reservation[],
   propertyRating: Rating[],
-  propertyAmenities: string
+  propertyAmenities: string,
+  averageRating: number
 }
