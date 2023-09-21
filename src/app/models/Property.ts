@@ -13,5 +13,7 @@ export interface Property{
   propertyImage: string,
   propertyUser: PropertyOwnerInfo,
   propertyImages: string[],
-  bookmarked: boolean
+  bookmarked: boolean,
+  propertyAverageRating: number,
+  propertyNumberOfRatings: number
 }

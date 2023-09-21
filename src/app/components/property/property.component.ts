@@ -20,6 +20,7 @@ export class PropertyComponent implements OnInit{
   constructor(private propertyService: PropertyService, private authService: AuthService) {}
 
   ngOnInit() {
+    console.log(this.property);
     this.propertyType = propertyTypes.find(i => i.value === this.property.propertyType)!.name;
   }
 
@@ -64,5 +65,25 @@ export class PropertyComponent implements OnInit{
 
   get propertyType(): string{
     return this._propertyType;
+  }
+
+  range(n: number): number[] {
+    return Array.from({ length: n }, (_, i) => i);
+  }
+
+  satisfaction(n: number): string {
+    const satisfactionScale: { [key: number]: string } = {
+      1: "Poor",
+      2: "Fair",
+      3: "Good",
+      4: "Very Good",
+      5: "Excellent"
+    };
+  
+    if (n >= 1 && n <= 5) {
+      return satisfactionScale[Math.trunc(n)];
+    } else {
+      return "Invalid input";
+    }
   }
 }

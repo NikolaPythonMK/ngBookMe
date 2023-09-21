@@ -11,9 +11,14 @@
     </mat-card-header>
     <mat-card-content>
       <p>{{ property.propertyCity }}, {{ property.propertyAddress }} </p>
-      <div>
-        <span class="to-bold"> 8.8 - Excellent </span>
-        <span>(342 reviews)</span>
+
+      <div *ngIf="property.propertyAverageRating > 0">
+        <span class="to-bold">{{ property.propertyAverageRating.toFixed(1) }} - {{ satisfaction(property.propertyAverageRating) }}</span>
+        <span> ({{ property.propertyNumberOfRatings }} reviews)</span>
+      </div>
+
+      <div *ngIf="property.propertyAverageRating === 0">
+        <span class="to-bold">Property not rated yet.</span>
       </div>
 
       <div class="footer">
