@@ -1,4 +1,4 @@
-import {Component, HostListener} from '@angular/core';
+import {Component, ElementRef, HostListener, NgZone, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {PropertyService} from "../../services/PropertyService";
 import {Page} from "../../models/Page";
 import {ActivatedRoute, Route, Router} from "@angular/router";
@@ -18,13 +18,23 @@ export class SearchBarComponent {
   page!: Page;
   mapEnlarged: boolean = false;
   positionY: number = 0;
-  toggleFilter: boolean = false;
+  toggleFilter: boolean = false
 
 
   constructor(private propertyService: PropertyService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
               private messengerService: MessengerService) {
+  }
+
+  @ViewChildren('mapContainer', {read: ElementRef}) mapContainer!: QueryList<ElementRef>;
+  @ViewChildren('searchWrapper', {read: ElementRef}) searchContainer!: QueryList<ElementRef>;
+
+  ngAfterViewInit() {
+    this.mapContainer.changes.subscribe((elements: QueryList<ElementRef>) => {
+      const firstMapContainer = elements.first;
+      firstMapContainer.nativeElement.style.top = this.searchContainer.first.nativeElement.clientHeight + "px";
+    });
   }
 
   ngOnInit(): void{
@@ -75,10 +85,15 @@ export class SearchBarComponent {
 
   onEnlarge(event: boolean){
     this.mapEnlarged = event;
-    console.log(this.mapEnlarged);
   }
 
   toggleFilterClick(){
-    this.toggleFilter = !this.toggleFilter;       
+    this.toggleFilter = !this.toggleFilter;  
+    if(this.toggleFilter){
+      this.mapContainer.first.nativeElement.style.top = this.searchContainer.first.nativeElement.clientHeight + 106 + "px";   
+    }else{
+      this.mapContainer.first.nativeElement.style.top = this.searchContainer.first.nativeElement.clientHeight - 106 + "px";
+    }
   }
 }
+
