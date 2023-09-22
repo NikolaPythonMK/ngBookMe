@@ -109,3 +109,27 @@
     padding: 0;
   }
 }
+
+.expand-icon:hover{
+  cursor: pointer;
+}
+
+@keyframes slidein {
+  from { display: none; opacity: 0; transform: translateY(-40px);}
+  to { transform: translateY(0px); opacity: 100;}
+}
+
+.show {
+  animation: slidein 200ms;
+  display: block;
+}
+
+@keyframes slideaway {
+  from { display: block; }
+  to { transform: translateY(-40px); opacity: 0;}
+}
+
+.hide {
+  animation: slideaway 1000ms;
+  display: none;
+}

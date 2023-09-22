@@ -14,14 +14,12 @@ import {MessengerService} from "../../services/MessengerService";
 export class SearchBarComponent {
   startDate?: Date;
   ednDate?: string;
-
   params = new URLSearchParams();
-
   page!: Page;
-
   mapEnlarged: boolean = false;
-
   positionY: number = 0;
+  toggleFilter: boolean = false;
+
 
   constructor(private propertyService: PropertyService,
               private activatedRoute: ActivatedRoute,
@@ -78,5 +76,9 @@ export class SearchBarComponent {
   onEnlarge(event: boolean){
     this.mapEnlarged = event;
     console.log(this.mapEnlarged);
+  }
+
+  toggleFilterClick(){
+    this.toggleFilter = !this.toggleFilter;       
   }
 }

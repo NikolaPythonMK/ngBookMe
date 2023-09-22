@@ -1,16 +1,16 @@
-import {Injectable, OnInit} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {BehaviorSubject, Observable, of, tap} from "rxjs";
 import {UserDetails} from "../models/UserDetails";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {RegisterRequest} from "../models/RegisterRequest";
 import jwt_decode from 'jwt-decode';
+import { backendUrl } from "../constants/AppConstants";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService{
-  private readonly authUrl = 'http://localhost:9090/api/auth';
-  // private readonly authUrl = 'http://192.168.0.15:9090/api/properties';
+  private readonly authUrl = backendUrl + '/api/auth';
   private token: string | null = null;
 
   user$ = new BehaviorSubject<any>(null);

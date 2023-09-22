@@ -2,11 +2,12 @@ import {Component, OnInit, ViewChild, ViewEncapsulation} from "@angular/core";
 import {PropertyService} from "../../services/PropertyService";
 import {ActivatedRoute} from "@angular/router";
 import { Location } from '@angular/common';
-import { DateRange, MAT_RANGE_DATE_SELECTION_MODEL_PROVIDER, MatCalendar } from '@angular/material/datepicker';
-import {MatCalendarCellClassFunction, MatDatepickerModule} from '@angular/material/datepicker';
+import { DateRange, MatCalendar } from '@angular/material/datepicker';
+import {MatCalendarCellClassFunction} from '@angular/material/datepicker';
 import { PropertyDetails } from "src/app/models/PropertyDetails";
 import { propertyAmenities } from "src/app/constants/AmenitiesConstants";
 import {MessengerService} from "../../services/MessengerService";
+import { backendUrl } from "src/app/constants/AppConstants";
 
 @Component({
   selector: 'component-details',
@@ -136,7 +137,7 @@ export class PropertyDetailsComponent implements OnInit{
   }
 
   transform(imageName: string, propertyId: number): string {
-    return `http://192.168.0.15:9090/api/images/${propertyId}/${imageName}`;
+    return `${backendUrl}/api/images/${propertyId}/${imageName}`;
   }
   
   range(n: number): number[] {

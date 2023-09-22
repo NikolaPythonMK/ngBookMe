@@ -2,15 +2,14 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AuthService} from "./AuthService";
 import {map, Observable, tap} from "rxjs";
-import {RecentlyViewed} from "../models/RecentlyViewed";
 import {RecentlyViewedPage} from "../models/RecentlyViewedPage";
-import {prerenderPages} from "@angular-devkit/build-angular/src/utils/server-rendering/prerender";
+import { backendUrl } from "../constants/AppConstants";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecentlyViewedService {
-  private readonly url = 'http://localhost:9090/api/recently-viewed';
+  private readonly url = backendUrl + '/api/recently-viewed';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 

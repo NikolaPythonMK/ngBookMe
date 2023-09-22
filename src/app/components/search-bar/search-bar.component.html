@@ -1,4 +1,4 @@
-<div class="search-menu-wrapper">
+<div class="search-menu-wrapper mb-0">
   <div class="search-bar-container">
   <mat-form-field  subscriptSizing="dynamic">
     <mat-label>Destination</mat-label>
@@ -31,22 +31,28 @@
   </mat-form-field>
 
 
-  <div class="search-btn">
-    <span class="search-label">Search</span>
+    <div class="search-btn">
+      <span class="search-label">Search</span>
+    </div>
   </div>
-
-<!--  <button class="search-btn h-100" mat-raised-button color="primary" (click)="submit()"><span>Search</span></button>-->
-  </div>
-
-  <div>
+  <div [ngClass]="toggleFilter ? 'show mb-0' : 'hide mb-0'">
     <filter-app></filter-app>
   </div>
+  <div class="w-75 mb-0">
+    <hr [ngClass]="toggleFilter ? 'd-none' : 'mt-3'">
+    <div class="d-flex justify-content-center">
+      <div (click)="toggleFilterClick()" [ngClass]="toggleFilter ? 'd-none' : 'expand-icon d-flex'">
+        <mat-icon>expand_more</mat-icon>
+        <span class="align-self-center" style="font-size: 12px;">show more</span>
+      </div>
 
+      <div (click)="toggleFilterClick()" [ngClass]="toggleFilter ? 'expand-icon d-flex' : 'd-none'">
+        <mat-icon>expand_less</mat-icon>
+        <span class="align-self-center" style="font-size: 12px;">show less</span>
+      </div>
+    </div>
+  </div>
 </div>
-
-<!--<div>-->
-<!--  <filter-app></filter-app>-->
-<!--</div>-->
 
 <div class="content-wrapper">
 <div class="content row">

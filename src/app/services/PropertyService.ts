@@ -2,19 +2,18 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map, Observable, of, tap} from "rxjs";
 import {Property} from "../models/Property";
-import {SavePropertyRequest} from "../models/SavePropertyRequest";
 import {AuthService} from "./AuthService";
 import {Page} from "../models/Page";
 import { PropertyDetails } from "../models/PropertyDetails";
 import {PropertyUpdate} from "../models/PropertyUpdate";
+import { backendUrl } from "../constants/AppConstants";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PropertyService {
 
-  private readonly url = 'http://localhost:9090/api/properties';
-  // private readonly url = 'http://192.168.0.15:9090/api/properties';
+  private readonly url = backendUrl + '/api/properties';
 
   readonly httpOptions = {
     headers: new HttpHeaders({

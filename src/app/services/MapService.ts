@@ -1,10 +1,11 @@
-import {Injectable, InjectionToken} from "@angular/core";
+import {Injectable} from "@angular/core";
 import * as L from "leaflet";
-import {Icon, IconOptions, LatLng, LatLngExpression} from "leaflet";
+import {Icon, IconOptions, LatLngExpression} from "leaflet";
 import {Observable} from "rxjs";
 import {PropertyPopup} from "../models/PropertyPopup";
 import {PropertyMarker} from "../models/PropertyMarker";
 import {Router} from "@angular/router";
+import { backendUrl } from "../constants/AppConstants";
 
 // export const MAP_SERVICE_TOKEN = new InjectionToken<MapService>('MAP_SERVICE_TOKEN');
 
@@ -62,7 +63,7 @@ export class MapService{
       interactive: true,
       content:`
                           <div class="d-flex justify-content-between" style="margin-left: -21px; margin-top: -15px; margin-bottom: -14px">
-                            <img src="http://localhost:9090/api/images/${property.id}/${property.image}" width="150" height="150">
+                            <img src="${backendUrl}/api/images/${property.id}/${property.image}" width="150" height="150">
                             <div class="d-flex flex-column justify-content-center mb-0" style="margin-left: 10px;">
                               <span class="mb-1">${property.name}</span>
                               <span class="text-body-tertiary mb-1">${property.type}</span>
