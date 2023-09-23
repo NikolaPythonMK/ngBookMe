@@ -39,16 +39,31 @@ export class PropertyService {
     let url = '';
     let opts = {};
 
-    if(urlParams){
-      url = `${this.url}?page=${urlParams}`;
+    if(filteredData){
+      url = `${this.url}/filter`;
+      if(urlParams){
+        url += `?page=${urlParams}${filteredData}`;
+      }
+      else{
+        url += `?${filteredData}`
+      }
+
     }
     else{
-      url = this.url;
+      if(urlParams){
+        url = `${this.url}?page=${urlParams}`;
+      }
+      else{
+        url = this.url;
+      }
     }
 
-    if(filteredData){
-      url += `&${filteredData}`
-    }
+    // if(urlParams){
+    //   url = `${this.url}?page=${urlParams}`;
+    // }
+    // else{
+    //   url = this.url;
+    // }
 
     if(this.authService.isAuthenticated()){
       opts = {

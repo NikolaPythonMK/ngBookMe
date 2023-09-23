@@ -101,23 +101,23 @@ export class SearchBarComponent {
     }
     if(this.endDate){
       this.params.set('endDate', this.endDate.toISOString());
-      url += `endDate=${this.endDate.toISOString()}&`
+      url += `endDate=${this.endDate.toISOString()}`
     }
     if(filteredData.propertyTypes.trim().length > 0){
       this.params.set('propertyTypes', filteredData.propertyTypes);
-      url += `propertyTypes=${filteredData.propertyTypes}&`
+      url += `&propertyTypes=${filteredData.propertyTypes}`
     }
     if(filteredData.propertyAmenities.trim().length > 0){
       this.params.set('propertyAmenities', filteredData.propertyAmenities);
-      url += `propertyAmenities=${filteredData.propertyAmenities}&`
+      url += `&propertyAmenities=${filteredData.propertyAmenities}`
     }
     if(filteredData.propertyRating.trim().length > 0){
       this.params.set('propertyRating', filteredData.propertyRating);
-      url += `propertyRating=${filteredData.propertyRating}&`
+      url += `&propertyRating=${filteredData.propertyRating}`
     }
     if(filteredData.propertyPriceRange.trim().length > 0){
       this.params.set('propertyPriceRange', filteredData.propertyPriceRange);
-      url += `priceRange=${filteredData.propertyPriceRange}`
+      url += `&priceRange=${filteredData.propertyPriceRange}`
     }
     console.log(this.params.toString());
     console.log(url);
