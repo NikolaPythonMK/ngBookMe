@@ -28,7 +28,7 @@
   background-color: #007FFF;
   padding-left: 1.8em;
   padding-right: 1.8em;
-
+  cursor: pointer;
   border-top-right-radius: 0.7em;
   border-bottom-right-radius: 0.7em;
 }

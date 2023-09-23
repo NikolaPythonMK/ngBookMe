@@ -35,8 +35,8 @@ export class PropertyService {
     return this.http.post<Property>(this.url, formData, httpOptions)
   }
 
-  getProperties(urlParams: string | null): Observable<Page>{
-    let url;
+  getProperties(urlParams: string | null, filteredData?: string): Observable<Page>{
+    let url = '';
     let opts = {};
 
     if(urlParams){
@@ -44,6 +44,10 @@ export class PropertyService {
     }
     else{
       url = this.url;
+    }
+
+    if(filteredData){
+      url += `&${filteredData}`
     }
 
     if(this.authService.isAuthenticated()){

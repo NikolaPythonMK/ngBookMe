@@ -6,7 +6,9 @@
       <div class="dropdown-content">
         <div class="row row-cols-2 mt-3">
           <div class="col mb-3 d-flex" *ngFor="let type of propertyTypes">
-            <input id="{{ type.value }}" type="checkbox" class="form-check-input mx-3" [value]="type.value">
+            <input id="{{ type.value }}" type="checkbox" class="form-check-input mx-3"
+                   [value]="type.value"
+                    (click)="onTypeSubmit(type.value)">
             <label for="{{ type.value }}" class="form-check-label">{{ type.name  }}</label>
           </div>
         </div>
@@ -21,7 +23,9 @@
       <div class="dropdown-content">
         <div class="row row-cols-2 mt-3">
           <div class="col mb-3 d-flex" *ngFor="let amenity of propertyAmenities">
-            <input id="{{ amenity.value }}" type="checkbox" class="form-check-input mx-3" [value]="amenity.value">
+            <input id="{{ amenity.value }}" type="checkbox" class="form-check-input mx-3"
+                   [value]="amenity.value"
+                    (click)="onAmenitySubmit(amenity.value)">
             <mat-icon>{{ amenity.value }}</mat-icon>
             <label for="{{ amenity.value }}" class="form-check-label">{{ amenity.name  }}</label>
           </div>
@@ -36,7 +40,9 @@
       <input type="button" class="form-control h-75 custom-select text-muted" value="Property Rating">
       <div class="dropdown-rating-content">
         <div class="col mb-3 d-flex mt-3" *ngFor="let n of range(5)">
-          <input id="{{ satisfaction(n) }}" type="checkbox" class="form-check-input mx-3" [value]="satisfaction(n)">
+          <input id="{{ satisfaction(n) }}" type="checkbox" class="form-check-input mx-3"
+                 [value]="satisfaction(n)"
+                  (click)="onRatingSubmit(n)">
           <mat-icon *ngFor="let s of range(n)" class="star">star</mat-icon>
           <label for="{{ satisfaction(n) }}" class="form-check-label"> ({{ satisfaction(n)  }})</label>
         </div>
@@ -47,8 +53,8 @@
   <div class="filter-element">
     <p class="mb-3">Price per night</p>
     <mat-slider min="500" max="30000" step="500" showTickMarks discrete [displayWith]="formatLabel" class="mt-3">
-      <input value="500" matSliderStartThumb>
-      <input value="30000" matSliderEndThumb>
+      <input value="500" matSliderStartThumb  #startValue (click)="onPriceSubmit(startValue.value, true)">
+      <input value="30000" matSliderEndThumb #endValue (click)="onPriceSubmit(endValue.value, false)">
     </mat-slider>
   </div>
 </div>
