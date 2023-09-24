@@ -40,7 +40,7 @@ export class PropertyService {
     let opts = {};
 
     if(filteredData){
-      url = `${this.url}/filter`;
+      url = `${this.url}`;
       if(urlParams){
         url += `?page=${urlParams}${filteredData}`;
       }
