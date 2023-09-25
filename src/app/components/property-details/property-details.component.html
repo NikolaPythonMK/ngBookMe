@@ -159,8 +159,8 @@
         </mat-calendar>
       </div>
 
-     <div class="reserve-wrapper">
-        <div class="people-container mt-4">
+     <div class="reserve-wrapper row  justify-content-between">
+        <div class="people-container mt-4 col-5">
           <div>
             <p class="people-label">People:</p>
           </div>
@@ -170,9 +170,10 @@
                     [disabled]="peopleCounter === 1">
               <mat-icon>remove</mat-icon>
             </button>
-            <mat-form-field class="people-input">
-              <input matInput type="text" [(ngModel)]="peopleCounter">
-            </mat-form-field>
+<!--            <mat-form-field class="people-input">-->
+<!--              <input matInput type="text" [(ngModel)]="peopleCounter" disabled class="people-input-el">-->
+<!--            </mat-form-field>-->
+            <span class="counter">{{peopleCounter}}</span>
             <button mat-mini-fab color="basic" aria-label="Example icon button with a delete icon"
                   (click)="peopleCounter = peopleCounter + 1">
               <mat-icon>add</mat-icon>
@@ -180,8 +181,10 @@
           </div>
         </div>
 
-        <div>
-          <button mat-raised-button color="primary" class="reserve-btn">Reserve</button>
+        <div class="col-6 reserve-info mt-4">
+          <button class="btn btn-outline-success w-100 py-2" (click)="onReserveSubmit()"><span class="btn-label">Reserve</span></button>
+          <hr>
+          <p class="total-el text-success text-end fw-bold">Total: {{property.propertyPrice * peopleCounter}} MKD</p>
         </div>
      </div>
 

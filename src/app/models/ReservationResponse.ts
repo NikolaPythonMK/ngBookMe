@@ -1,4 +1,4 @@
-export interface Reservation{
+export interface ReservationResponse {
     id: number,
     reservationStartDate: Date,
     reservationEndDate: Date,

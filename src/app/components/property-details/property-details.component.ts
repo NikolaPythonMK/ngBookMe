@@ -8,6 +8,9 @@ import { PropertyDetails } from "src/app/models/PropertyDetails";
 import { propertyAmenities } from "src/app/constants/AmenitiesConstants";
 import {MessengerService} from "../../services/MessengerService";
 import { backendUrl } from "src/app/constants/AppConstants";
+import {NotificationService} from "../../services/NotificationService";
+import {ReservationRequest} from "../../models/ReservationRequest";
+import {ReservationService} from "../../services/ReservationService";
 
 @Component({
   selector: 'component-details',
@@ -23,8 +26,8 @@ export class PropertyDetailsComponent implements OnInit{
   first: boolean = true;
   activeSlideIndex: number = 0;
   selectedRange: DateRange<Date> | any = null;
-  fromDate:  Date | any = null;
-  toDate: Date | any = null;
+  fromDate:  Date | null = null;
+  toDate: Date | null = null;
   reservationMap: Map<number, number[]> = new Map();
   propertyAmenitiesConstants = propertyAmenities;
   todayDate:Date = new Date();
@@ -36,7 +39,9 @@ export class PropertyDetailsComponent implements OnInit{
   constructor(private propertyService: PropertyService,
               private route: ActivatedRoute,
               private location: Location,
-              private messengerService: MessengerService) {
+              private messengerService: MessengerService,
+              private notificationService: NotificationService,
+              private reservationService: ReservationService) {
     this.refreshDR();
   }
 
@@ -160,6 +165,21 @@ export class PropertyDetailsComponent implements OnInit{
       return satisfactionScale[Math.trunc(n)];
     } else {
       return "Invalid input";
+    }
+  }
+
+  onReserveSubmit(): void{
+    if(!this.fromDate || !this.toDate){
+      this.notificationService.error("Please choose a date.")
+    }
+    else{
+      const reservation = {
+        reservationStartDate: this.fromDate.toISOString(),
+        reservationEndDate: this.toDate.toISOString(),
+        reservationNumberOfPeople: this.peopleCounter,
+        reservationTotalPrice: this.peopleCounter * this.property.propertyPrice
+      } as ReservationRequest;
+      // this.reservationService.reserve(reservation).subscribe(...)...
     }
   }
 }

@@ -1,6 +1,6 @@
 import {PropertyOwnerInfo} from "./PropertyOwnerInfo";
 import { Rating } from "./Rating";
-import { Reservation } from "./Reservation";
+import { ReservationResponse } from "./ReservationResponse";
 
 export interface PropertyDetails{
   id: number,
@@ -16,7 +16,7 @@ export interface PropertyDetails{
   propertyUser: PropertyOwnerInfo,
   propertyImages: string[],
   bookmarked: boolean,
-  reservationList: Reservation[],
+  reservationList: ReservationResponse[],
   propertyRating: Rating[],
   propertyAmenities: string,
   averageRating: number
