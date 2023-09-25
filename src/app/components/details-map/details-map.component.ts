@@ -14,7 +14,7 @@ export class DetailsMapComponent{
     this.mapService.setUserLocationMarker(new L.LatLng(Number(location.split(';')[0]), Number(location.split(';')[1])));
   }
   @Input() set name (propertyName : string){
-    this.mapService.propertyDetailMarker(propertyName);
+    this.mapService.isPropertyMarker(propertyName);
   }
   @ViewChild('map') myDiv!: ElementRef;
 

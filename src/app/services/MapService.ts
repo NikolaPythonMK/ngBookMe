@@ -177,7 +177,7 @@ export class MapService{
   isPropertyMarker(): void{
     this.userMarker!.bindPopup(L.popup({
       content: `<span class="d-flex justify-content-center">Your property</span>`,
-      offset: L.point(0, -10)
+      offset: L.point(0, -10),
     })).openPopup();
   }
 }
