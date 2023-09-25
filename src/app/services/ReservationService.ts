@@ -35,4 +35,14 @@ export class ReservationService {
       )
   }
 
+  deleteReservation(idToDelete : number) : Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.authService.getToken()!,
+      }),
+    };
+    console.log(httpOptions);
+    return this.http.delete<any>(this.url+ "/" + idToDelete + "/delete", httpOptions)
+  }
+
 }
