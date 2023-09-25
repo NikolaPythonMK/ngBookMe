@@ -29,6 +29,8 @@ export class PropertyDetailsComponent implements OnInit{
   propertyAmenitiesConstants = propertyAmenities;
   todayDate:Date = new Date();
 
+  peopleCounter: number = 1;
+
   @ViewChild("calendar") calendar! : MatCalendar<Date>;
 
   constructor(private propertyService: PropertyService,
@@ -140,7 +142,7 @@ export class PropertyDetailsComponent implements OnInit{
   transform(imageName: string, propertyId: number): string {
     return `${backendUrl}/api/images/${propertyId}/${imageName}`;
   }
-  
+
   range(n: number): number[] {
     return Array.from({ length: n }, (_, i) => i);
   }
@@ -153,7 +155,7 @@ export class PropertyDetailsComponent implements OnInit{
       4: "Very Good",
       5: "Excellent"
     };
-  
+
     if (n >= 1 && n <= 5) {
       return satisfactionScale[Math.trunc(n)];
     } else {

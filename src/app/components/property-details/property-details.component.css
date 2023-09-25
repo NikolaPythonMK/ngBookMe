@@ -35,7 +35,7 @@
 
 .album-img:hover{
   cursor: pointer;
-} 
+}
 
 .clickedImage{
   padding: 0.3em !important;
@@ -73,3 +73,29 @@ button.example-custom-date-class {
 .mat-calendar{
   border: 1px solid rgb(212, 208, 208);
 }
+
+/*.people-input{*/
+/*  width: 50px;*/
+/*  !*margin: .5em;*!*/
+/*}*/
+/*.people-label{*/
+/*  !*font-weight: bold;*!*/
+/*  !*margin-right: 2em;*!*/
+/*  !*font-size: 1.1rem;*!*/
+/*}*/
+/*.people-container{*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*}*/
+/*.reserve-wrapper{*/
+/*  display: flex;*/
+/*  justify-content: space-around;*/
+/*  align-items: center;*/
+/*}*/
+/*.reserve-btn{*/
+/*  !*transform: scale(1.4);*!*/
+/*}*/
+/*.price-label{*/
+/*  !*font-size: 2.5rem;*!*/
+/*  !*font-weight: bold;*!*/
+/*}*/
