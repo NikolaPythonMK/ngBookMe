@@ -4,6 +4,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {AuthService} from "../../services/AuthService";
 import {Router} from "@angular/router";
 import jwt_decode from 'jwt-decode';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'login-app',
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit{
   constructor(private messengerService: MessengerService,
               private fb: FormBuilder,
               private authService: AuthService,
-              private router: Router) {}
+              private router: Router,
+              private location: Location) {}
 
 
 
@@ -41,7 +43,8 @@ export class LoginComponent implements OnInit{
       this.authService.login(email!, password!).subscribe({
         next: (token) => {
           this.authService.setToken(token);
-          this.router.navigate([''])
+          // this.router.navigate([''])
+          this.location.back();
         },
         error: (err) => {
           this.displayErrorMessage = true;

@@ -6,6 +6,7 @@ import {AuthService} from "./AuthService";
 import {ReservationDetail} from "../models/ReservationDetail";
 import {Page} from "../models/Page";
 import {ReservationPage} from "../models/ReservationPage";
+import {ReservationRequest} from "../models/ReservationRequest";
 
 @Injectable({
   providedIn: 'root'
@@ -35,4 +36,12 @@ export class ReservationService {
       )
   }
 
+  postReserve(request: ReservationRequest): Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.authService.getToken()!,
+      }),
+    };
+    return this.http.post<any>(this.url + '/add', request, httpOptions)
+  }
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from "@angular/core";
 import {PropertyService} from "../../services/PropertyService";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { Location } from '@angular/common';
 import { DateRange, MatCalendar } from '@angular/material/datepicker';
 import {MatCalendarCellClassFunction} from '@angular/material/datepicker';
@@ -11,6 +11,7 @@ import { backendUrl } from "src/app/constants/AppConstants";
 import {NotificationService} from "../../services/NotificationService";
 import {ReservationRequest} from "../../models/ReservationRequest";
 import {ReservationService} from "../../services/ReservationService";
+import {AuthService} from "../../services/AuthService";
 
 @Component({
   selector: 'component-details',
@@ -41,7 +42,9 @@ export class PropertyDetailsComponent implements OnInit{
               private location: Location,
               private messengerService: MessengerService,
               private notificationService: NotificationService,
-              private reservationService: ReservationService) {
+              private reservationService: ReservationService,
+              private authService: AuthService,
+              private router: Router) {
     this.refreshDR();
   }
 
@@ -169,17 +172,31 @@ export class PropertyDetailsComponent implements OnInit{
   }
 
   onReserveSubmit(): void{
-    if(!this.fromDate || !this.toDate){
+    if(!this.authService.isAuthenticated()){
+      this.router.navigate(['/login'])
+    }
+
+    else if(!this.fromDate || !this.toDate){
       this.notificationService.error("Please choose a date.")
     }
     else{
       const reservation = {
+        reservationProperty: this.property.id,
         reservationStartDate: this.fromDate.toISOString(),
         reservationEndDate: this.toDate.toISOString(),
         reservationNumberOfPeople: this.peopleCounter,
         reservationTotalPrice: this.peopleCounter * this.property.propertyPrice
       } as ReservationRequest;
-      // this.reservationService.reserve(reservation).subscribe(...)...
+      this.reservationService.postReserve(reservation).subscribe({
+        next: () => {
+          this.notificationService.success("Reserved successfully!")
+          // redirect to
+        },
+        error: () => {
+          this.notificationService.error("Reserved failed.")
+        }
+
+      })
     }
   }
 }
