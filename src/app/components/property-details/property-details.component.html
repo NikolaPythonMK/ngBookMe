@@ -82,7 +82,8 @@
       </div>
 
       <p class="display-6 fw-bold mb-0">{{ property.propertyName }}</p>
-      <p class="location-text">{{ property.propertyAddress }}-{{ property.propertyCity }}, Macedonia</p>
+      <p class="location-text mb-0 pb-0">{{ property.propertyAddress }}-{{ property.propertyCity }}, Macedonia</p>
+      <p class="text-success price-label mt-0 pt-0">{{property.propertyPrice}} MKD</p>
     </div>
     <div class="rounded-1 align-self-center p-3">
       <h2 class="d-block">{{ property.propertyUser.firstName }} {{ property.propertyUser.lastName }}</h2>
@@ -157,7 +158,35 @@
                       >
         </mat-calendar>
       </div>
+
+     <div class="reserve-wrapper">
+        <div class="people-container mt-4">
+          <div>
+            <p class="people-label">People:</p>
+          </div>
+          <div>
+            <button mat-mini-fab  color="basic" aria-label="Example icon button with a delete icon"
+                    (click)="peopleCounter = peopleCounter - 1"
+                    [disabled]="peopleCounter === 1">
+              <mat-icon>remove</mat-icon>
+            </button>
+            <mat-form-field class="people-input">
+              <input matInput type="text" [(ngModel)]="peopleCounter">
+            </mat-form-field>
+            <button mat-mini-fab color="basic" aria-label="Example icon button with a delete icon"
+                  (click)="peopleCounter = peopleCounter + 1">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <button mat-raised-button color="primary" class="reserve-btn">Reserve</button>
+        </div>
+     </div>
+
     </div>
+
     <hr class="mt-5">
   </div>
 
