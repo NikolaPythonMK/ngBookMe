@@ -22,9 +22,6 @@ export class DetailsMapComponent{
 
   ngAfterViewInit(): void {
     this.mapService.initMap();
-    this.mapService.addMarkerPositionChangeOnClick().subscribe(location => {
-      this.propertyLocationEmit.emit(location);
-    })
   }
 
   ngOnDestroy(): void {

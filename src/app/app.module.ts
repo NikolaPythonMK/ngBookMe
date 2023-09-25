@@ -55,6 +55,7 @@ import {UpdatePropertyMapComponent} from "./components/update-property-map/updat
 import {FilterPropertiesComponent} from "./components/filter-properties/filter-properties.component";
 import {MatSelectModule} from "@angular/material/select";
 import {MatSliderModule} from "@angular/material/slider";
+import { DetailsMapComponent } from './components/details-map/details-map.component';
 
 
 
@@ -87,6 +88,7 @@ import {MatSliderModule} from "@angular/material/slider";
     PropertyUpdateComponent,
     UpdatePropertyMapComponent,
     FilterPropertiesComponent,
+    DetailsMapComponent
   ],
   imports: [
     BrowserModule,

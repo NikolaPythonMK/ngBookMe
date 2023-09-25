@@ -12,7 +12,7 @@ export class UpdatePropertyMapComponent implements AfterViewInit, OnDestroy{
   @Input() set latLng(arr: number[]) {
     if(arr.length){
       this.mapService.setUserLocationMarker(new L.LatLng(arr[0], arr[1]));
-      this.mapService.isPropertyMarker();
+      this.mapService.isPropertyMarker('Your property');
     }
   }
   @ViewChild('map') myDiv!: ElementRef;

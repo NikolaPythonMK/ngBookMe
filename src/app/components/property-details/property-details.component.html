@@ -20,7 +20,7 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-      
+
       <div class="mt-3">
         <div class="row row-cols-3 m-0">
           <img *ngFor="let img of images; let i = index" [src]="img | formatImageUrl:property.id"
@@ -76,11 +76,11 @@
         <mat-icon class="star-icon" *ngFor="let i of range(property.averageRating)">star</mat-icon>
         <span class="mx-3 fst-italic">{{ property.averageRating.toFixed(1) }} out of 5.0</span>
       </div>
-  
+
       <div class="d-flex mb-2" *ngIf="property.averageRating === 0">
         <span class="fw-bold">Property not rated yet.</span>
       </div>
-      
+
       <p class="display-6 fw-bold mb-0">{{ property.propertyName }}</p>
       <p class="location-text">{{ property.propertyAddress }}-{{ property.propertyCity }}, Macedonia</p>
     </div>
@@ -90,7 +90,7 @@
       <h6 class="d-block">{{ property.propertyUser.email }}</h6>
     </div>
   </div>
-  
+
   <div class="row" *ngIf="property != null">
 
     <div class="col-6 m-0 p-0">
@@ -123,7 +123,7 @@
     </div>
 
   </div>
-  
+
   <div class="row mt-3">
     <div class="col">
       <div class="d-flex row row-cols-3">
@@ -136,7 +136,7 @@
   </div>
 
   <div class="row mt-5">
-    <div class="col-6"> 
+    <div class="col-6">
       <div class="px-2">
         <h1>{{ property.propertyName }}</h1>
         <h4> {{ property.propertyType }}  </h4>
@@ -152,6 +152,7 @@
         <mat-calendar [selected]="this.selectedRange"
                       (selectedChange)="this.onChange($event)"
                       [dateClass]="dateClass"
+                      [minDate]="todayDate"
                       #calendar
                       >
         </mat-calendar>
@@ -161,7 +162,7 @@
   </div>
 
   <div class="row map">
-    <create-property-map-app></create-property-map-app>
+    <details-map-app [latLng]="property.propertyLocation" [name]="property.propertyName"></details-map-app>
   </div>
 
   <div class="mt-0">
@@ -173,7 +174,7 @@
                 <div class="card-body p-4">
                   <h4 class="mb-0">Recent reviews</h4>
                   <p class="fw-light mb-4 pb-2">Latest reviews section</p>
-      
+
                   <div class="d-flex flex-start mb-5" *ngFor="let rating of property.propertyRating">
                     <img class="rounded-circle shadow-1-strong me-3"
                       src="../../../assets/avatar.png" alt="avatar" width="60"
@@ -201,5 +202,5 @@
         </div>
       </section>
   </div>
-</div> 
+</div>
 

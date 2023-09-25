@@ -28,6 +28,7 @@ export class SearchBarComponent {
 
   getFilteredData: boolean = false;
   filteredDataUrl: string = '';
+  todayDate:Date = new Date();
 
 
   constructor(private propertyService: PropertyService,

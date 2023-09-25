@@ -27,6 +27,7 @@ export class PropertyDetailsComponent implements OnInit{
   toDate: Date | any = null;
   reservationMap: Map<number, number[]> = new Map();
   propertyAmenitiesConstants = propertyAmenities;
+  todayDate:Date = new Date();
 
   @ViewChild("calendar") calendar! : MatCalendar<Date>;
 
