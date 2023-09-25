@@ -31,10 +31,6 @@ export class UserPropertiesComponent implements OnInit{
     })
   }
 
-  appendQueryParam(pageNumber: number){
-
-  }
-
   deleteProperty(id: number){
     const dialogRef = this.dialog.open(DeleteConfirmComponent)
 

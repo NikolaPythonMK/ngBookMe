@@ -56,6 +56,7 @@ import {FilterPropertiesComponent} from "./components/filter-properties/filter-p
 import {MatSelectModule} from "@angular/material/select";
 import {MatSliderModule} from "@angular/material/slider";
 import { DetailsMapComponent } from './components/details-map/details-map.component';
+import {PropertyBookingComponent} from "./components/property-booking/property-booking.component";
 
 
 
@@ -88,7 +89,8 @@ import { DetailsMapComponent } from './components/details-map/details-map.compon
     PropertyUpdateComponent,
     UpdatePropertyMapComponent,
     FilterPropertiesComponent,
-    DetailsMapComponent
+    DetailsMapComponent,
+    PropertyBookingComponent
   ],
   imports: [
     BrowserModule,
