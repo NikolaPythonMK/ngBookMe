@@ -1,0 +1,44 @@
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span *ngIf="getDateOfReservation(reservation.reservationEndDate) <= todayDate"
+              class="text-success">Property Reserved: {{ reservation.reservationPropertyName }}</span>
+
+        <span *ngIf="getDateOfReservation(reservation.reservationEndDate) > todayDate"
+              class="text-warning">Property Reserved: {{ reservation.reservationPropertyName }}</span>
+      </mat-panel-title>
+      <mat-panel-description>
+        <div class="d-flex justify-content-around w-100">
+          <div class="d-none d-md-block d-lg-block d-xxl-block">
+            <span>From: {{ getDateOfReservation(reservation.reservationStartDate).toDateString() }} -</span>
+            <span>To: {{ getDateOfReservation(reservation.reservationEndDate).toDateString() }}</span>
+          </div>
+          <div>
+              <span *ngIf="getDateOfReservation(reservation.reservationEndDate) <= todayDate"
+                    class="text-success">Completed</span>
+
+            <span *ngIf="getDateOfReservation(reservation.reservationEndDate) > todayDate"
+                  class="text-warning">Pending...</span>
+          </div>
+        </div>
+
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="d-flex justify-content-between align-items-end">
+      <div class="fw-bold">
+        <p>Reservation ID: {{ reservation.id }}</p>
+        <p>From: {{ getDateOfReservation(reservation.reservationStartDate).toDateString() }}</p>
+        <p>To: {{ getDateOfReservation(reservation.reservationEndDate).toDateString() }}</p>
+        <p>Num of People: {{ reservation.reservationNumberOfPeople }}</p>
+      </div>
+      <div>
+        <p class="fw-bolder text-success fs-4">Total Price: {{ reservation.reservationTotalPrice.toFixed(0) }} МКД.</p>
+        <button *ngIf="getDateOfReservation(reservation.reservationEndDate) <= todayDate" class="btn btn-outline-success">Rate Property</button>
+        <button *ngIf="getDateOfReservation(reservation.reservationEndDate) > todayDate" class="btn btn-outline-danger">Delete Reservation</button>
+      </div>
+    </div>
+
+  </mat-expansion-panel>
+</mat-accordion>
