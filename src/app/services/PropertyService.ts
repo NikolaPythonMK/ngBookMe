@@ -42,7 +42,7 @@ export class PropertyService {
     if(filteredData){
       url = `${this.url}`;
       if(urlParams){
-        url += `?page=${urlParams}${filteredData}`;
+        url += `?page=${urlParams}&${filteredData}`;
       }
       else{
         url += `?${filteredData}`

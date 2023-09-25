@@ -8,7 +8,7 @@
 
   <mat-form-field subscriptSizing="dynamic">
     <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="startDatepicker" placeholder="Start date" [(ngModel)]="startDate">
+    <input [min]="todayDate" matInput [matDatepicker]="startDatepicker" placeholder="Start date" [(ngModel)]="startDate">
     <mat-datepicker-toggle matIconSuffix [for]="startDatepicker"></mat-datepicker-toggle>
     <mat-datepicker #startDatepicker>
       <mat-datepicker-actions>
@@ -20,7 +20,7 @@
 
   <mat-form-field class="example-form-field" subscriptSizing="dynamic">
     <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="endDatepicker" placeholder="End date" [(ngModel)]="endDate">
+    <input [min]="todayDate" matInput [matDatepicker]="endDatepicker" placeholder="End date" [(ngModel)]="endDate">
     <mat-datepicker-toggle matIconSuffix [for]="endDatepicker"></mat-datepicker-toggle>
     <mat-datepicker #endDatepicker>
       <mat-datepicker-actions>

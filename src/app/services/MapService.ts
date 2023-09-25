@@ -68,7 +68,7 @@ export class MapService{
                               <span class="mb-1">${property.name}</span>
                               <span class="text-body-tertiary mb-1">${property.type}</span>
                               <span class="mb-2">${property.address}</span>
-                               <span class="mb-3"><span style="font-weight: bold">${property.rating}</span> (432 reviews)</span>
+                               <span class="mb-3"><span style="font-weight: bold">${property.rating}</span> (${property.numRatings} reviews)</span>
                                <div class="d-flex justify-content-between align-items-center mb-0">
                                 <span style="color: green; font-size: 1.1rem">${property.price} MKD</span>
                                 <a class="btn btn-outline-primary btn-sm" href="/property/${property.id}">Details</a>
@@ -119,7 +119,7 @@ export class MapService{
               content: `<span class="d-flex justify-content-center">You</span>`,
               offset: L.point(0, -10)
             })).openPopup();
-            this.map!.setView([lat, lng], 15);
+            this.map!.setView([lat, lng], 13);
             observer.next([lat, lng])
             observer.complete();
           },
@@ -154,6 +154,7 @@ export class MapService{
     else{
       this.userMarker.setLatLng(newLocation);
     }
+    this.map!.setView(newLocation, 15);
   }
 
   getUserMarkerLocation(): number[] | null{
@@ -174,9 +175,9 @@ export class MapService{
     }
   }
 
-  isPropertyMarker(): void{
+  isPropertyMarker(propertyName: string): void{
     this.userMarker!.bindPopup(L.popup({
-      content: `<span class="d-flex justify-content-center">Your property</span>`,
+      content: `<span class="d-flex justify-content-center">${propertyName}</span>`,
       offset: L.point(0, -10)
     })).openPopup();
   }

@@ -5,5 +5,6 @@ export interface PropertyPopup{
   type: string,
   price: number,
   image: string,
-  rating: string
+  rating: string,
+  numRatings: number
 }

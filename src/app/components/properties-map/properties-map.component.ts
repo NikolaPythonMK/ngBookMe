@@ -56,7 +56,8 @@ export class PropertiesMapComponent {
         type: property.propertyType,
         price: property.propertyPrice,
         image: property.propertyImage,
-        rating: "8-8 excellent"
+        rating: Number(property.propertyAverageRating.toFixed(1)) === 0 ? 'Property Not Rated Yet.' : String(property.propertyAverageRating.toFixed(1) + " - " + this.satisfaction(property.propertyAverageRating)),
+        numRatings: Number(property.propertyNumberOfRatings)
       } as PropertyPopup;
       this.mapService.appendMarker(this.extractLatLng(property.propertyLocation), propertyInfo);
     }
@@ -75,5 +76,21 @@ export class PropertiesMapComponent {
 
   collapseMap(){
     this.enlargeMapEvent.emit(false);
+  }
+
+  satisfaction(n: number): string {
+    const satisfactionScale: { [key: number]: string } = {
+      1: "Poor",
+      2: "Fair",
+      3: "Good",
+      4: "Very Good",
+      5: "Excellent"
+    };
+  
+    if (n >= 1 && n <= 5) {
+      return satisfactionScale[Math.trunc(n)];
+    } else {
+      return "Invalid input";
+    }
   }
 }
