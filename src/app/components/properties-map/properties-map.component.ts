@@ -20,7 +20,8 @@ export class PropertiesMapComponent {
 
 
   constructor(private mapService: MapService,
-              private messengerService: MessengerService,) {}
+              private messengerService: MessengerService,
+              private propertyService: PropertyService) {}
 
 
   ngAfterViewInit(){
@@ -72,10 +73,20 @@ export class PropertiesMapComponent {
 
   enlargeMap(){
     this.enlargeMapEvent.emit(true);
+    this.propertyService.getAllProperties().subscribe({
+      next: (properties) => {
+        this.properties = properties;
+        this.drawMarkers();
+      }
+    })
   }
 
   collapseMap(){
     this.enlargeMapEvent.emit(false);
+    this.messengerService.properties$.subscribe(next => {
+      this.properties = next as Property[];
+      this.drawMarkers();
+    })
   }
 
   satisfaction(n: number): string {
@@ -86,7 +97,7 @@ export class PropertiesMapComponent {
       4: "Very Good",
       5: "Excellent"
     };
-  
+
     if (n >= 1 && n <= 5) {
       return satisfactionScale[Math.trunc(n)];
     } else {

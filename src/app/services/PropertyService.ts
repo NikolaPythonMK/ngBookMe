@@ -35,6 +35,18 @@ export class PropertyService {
     return this.http.post<Property>(this.url, formData, httpOptions)
   }
 
+  getAllProperties(): Observable<Property[]>{
+    let opts = {};
+    if(this.authService.isAuthenticated()){
+      opts = {
+        headers: new HttpHeaders({
+          'Authorization': this.authService.getToken()!,
+        }),
+      };
+    }
+    return this.http.get<Property[]>(this.url + '/getAll');
+  }
+
   getProperties(urlParams: string | null, filteredData?: string): Observable<Page>{
     let url = '';
     let opts = {};
@@ -170,6 +182,4 @@ export class PropertyService {
     const url = `${this.url}/${id}/edit`
     return this.http.put<Property>(url, property, httpOptions);
   }
-
-
 }
