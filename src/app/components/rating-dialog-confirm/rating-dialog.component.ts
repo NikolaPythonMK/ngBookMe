@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, Validators} from "@angular/forms";
+import {DialogRatingResponse} from "../../models/DialogRatingResponse";
 @Component({
   selector: 'rating-dialog',
   templateUrl: './rating-dialog.component.html',
@@ -21,10 +22,8 @@ export class RatingDialogComponent{
 
   confirm(): void{
     this.confirmed = true;
-    this.dialogRef.close(this.confirmed);
-  }
-
-  onSubmit() {
-
+    this.dialogRef.close({confirmed: this.confirmed,
+                          rating: this.starRating,
+                          comment: this.ratingForm.get("userComment")!.value} as DialogRatingResponse);
   }
 }

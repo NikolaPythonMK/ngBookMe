@@ -7,6 +7,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {DeleteConfirmComponent} from "../delete-confirm-dialog/delete-confirm.component";
 import {RatingDialogComponent} from "../rating-dialog-confirm/rating-dialog.component";
 import {RatingService} from "../../services/RatingService";
+import {DialogRatingResponse} from "../../models/DialogRatingResponse";
+import {RatingRequest} from "../../models/RatingRequest";
 
 @Component({
   selector: 'property-booking-panel',
@@ -41,14 +43,20 @@ export class PropertyBookingComponent {
   rateProperty(propertyId : number) : void {
     const dialogRef = this.dialog.open(RatingDialogComponent)
 
-    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-      if(confirmed){
-        this.ratingService.rateProperty(propertyId).subscribe({
+    dialogRef.afterClosed().subscribe((rating: DialogRatingResponse) => {
+      if(rating.confirmed){
+        const ratingRequest = {
+          userRating: rating.rating,
+          userComment: rating.comment,
+          reservationStartDate: this.reservation.reservationStartDate,
+        } as RatingRequest
+        this.ratingService.rateProperty(propertyId, ratingRequest).subscribe({
           next: () => {
-            this.openSnackBar();
+            this.notificationService.success("Property rated successfully!");
           },
           error: (err) => {
             console.log(err);
+            this.notificationService.error("Something went wrong...");
           }
         })
       }
