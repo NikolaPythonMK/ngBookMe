@@ -57,6 +57,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatSliderModule} from "@angular/material/slider";
 import { DetailsMapComponent } from './components/details-map/details-map.component';
 import {PropertyBookingComponent} from "./components/property-booking/property-booking.component";
+import {RatingDialogComponent} from "./components/rating-dialog-confirm/rating-dialog.component";
 
 
 
@@ -90,7 +91,8 @@ import {PropertyBookingComponent} from "./components/property-booking/property-b
     UpdatePropertyMapComponent,
     FilterPropertiesComponent,
     DetailsMapComponent,
-    PropertyBookingComponent
+    PropertyBookingComponent,
+    RatingDialogComponent
   ],
   imports: [
     BrowserModule,
