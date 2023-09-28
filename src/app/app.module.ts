@@ -57,6 +57,15 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatSliderModule} from "@angular/material/slider";
 import { DetailsMapComponent } from './components/details-map/details-map.component';
 import {PropertyBookingComponent} from "./components/property-booking/property-booking.component";
+import {HelpAndSupportComponent} from "./components/help-and-support/help-and-support.component";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {CreateAccountComponent} from "./components/help-and-support/create-account-help/create-account.component";
+import {ResetPasswordHelpComponent} from "./components/help-and-support/reset-password-help/reset-password-help.component";
+import {MakeBookingHelpComponent} from "./components/help-and-support/make-booking-help/make-booking-help.component";
+import {PaymentOptionsHelpComponent} from "./components/help-and-support/payment-options-help/payment-options-help.component";
+import {BookingHelpComponent} from "./components/help-and-support/booking-help/booking-help.component";
+import {PersonalInfoHelpComponent} from "./components/help-and-support/personal-info-help/personal-info-help.component";
+import {ContactComponent} from "./components/help-and-support/contact/contact.component";
 
 
 
@@ -90,7 +99,15 @@ import {PropertyBookingComponent} from "./components/property-booking/property-b
     UpdatePropertyMapComponent,
     FilterPropertiesComponent,
     DetailsMapComponent,
-    PropertyBookingComponent
+    PropertyBookingComponent,
+    HelpAndSupportComponent,
+    CreateAccountComponent,
+    ResetPasswordHelpComponent,
+    MakeBookingHelpComponent,
+    PaymentOptionsHelpComponent,
+    BookingHelpComponent,
+    PersonalInfoHelpComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
@@ -119,6 +136,7 @@ import {PropertyBookingComponent} from "./components/property-booking/property-b
     MatCheckboxModule,
     MatSelectModule,
     MatSliderModule,
+    MatSidenavModule,
   ],
   providers: [
     // {

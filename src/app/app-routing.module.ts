@@ -17,6 +17,7 @@ import {FavouritesComponent} from "./components/profile-favourites/favourites.co
 import {UserPropertiesComponent} from "./components/display-user-properties/user-properties.component";
 import {BookingsComponent} from "./components/display-bookings/bookings.component";
 import {PropertyUpdateComponent} from "./components/property-update/property-update.component";
+import {HelpAndSupportComponent} from "./components/help-and-support/help-and-support.component";
 
 const routes: Routes = [
   {path: '', component: SearchBarComponent},
@@ -33,7 +34,9 @@ const routes: Routes = [
       {path: 'bookings', component: BookingsComponent}
     ]
   },
-  {path: 'update/:id', component: PropertyUpdateComponent}
+  {path: 'update/:id', component: PropertyUpdateComponent},
+  {path: 'help-and-support', component: HelpAndSupportComponent, canActivate: [AuthGuard]}
+
 ];
 
 @NgModule({

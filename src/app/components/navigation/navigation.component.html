@@ -26,8 +26,7 @@
           <mat-menu #menu="matMenu" class="menu" xPosition="before">
             <button mat-menu-item routerLink="/profile"><mat-icon>person</mat-icon>Profile</button>
             <button mat-menu-item><mat-icon>settings</mat-icon>Settings and privacy</button>
-            <button mat-menu-item><mat-icon>display_settings</mat-icon>display and accessibility</button>
-            <button mat-menu-item><mat-icon>help</mat-icon>Help and support</button>
+            <button mat-menu-item routerLink="/help-and-support"><mat-icon>help</mat-icon>Help and support</button>
             <button mat-menu-item (click)="logout()"><mat-icon>logout</mat-icon>Log out</button>
           </mat-menu>
         </div>

@@ -1,0 +1,57 @@
+.example-container {
+  /*width: 30%;*/
+  height: 85vh;
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.upper{
+  height: 95%;
+}
+
+.lower{
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.example-sidenav {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.faqs{
+  list-style: none;
+  padding: 0;
+}
+
+.faqs li{
+  padding: 0.6em;
+  color: dodgerblue;
+}
+
+.faqs li:hover{
+  text-decoration: underline;
+}
+.logout-btn{
+  cursor: pointer;
+}
+.profile-btn{
+  cursor: pointer;
+}
+
+.content{
+  margin-top: 2em;
+  width: 80%;
+  height: 100%;
+}
+.selected{
+  background-color: lightgray;
+}

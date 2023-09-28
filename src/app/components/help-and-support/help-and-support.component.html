@@ -1,0 +1,53 @@
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer opened class="example-sidenav" mode="side">
+    <div class="upper">
+      <p class="fw-bold">Frequently Asked Questions (FAQs):</p>
+      <ul class="faqs">
+        <li (click)="selected = 0" [class.selected]="selected === 0">How do I create an account?</li>
+        <li (click)="selected = 1" [class.selected]="selected === 1">How do I reset my password?</li>
+        <li (click)="selected = 2" [class.selected]="selected === 2">How do I make a booking?</li>
+        <li (click)="selected = 3" [class.selected]="selected === 3">What are the payment options?</li>
+        <li (click)="selected = 4" [class.selected]="selected === 4">How can I cancel or modify a booking?</li>
+        <li (click)="selected = 5" [class.selected]="selected === 5">What happens if there's a problem with my booking?</li>
+        <li (click)="selected = 6" [class.selected]="selected === 6">Is my personal information secure?</li>
+        <li (click)="selected = 7" [class.selected]="selected === 7">How do I contact customer support?</li>
+      </ul>
+    </div>
+    <div class="lower">
+      <div class="profile-btn" routerLink="/profile/bookings">{{user.username}}</div>
+      <mat-icon class="logout-btn" (click)="logout()">logout</mat-icon>
+    </div>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+
+    <div class="content">
+      <div *ngIf="selected === 0">
+        <create-account-app></create-account-app>
+      </div>
+      <div *ngIf="selected === 1">
+        <reset-password-help-app></reset-password-help-app>
+      </div>
+      <div *ngIf="selected === 2">
+        <make-booking-help-app></make-booking-help-app>
+      </div>
+      <div *ngIf="selected === 3">
+        <payment-options-help-app></payment-options-help-app>
+      </div>
+      <div *ngIf="selected === 4">
+        <booking-help-app [first]="true"></booking-help-app>
+      </div>
+      <div *ngIf="selected === 5">
+        <booking-help-app [second]="true"></booking-help-app>
+      </div>
+      <div *ngIf="selected === 6">
+        <personal-info-app></personal-info-app>
+      </div>
+      <div *ngIf="selected === 7">
+        <contact-app></contact-app>
+      </div>
+    </div>
+  </div>
+
+</mat-drawer-container>
+

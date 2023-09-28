@@ -1,0 +1,14 @@
+<h4 class="mb-5">Contact Customer Support</h4>
+
+<p>
+  If you need assistance or have any questions, please feel free to contact our dedicated customer support team. Simply use the form below to send us a message, and we'll get back to you as soon as possible.
+</p>
+
+<mat-form-field class="contact-input">
+  <mat-label>Type your message here...</mat-label>
+  <textarea matInput rows="10" class="w-100" [(ngModel)]="text"></textarea>
+</mat-form-field>
+
+<button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+
+
