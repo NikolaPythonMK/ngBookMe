@@ -35,7 +35,8 @@
       </div>
       <div>
         <p class="fw-bolder text-success fs-4">Total Price: {{ reservation.reservationTotalPrice.toFixed(0) }} МКД.</p>
-        <button *ngIf="getDateOfReservation(reservation.reservationEndDate) <= todayDate" class="btn btn-outline-success">Rate Property</button>
+        <button (click)="rateProperty(reservation.reservationPropertyId)"
+                *ngIf="getDateOfReservation(reservation.reservationEndDate) <= todayDate" class="btn btn-outline-success">Rate Property</button>
         <button (click)="deleteReservation(reservation.id)"
                 *ngIf="getDateOfReservation(reservation.reservationEndDate) > todayDate" class="btn btn-outline-danger">Delete Reservation</button>
       </div>

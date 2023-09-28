@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Rate property</h1>
+<div mat-dialog-content>
+  <form class="example-form" [formGroup]="ratingForm">
+    <mat-form-field class="example-full-width">
+      <mat-label>Leave a comment</mat-label>
+      <textarea matInput placeholder="The experience in this property ..."></textarea>
+    </mat-form-field>
+    <ngb-rating [max]="5" [(rate)]="starRating" [readonly]="false" class="fs-1"></ngb-rating>
+  </form>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-end buttons">
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button class="bg-success text-white" mat-dialog-close cdkFocusInitial (click)="confirm();onSubmit();">Rate</button>
+</div>
+
