@@ -57,7 +57,6 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatSliderModule} from "@angular/material/slider";
 import { DetailsMapComponent } from './components/details-map/details-map.component';
 import {PropertyBookingComponent} from "./components/property-booking/property-booking.component";
-<<<<<<< HEAD
 import {HelpAndSupportComponent} from "./components/help-and-support/help-and-support.component";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {CreateAccountComponent} from "./components/help-and-support/create-account-help/create-account.component";
@@ -67,9 +66,7 @@ import {PaymentOptionsHelpComponent} from "./components/help-and-support/payment
 import {BookingHelpComponent} from "./components/help-and-support/booking-help/booking-help.component";
 import {PersonalInfoHelpComponent} from "./components/help-and-support/personal-info-help/personal-info-help.component";
 import {ContactComponent} from "./components/help-and-support/contact/contact.component";
-=======
 import {RatingDialogComponent} from "./components/rating-dialog-confirm/rating-dialog.component";
->>>>>>> 858bb52fb7c40d5810fa9215184c52bb83e72415
 
 
 
