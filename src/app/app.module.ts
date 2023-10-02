@@ -67,6 +67,9 @@ import {BookingHelpComponent} from "./components/help-and-support/booking-help/b
 import {PersonalInfoHelpComponent} from "./components/help-and-support/personal-info-help/personal-info-help.component";
 import {ContactComponent} from "./components/help-and-support/contact/contact.component";
 import {RatingDialogComponent} from "./components/rating-dialog-confirm/rating-dialog.component";
+import {ResetPasswordDialogComponent} from "./components/reset-password-dialog/reset-password-dialog.component";
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {ResetPasswordComponent} from "./components/reset-password/reset-password.component";
 
 
 
@@ -109,7 +112,9 @@ import {RatingDialogComponent} from "./components/rating-dialog-confirm/rating-d
     BookingHelpComponent,
     PersonalInfoHelpComponent,
     ContactComponent,
-    RatingDialogComponent
+    RatingDialogComponent,
+    ResetPasswordDialogComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -139,6 +144,7 @@ import {RatingDialogComponent} from "./components/rating-dialog-confirm/rating-d
     MatSelectModule,
     MatSliderModule,
     MatSidenavModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     // {

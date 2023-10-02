@@ -18,6 +18,8 @@ import {UserPropertiesComponent} from "./components/display-user-properties/user
 import {BookingsComponent} from "./components/display-bookings/bookings.component";
 import {PropertyUpdateComponent} from "./components/property-update/property-update.component";
 import {HelpAndSupportComponent} from "./components/help-and-support/help-and-support.component";
+import {ResetPasswordDialogComponent} from "./components/reset-password-dialog/reset-password-dialog.component";
+import {ResetPasswordComponent} from "./components/reset-password/reset-password.component";
 
 const routes: Routes = [
   {path: '', component: SearchBarComponent},
@@ -35,8 +37,8 @@ const routes: Routes = [
     ]
   },
   {path: 'update/:id', component: PropertyUpdateComponent},
-  {path: 'help-and-support', component: HelpAndSupportComponent, canActivate: [AuthGuard]}
-
+  {path: 'help-and-support', component: HelpAndSupportComponent, canActivate: [AuthGuard]},
+  {path: 'reset-password', component: ResetPasswordComponent}
 ];
 
 @NgModule({

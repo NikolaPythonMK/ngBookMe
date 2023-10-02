@@ -12,3 +12,9 @@
   background-color: #fed;
 }
 
+.link{
+  cursor: pointer;
+}
+.link:hover{
+  text-decoration: underline;
+}

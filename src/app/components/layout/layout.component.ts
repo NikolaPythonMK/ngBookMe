@@ -13,6 +13,6 @@ export class LayoutComponent{
   constructor(private authService: AuthService, private router: Router) {}
 
   shouldShowNavbar(): boolean{
-    return !['/login', '/register'].includes(this.router.url);
+    return !['/login', '/register', '/reset-password'].includes(this.router.url);
   }
 }
