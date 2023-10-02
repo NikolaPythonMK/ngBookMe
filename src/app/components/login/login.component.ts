@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit{
   }
 
   resetPassword(value: string): void{
-    this.resetPasswordService.resetPassword(value).subscribe({
+    this.resetPasswordService.sendResetPasswordRequest(value).subscribe({
       next: () => {
         this.notificationService.success("A request to reset your password has been sent. Please check your email.");
       },

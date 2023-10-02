@@ -70,6 +70,7 @@ import {RatingDialogComponent} from "./components/rating-dialog-confirm/rating-d
 import {ResetPasswordDialogComponent} from "./components/reset-password-dialog/reset-password-dialog.component";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {ResetPasswordComponent} from "./components/reset-password/reset-password.component";
+import {SettingsComponent} from "./components/settings/settings.component";
 
 
 
@@ -115,6 +116,8 @@ import {ResetPasswordComponent} from "./components/reset-password/reset-password
     RatingDialogComponent,
     ResetPasswordDialogComponent,
     ResetPasswordComponent,
+    SettingsComponent,
+
   ],
   imports: [
     BrowserModule,

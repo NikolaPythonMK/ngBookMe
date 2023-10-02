@@ -13,6 +13,9 @@ export class LayoutComponent{
   constructor(private authService: AuthService, private router: Router) {}
 
   shouldShowNavbar(): boolean{
-    return !['/login', '/register', '/reset-password'].includes(this.router.url);
+    if(this.router.url.startsWith('/reset-password')){
+      return !this.router.url.startsWith('/reset-password');
+    }
+    return !['/login', '/register'].includes(this.router.url);
   }
 }
