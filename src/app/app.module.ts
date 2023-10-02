@@ -71,6 +71,7 @@ import {ResetPasswordDialogComponent} from "./components/reset-password-dialog/r
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {ResetPasswordComponent} from "./components/reset-password/reset-password.component";
 import {SettingsComponent} from "./components/settings/settings.component";
+import {PropertyRateDisplayComponent} from "./components/property-rate-display/property-rate-display.component";
 
 @NgModule({
   declarations: [
@@ -113,6 +114,8 @@ import {SettingsComponent} from "./components/settings/settings.component";
     RatingDialogComponent,
     ResetPasswordDialogComponent,
     ResetPasswordComponent,
+    SettingsComponent,
+    PropertyRateDisplayComponent
   ],
   imports: [
     BrowserModule,
