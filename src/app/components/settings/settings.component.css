@@ -1,0 +1,17 @@
+.wrapper{
+  width: 70%;
+}
+
+.part{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.change-btn{
+  border: 1px solid slateblue;
+  border-radius: 30px;
+  padding: .5em 1em .5em 1em;
+  font-size: 1rem;
+  background-color: #ffffff;
+}
