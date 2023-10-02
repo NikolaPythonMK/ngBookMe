@@ -1,6 +1,7 @@
 <mat-accordion>
   <mat-expansion-panel (opened)="panelOpenState = true"
-                       (closed)="panelOpenState = false">
+                       (closed)="panelOpenState = false"
+                       (click)="checkRated(reservation.id)">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span *ngIf="getDateOfReservation(reservation.reservationEndDate) <= todayDate"
@@ -36,10 +37,53 @@
       <div>
         <p class="fw-bolder text-success fs-4">Total Price: {{ reservation.reservationTotalPrice.toFixed(0) }} МКД.</p>
         <button (click)="rateProperty(reservation.reservationPropertyId)"
-                *ngIf="getDateOfReservation(reservation.reservationEndDate) <= todayDate" class="btn btn-outline-success">Rate Property</button>
+                *ngIf="(getDateOfReservation(reservation.reservationEndDate) <= todayDate) && (rating === null)"
+                class="btn btn-outline-success">Rate Property</button>
+
+        <button (click)="rateProperty(reservation.reservationPropertyId)"
+                *ngIf="(getDateOfReservation(reservation.reservationEndDate) <= todayDate) && (rating !== null)"
+                class="btn btn-outline-success">Edit Rating</button>
+
         <button (click)="deleteReservation(reservation.id)"
                 *ngIf="getDateOfReservation(reservation.reservationEndDate) > todayDate" class="btn btn-outline-danger">Delete Reservation</button>
       </div>
+    </div>
+    <div>
+      <section style="background-color: #ffffff;" class="rounded-2" *ngIf="rating != null">
+        <div class="container py-5">
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-12 col-lg-10">
+              <div class="card text-dark">
+                <div class="card-body p-4">
+                  <div class="d-flex flex-start mb-5">
+                    <img class="rounded-circle shadow-1-strong me-3"
+                         src="../../../assets/avatar.png" alt="avatar" width="60"
+                         height="60" />
+                    <div class="w-100">
+                      <h6 class="fw-bold mb-1">{{ rating.ratedBy.firstName }} {{ rating.ratedBy.lastName }}</h6>
+                      <div class="d-flex align-items-center mb-3">
+                        <p class="mb-0">
+                          {{ rating.ratingTime | date: 'longDate'}}
+                        </p>
+                      </div>
+                      <div class="d-flex mb-2" *ngIf="rating.userRating !== 0">
+                        <mat-icon class="star-icon" *ngFor="let i of range(rating.userRating)">star</mat-icon>
+                        <span class="mx-3 fst-italic">{{ rating.userRating.toFixed(1) }} out of 5.0</span>
+                      </div>
+                      <p class="mb-0">
+                        {{ rating.userComment }}
+                      </p>
+                    </div>
+                    <div class="d-flex flex-row-reverse text-danger">
+                      <mat-icon>delete</mat-icon>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
 
   </mat-expansion-panel>

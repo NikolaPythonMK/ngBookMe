@@ -1,7 +1,8 @@
-import {Component} from "@angular/core";
-import {MatDialogRef} from "@angular/material/dialog";
+import {Component, Inject} from "@angular/core";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, Validators} from "@angular/forms";
 import {DialogRatingResponse} from "../../models/DialogRatingResponse";
+import {Property} from "../../models/Property";
 @Component({
   selector: 'rating-dialog',
   templateUrl: './rating-dialog.component.html',
@@ -10,8 +11,10 @@ import {DialogRatingResponse} from "../../models/DialogRatingResponse";
 
 export class RatingDialogComponent{
 
-  constructor(public dialogRef: MatDialogRef<RatingDialogComponent>,
-              private fb: FormBuilder,) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef: MatDialogRef<RatingDialogComponent>,
+              private fb: FormBuilder,) {
+  }
 
   confirmed: boolean = false;
   starRating = 0;

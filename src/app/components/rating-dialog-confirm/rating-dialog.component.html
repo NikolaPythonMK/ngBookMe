@@ -1,11 +1,14 @@
 <h1 mat-dialog-title>Rate property</h1>
-<div mat-dialog-content>
-  <form class="example-form" [formGroup]="ratingForm">
-    <mat-form-field class="example-full-width">
+<div mat-dialog-content class="w-100">
+  <property-rating-display [property]="data.property">
+  </property-rating-display>
+  <form class="example-form mt-3" [formGroup]="ratingForm">
+    <mat-form-field class="w-100">
       <mat-label>Leave a comment</mat-label>
-      <textarea matInput placeholder="The experience in this property ..."></textarea>
+      <textarea matInput placeholder="The experience in this property ..." formControlName="userComment"></textarea>
     </mat-form-field>
-    <ngb-rating [max]="5" [(rate)]="starRating" [readonly]="false" class="fs-1"></ngb-rating>
+    <span class="d-block fw-bold mb-2">Rating:</span>
+    <ngb-rating [max]="5" [(rate)]="starRating" [readonly]="false" class="fs-1" formControlName="userRating"></ngb-rating>
   </form>
 </div>
 <div mat-dialog-actions class="d-flex justify-content-end buttons">

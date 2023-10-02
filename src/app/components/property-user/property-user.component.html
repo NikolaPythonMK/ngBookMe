@@ -2,7 +2,7 @@
   <img mat-card-image [src]="property.propertyImage | formatImageUrl:property.id" alt="Property Image" class="card-avatar">
   <div class="card-content">
     <div class="options">
-      <mat-icon (click)="deleteProperty(property.id, $event)"><span class="cart-icon">delete</span></mat-icon>
+      <mat-icon (click)="deleteProperty(property.id, $event)"><span class="cart-icon text-danger">delete</span></mat-icon>
     </div>
     <mat-card-header>
       <mat-card-title>{{ property.propertyName }}</mat-card-title>

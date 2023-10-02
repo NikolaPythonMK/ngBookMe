@@ -1,3 +1,6 @@
 .mat-mdc-form-field + .mat-mdc-form-field {
   margin-left: 8px;
 }
+.star-icon{
+  color: orange;
+}

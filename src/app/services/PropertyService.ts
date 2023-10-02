@@ -104,6 +104,11 @@ export class PropertyService {
     return this.http.get<PropertyDetails>(url);
   }
 
+  getByIdSmall(id : number) : Observable<Property>{
+    const url = `${this.url}/${id}/small`
+    return this.http.get<Property>(url);
+  }
+
   bookmarkProperty(id: number): Observable<Property>{
     const url = `${this.url}/${id}/favourite`;
     return this.http.post<Property>(url, {}, this.httpOptions);
